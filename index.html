@@ -356,15 +356,15 @@
       </div>
     </div>
     <div>
-      <div class="contact-form">
+      <form class="contact-form" action="https://formsubmit.co/william.swong@sydney.edu.au" method="POST">
         <div class="form-row">
-          <input type="text" class="form-input" placeholder="Name">
-          <input type="email" class="form-input" placeholder="Email">
+          <input type="text" name="name" class="form-input" placeholder="Name" required>
+          <input type="email" name="email" class="form-input" placeholder="Email" required>
         </div>
-        <input type="text" class="form-input" placeholder="Subject">
-        <textarea class="form-input" placeholder="Your message…"></textarea>
-        <button class="form-submit">Send Message</button>
-      </div>
+        <input type="text" name="_subject" class="form-input" placeholder="Subject" required>
+        <textarea name="message" class="form-input" placeholder="Your message…" required></textarea>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
     </div>
   </div>
 </div>
