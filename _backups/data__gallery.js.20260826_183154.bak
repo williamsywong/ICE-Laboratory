@@ -1,0 +1,72 @@
+// ============================================================
+//  ICE Group — Gallery Data
+//  Add new tiles by adding entries to the GALLERY array below.
+//  This is the ONLY place you need to edit to add, remove, or
+//  resize tiles on the Gallery page — no HTML editing needed.
+//
+//  Fields:
+//    file:     filename in images/Gallery/  e.g. "drop-impact.jpg"
+//              Leave "" to show a placeholder tile (icon + caption)
+//              until a real image is added. If "youtube" (below) is set
+//              and file is "", YouTube's own thumbnail is used instead.
+//    caption:  Short description shown on hover
+//    link:     Optional URL (paper / dataset), or "" for none. Ignored on
+//              tiles that have a "youtube" video — the video takes over
+//              the tile's click action instead.
+//    youtube:  Optional YouTube video ID (e.g. "dQw4w9WgXcQ") — the tile
+//              plays it in an in-page popup player when clicked. Add one
+//              through the Site Editor: hover a Gallery tile and click 🎬. 
+//    category: "surface" | "phenomena" | "process"  (used by the filter bar)
+//    icon:     Emoji shown on placeholder tiles (only used when file is "") 💧 🩸 🫧 ❄️ 🧪 🧴 🍾 🌍 🔬 🧬 🌡 ⚡ 🕯 🌊 🧫 🧩
+//    size:     "small" | "medium" | "large"  — see GALLERY_SIZES below
+//
+//  To add a tile:
+//    1. Put the image file in the images/Gallery/ folder (optional —
+//       tiles without an image show a placeholder instead)
+//    2. Add an entry to the GALLERY array
+//    3. Push to GitHub — done.
+//
+//  To remove a tile: delete its entry from the array.
+//  To resize a tile: change its "size" field to "small", "medium", or "large".
+// ============================================================
+
+const GALLERY = [
+
+  { file: "", caption: "Racing Water Drops on Silicone Surfaces", link: "doi:10.1021/acsnano.5c04250", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Polarity-induced Reactive Wetting", link: "doi:10.1021/acs.langmuir.4c01085", youtube: "", category: "phenomena", icon: "🧪", size: "small" },
+  { file: "", caption: "Underwater Bubble / Hexane Manipulation", link: "doi:10.1002/advs.202403366", youtube: "", category: "phenomena", icon: "🌊", size: "small" },
+  { file: "", caption: "Cryo-fouling Resistant Antarctic Scallops", link: "doi:10.1038/s42003-022-03023-6", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "High Speed Droplet Fragmentation", link: "doi:10.1002/adfm.202107831", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Reactive Efferverscent Surface", link: "doi:10.1002/adfm.202107831", youtube: "", category: "phenomena", icon: "🧪", size: "small" },
+  { file: "", caption: "Ultra-fast Bubble Rupture", link: "doi:10.1002/adma.202101855", youtube: "", category: "phenomena", icon: "🫧", size: "small" },
+  { file: "", caption: "Defoaming Surface", link: "doi:10.1038/s41467-021-25556-w", youtube: "", category: "process", icon: "🫧", size: "small" },
+  { file: "", caption: "Debubbling Surface", link: "doi:10.1038/s41467-021-25556-w", youtube: "", category: "process", icon: "🫧", size: "small" },
+  { file: "", caption: "Bouncing Foam Jets", link: "doi:10.1038/s41467-021-25556-w", youtube: "", category: "process", icon: "🫧", size: "small" },
+  { file: "", caption: "An Antifoaming Surface", link: "doi:10.1038/s41467-021-25556-w", youtube: "", category: "process", icon: "🫧", size: "small" },
+  { file: "", caption: "Capillary-stabilized Anti-Icing Surface", link: "doi:10.1021/acs.nanolett.0c02956", youtube: "", category: "process", icon: "❄️", size: "small" },
+  { file: "", caption: "A Super (Omni) Liquid Repellent Surface", link: "doi:10.1021/acs.nanolett.8b04972", youtube: "", category: "phenomena", icon: "🌊", size: "small" },
+  { file: "", caption: "Bouncing Oil Droplets on a Superamphiphobic Surface", link: "doi:10.1021/acsnano.6b06715", youtube: "", category: "phenomena", icon: "🩸", size: "small" },
+  { file: "", caption: "Core Shell Droplet Injection", link: "doi:10.1002/smll.201603688", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Micro Core Shell Droplets", link: "doi:10.1002/smll.201603688", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Macro Core Shell Droplets", link: "doi:10.1002/smll.201603688", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Droplet Impact on Paperboard", link: "doi:10.1021/acsami.6b03414", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Droplet Impact on Wood and Brick", link: "doi:10.1021/acsami.6b03414", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Droplet Impact on Superhydrophobic Coins", link: "doi:10.1021/acsami.6b03414", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  { file: "", caption: "Superhydrophobic Australian Coins", link: "doi:10.1021/acsami.6b03414", youtube: "", category: "phenomena", icon: "💧", size: "small" },
+  
+];
+
+// Category display config (used by the filter bar)
+const GALLERY_CATEGORIES = {
+  surface:    { label: "Surfaces" },
+  phenomena:      { label: "Phenomena" },
+  process: { label: "Processes" },
+};
+
+// Tile size config — 3 selectable sizes. Edit these to change how big
+// each size appears; edit a tile's "size" field above to switch it.
+const GALLERY_SIZES = {
+  small:  { wide: false, minHeight: 150 },  // single grid column, standard height
+  medium: { wide: true,  minHeight: 220 },  // spans the full width, standard height
+  large:  { wide: true,  minHeight: 340 },  // spans the full width, tall hero tile
+};

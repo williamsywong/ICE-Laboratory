@@ -1,0 +1,448 @@
+// ============================================================
+//  ICE Group — Publications Data
+//  Source: CV of Dr. William S. Y. Wong 
+//  Scopus ID: 56358785200 | ORCID: 0000-0002-5389-5018
+//  Fields: year, authors, title, journal, volume, pages, doi,
+//          type ("article"|"review"|"book-chapter"),
+//          highlight (bool), thumbnail (optional)
+//
+//  thumbnail: filename in images/Publications/ for a small square
+//  thumbnail shown next to this entry (e.g. a graphical abstract
+//  or journal cover crop). Leave unset (or omit) for no thumbnail.
+//  You can add one through the Site Editor — click 📷 on a
+//  publication's thumbnail square, which uploads the image and
+//  gives you the exact filename to paste in here; or just drop a
+//  file into images/Publications/ yourself and set this field.
+// ============================================================
+
+const PUBLICATIONS = [
+
+  // ── 2026 ──────────────────────────────────────────────────
+
+    {
+    year: 2026,
+    authors: "Koochak, P., Liu, K., and Wong, W. S. Y.*",
+    title: "Rolling and Impacting Caustic Drops on Super Liquid Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation",
+    journal: "Advanced Functional Materials",
+    volume: "36", pages: "e27264 ",
+    doi: "10.1002/adfm.202527264",
+    type: "article", highlight: true,
+    thumbnail: "2026-rolling-and-impacting-caustic-drops-on-s.jpg-cropped.png"
+  },
+ // ── 2025 ──────────────────────────────────────────────────
+  {
+    year: 2025,
+    authors: "Koochak, P., Lin, M., Afzalifar, A., Hashemi, A., Arunachalam, S., Shoaib, A., Turkki, V., Ala-Nissila, T., Daniel, D., Vuckovac, M., and Wong, W. S. Y.*",
+    title: "Self-Accelerating Drops on Silicone-Based Super Liquid-Repellent Surfaces",
+    journal: "ACS Nano",
+    volume: "19", pages: "23105–23119",
+    doi: "10.1021/acsnano.5c04250",
+    type: "article", highlight: true,
+    thumbnail: "2025-self-accelerating-drops-on-silicone-base.jpg-cropped.png-cropped.png"
+  },
+  {
+    year: 2025,
+    authors: "Fauconnier, M., Karunakaran, B., Drago-González, A., Wong, W. S. Y., Ras, R. H. A., and Nieminen, H. J.",
+    title: "Fast Capillary Waves on an Underwater Superhydrophobic Surface",
+    journal: "Nature Communications",
+    volume: "16", pages: "1568",
+    doi: "10.1038/s41467-025-55907-w",
+    type: "article", highlight: false,
+    thumbnail: "2025-fast-capillary-waves-on-an-underwater-su.jpg-cropped.jpg"
+  },
+
+  // ── 2024 ──────────────────────────────────────────────────
+  {
+    year: 2024,
+    authors: "Koochak, P., Kiseleva, M. S., Lepikko, S., Latikka, M., Ras, R. H. A., and Wong, W. S. Y.*",
+    title: "Smoothening Perfluoroalkylated Surfaces: Liquid-Like Despite Molecular Rigidity?",
+    journal: "Advanced Materials Interfaces",
+    volume: "12", pages: "2400619",
+    doi: "10.1002/admi.202400619",
+    type: "article", highlight: true,
+    thumbnail: "2024-smoothening-perfluoroalkylated-surfaces-.jpg-cropped.png-cropped.png"
+  },
+  {
+    year: 2024,
+    authors: "Ma, J., Zhang, C., Wong, W. S. Y.*, and Song, J.*",
+    title: "Facile, Scalable and Substrate-Independent Omniphobic Surface",
+    journal: "Applied Surface Science",
+    volume: "682", pages: "161726",
+    doi: "10.1016/j.apsusc.2024.161726",
+    type: "article", highlight: false,
+    thumbnail: "2024-facile-scalable-and-substrate-independen.jpg"
+  },
+  {
+    year: 2024,
+    authors: "Naga, A., Rennick, M., Hauer, L., Wong, W. S. Y., Vollmer, D., and Kusumaatmaja, H.",
+    title: "Direct Visualization of Viscous Dissipation and Wetting Ridge Geometry on Lubricant-Infused Surfaces",
+    journal: "Communications Physics",
+    volume: "7", pages: "306",
+    doi: "10.1038/s42005-024-01795-3",
+    type: "article", highlight: false,
+    thumbnail: "2024-direct-visualization-of-viscous-dissipat.jpg-cropped.png"
+  },
+  {
+    year: 2024,
+    authors: "Hauer, L., Naga, A., Rodrique, B., Pham, J. T., Wong, W. S. Y., and Vollmer, D.",
+    title: "Wetting on Silicone Surfaces",
+    journal: "Soft Matter",
+    volume: "20", pages: "5273–5295",
+    doi: "10.1039/D4SM00346B",
+    type: "review", highlight: false,
+    thumbnail: "2024-wetting-on-silicone-surfaces.jpg-cropped.png-cropped.png-cropped.png"
+  },
+  {
+    year: 2024,
+    authors: "Wong, W. S. Y.*, Naga, A., Neef, T., Karunakaran, B., Poulikakos, D., and Ras, R. H. A.",
+    title: "Designing Plastrons for Underwater Bubble Capture: From Model Microstructures to Stochastic Nanostructures",
+    journal: "Advanced Science",
+    volume: "11", pages: "2403366",
+    doi: "10.1002/advs.202403366",
+    type: "article", highlight: true,
+    thumbnail: "2024-designing-plastrons-for-underwater-bubbl.png"
+  },
+  {
+    year: 2024,
+    authors: "Drago-González, A., Fauconnier, M., Karunakaran, B., Wong, W. S. Y., Ras, R. H. A., and Nieminen, H. J.",
+    title: "Ultrasonic Healing of Plastrons",
+    journal: "Advanced Science",
+    volume: "11", pages: "2403028",
+    doi: "10.1002/advs.202403028",
+    type: "article", highlight: false,
+    thumbnail: "2024-ultrasonic-healing-of-plastrons.jpg-cropped.png"
+  },
+  {
+    year: 2024,
+    authors: "Wong, W. S. Y.*, Kiseleva, M. S., and Naga, A.",
+    title: "Polarity-Induced Reactive Wetting: Spreading and Retracting Sessile Water Drops",
+    journal: "Langmuir",
+    volume: "40", pages: "13562–13572",
+    doi: "10.1021/acs.langmuir.4c01085",
+    type: "article", highlight: false,
+    thumbnail: "2024-polarity-induced-reactive-wetting-spread.jpg"
+  },
+
+  // ── 2023 ──────────────────────────────────────────────────
+  {
+    year: 2023,
+    authors: "Wong, W. S. Y.*, Kiseleva, M. S., Zhou, S., Junaid, M., Pitkänen, L., and Ras, R. H. A.*",
+    title: "Design of Fluoro-Free Surfaces Super-Repellent to Low-Surface-Tension Liquids",
+    journal: "Advanced Materials",
+    volume: "35", pages: "2300306",
+    doi: "10.1002/adma.202300306",
+    type: "article", highlight: true,
+    thumbnail: "thumb-cropped.png"
+  },
+
+  // ── 2022 ──────────────────────────────────────────────────
+  {
+    year: 2022,
+    authors: "Wong, W. S. Y.*, Bista, P., Li, X., Veith, L., Sharifi-Aghili, A., Weber, S. A. L., and Butt, H-J.*",
+    title: "Tuning the Charge of Sliding Water Drops",
+    journal: "Langmuir",
+    volume: "38", pages: "6224",
+    doi: "10.1021/acs.langmuir.2c00941",
+    type: "article", highlight: true,
+    thumbnail: "2022-tuning-the-charge-of-sliding-water-drops.jpg-cropped.png"
+  },
+  {
+    year: 2022,
+    authors: "Wong, W. S. Y., Hauer, L., Cziko, P., and Meister, K.",
+    title: "Cryofouling Avoidance in the Antarctic Scallop Adamussium colbecki",
+    journal: "Communications Biology",
+    volume: "5", pages: "83",
+    doi: "10.1038/s42003-022-03023-6",
+    type: "article", highlight: false,
+    thumbnail: "2022-cryofouling-avoidance-in-the-antarctic-s.png"
+  },
+  {
+    year: 2022,
+    authors: "Wong, W. S. Y.* and Vollmer, D.*",
+    title: "Effervescence-Inspired Self-Healing Plastrons for Long-Term Immersion Stability",
+    journal: "Advanced Functional Materials",
+    volume: "32", pages: "2107831",
+    doi: "10.1002/adfm.202107831",
+    type: "article", highlight: true,
+    thumbnail: "2022-effervescence-inspired-self-healing-plas.jpg-cropped.png"
+  },
+
+  // ── 2021 ──────────────────────────────────────────────────
+  {
+    year: 2021,
+    authors: "Wang, W., Gu, W., Liu, P., Liu, J., Wang, X., Liu, J., Yu, X., Wong, W. S. Y., and Zhang, Y.*",
+    title: "Heterogeneously-Wetting Glass with Enhanced Anti-Fingerprint Properties",
+    journal: "Chemical Engineering Journal",
+    volume: "430", pages: "132902",
+    doi: "10.1016/j.cej.2021.132902",
+    type: "article", highlight: false,
+    thumbnail: "thumb-cropped_1.png"
+  },
+  {
+    year: 2021,
+    authors: "Hauer, L., Wong, W. S. Y., Sharifi-Aghili, A., Kondic, L., and Vollmer, D.*",
+    title: "Frost Spreading and Pattern Formation on Microstructured Surfaces",
+    journal: "Physical Review E",
+    volume: "104", pages: "044901",
+    doi: "10.1103/PhysRevE.104.044901",
+    type: "article", highlight: false,
+    thumbnail: "2021-frost-spreading-and-pattern-formation-on.png"
+  },
+  {
+    year: 2021,
+    authors: "Wong, W. S. Y.*, Naga, A., Hauer, L., Baumli, P., Bauer, H., Hegner, K. I., D'Acunzi, M., Kaltbeitzel, A., Butt, H-J., and Vollmer, D.*",
+    title: "Super Liquid Repellent Surfaces for Anti-Foaming and Froth Management",
+    journal: "Nature Communications",
+    volume: "12", pages: "5358",
+    doi: "10.1038/s41467-021-25556-w",
+    type: "article", highlight: true,
+    thumbnail: "2021-super-liquid-repellent-surfaces-for-anti.jpg-cropped.png"
+  },
+  {
+    year: 2021,
+    authors: "Liu, G., Wong, W. S. Y., Kraft, M., Ager, J. W., Vollmer, D., and Xu, R.",
+    title: "Wetting-Regulated Gas-Involving (Photo)electrocatalysis: Biomimetics in Energy Conversion",
+    journal: "Chemical Society Reviews",
+    volume: "50", pages: "10674–10699",
+    doi: "10.1039/d1cs00258a",
+    type: "review", highlight: false,
+    thumbnail: "thumb-cropped_2.png"
+  },
+  {
+    year: 2021,
+    authors: "Hegner, K. I., Wong, W. S. Y.*, and Vollmer, D.*",
+    title: "Ultrafast Bubble Bursting by Superamphiphobic Coatings",
+    journal: "Advanced Materials",
+    volume: "33", pages: "2101855",
+    doi: "10.1002/adma.202101855",
+    type: "article", highlight: false,
+    thumbnail: "2021-ultrafast-bubble-bursting-by-superamphip.jpg-cropped.png"
+  },
+  {
+    year: 2021,
+    authors: "Lowe, A., Wong, W. S. Y., Tsyrin, N., Chorążewski, M., Zaki, A., Geppert-Rybczyńska, M., Stoudenets, V., Tricoli, A., Faik, A., and Grosu, Y.",
+    title: "Effect of Surface Entropy on Heat of Non-Wetting Liquid Intrusion into Nanopores",
+    journal: "Langmuir",
+    volume: "37", pages: "4827–4835",
+    doi: "10.1021/acs.langmuir.1c00005",
+    type: "article", highlight: false,
+    thumbnail: "thumb-cropped_3.png"
+  },
+  {
+    year: 2021,
+    authors: "Hauer, L.†, Wong, W. S. Y.†, Donadei, V., Hegner, K. I., Kondic, L., and Vollmer, D.",
+    title: "How Frost Forms and Grows on Lubricated Micro- and Nanostructured Surfaces",
+    journal: "ACS Nano",
+    volume: "15", pages: "4658–4668",
+    doi: "10.1021/acsnano.0c09152",
+    type: "article", highlight: false,
+    thumbnail: "2021-how-frost-forms-and-grows-on-lubricated-.jpg"
+  },
+  {
+    year: 2021,
+    authors: "Naga, A., Kaltbeitzel, A., Wong, W. S. Y., Butt, H-J., and Vollmer, D.",
+    title: "How a Water Drop Removes a Particle from a Hydrophobic Surface",
+    journal: "Soft Matter",
+    volume: "17", pages: "1746–1755",
+    doi: "10.1039/D0SM01925A",
+    type: "article", highlight: false,
+    thumbnail: "2021-how-a-water-drop-removes-a-particle-from.jpg"
+  },
+
+  // ── 2020 ──────────────────────────────────────────────────
+  {
+    year: 2020,
+    authors: "Baumli, P., D'Acunzi, M., Hegner, K. I., Naga, A., Wong, W. S. Y., Butt, H-J., and Vollmer, D.",
+    title: "The Challenge of Lubricant-Replenishment on Lubricant-Impregnated Surfaces",
+    journal: "Advances in Colloid and Interface Science",
+    volume: "287", pages: "102329",
+    doi: "10.1016/j.cis.2020.102329",
+    type: "review", highlight: false,
+    thumbnail: "thumb-cropped_4.png"
+  },
+  {
+    year: 2020,
+    authors: "Wong, W. S. Y.*, Hegner, K. I., Donadei, V., Hauer, L., Naga, A., and Vollmer, D.*",
+    title: "Capillary Balancing: Designing Frost-Resistant Lubricant-Infused Surfaces",
+    journal: "Nano Letters",
+    volume: "20", pages: "8508–8515",
+    doi: "10.1021/acs.nanolett.0c02956",
+    type: "article", highlight: true,
+    thumbnail: "2020-capillary-balancing-designing-frost-resi.jpg-cropped.png"
+  },
+  {
+    year: 2020,
+    authors: "Jiao, X., Li, M., Yu, X., Wong, W. S. Y.*, and Zhang, Y.*",
+    title: "Oil-Immersion Stable Superamphiphobic Coatings for Long-term Super Liquid-Repellency",
+    journal: "Chemical Engineering Journal",
+    volume: "420", pages: "127606",
+    doi: "10.1016/j.cej.2020.127606",
+    type: "article", highlight: false,
+    thumbnail: "2020-oil-immersion-stable-superamphiphobic-co.jpg"
+  },
+  {
+    year: 2020,
+    authors: "Wong, W. S. Y., Hauer, L., Naga, A., Kaltbeitzel, A., Baumli, P., D'Acunzi, M., Berger, R., Vollmer, D., and Butt, H-J.",
+    title: "Adaptive Wetting of Polydimethylsiloxane",
+    journal: "Langmuir",
+    volume: "36", pages: "7236–7245",
+    doi: "10.1021/acs.langmuir.0c00538",
+    type: "article", highlight: false,
+    thumbnail: "2020-adaptive-wetting-of-polydimethylsiloxane.jpg-cropped.png-cropped.png"
+  },
+  {
+    year: 2020,
+    authors: "Wong, W. S. Y.*, Corrales, T. P., Naga, A., Baumli, P., Kaltbeitzel, A., Kappl, M., Papadopoulos, P., Vollmer, D., and Butt, H-J.*",
+    title: "Microdroplet Contaminants: When and Why Superamphiphobic Surfaces Are Not Self-Cleaning",
+    journal: "ACS Nano",
+    volume: "14", pages: "3836–3846",
+    doi: "10.1021/acsnano.9b08211",
+    type: "article", highlight: false,
+    thumbnail: "2020-microdroplet-contaminants-when-and-why-s.jpg-cropped.png"
+  },
+
+  // ── 2019 ──────────────────────────────────────────────────
+  {
+    year: 2019,
+    authors: "Wong, W. S. Y.*",
+    title: "Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids",
+    journal: "Nano Letters",
+    volume: "19", pages: "1892–1901",
+    doi: "10.1021/acs.nanolett.8b04972",
+    type: "article", highlight: true,
+    thumbnail: "2019-surface-chemistry-enhancements-for-the-t.jpg-cropped.png-cropped.png"
+  },
+
+  // ── 2018 ──────────────────────────────────────────────────
+  {
+    year: 2018,
+    authors: "Wong, W. S. Y.* and Tricoli, A.*",
+    title: "Cassie-Levitated Droplets for Distortion-Free Low-Energy Solid–Liquid Interactions",
+    journal: "ACS Applied Materials and Interfaces",
+    volume: "10", pages: "13999–14007",
+    doi: "10.1021/acsami.8b00641",
+    type: "article", highlight: false,
+    thumbnail: "2018-cassie-levitated-droplets-for-distortion.jpg"
+  },
+  {
+    year: 2018,
+    authors: "Wong, W. S. Y.* and Tricoli, A.",
+    title: "Multi-Scale Engineering and Scalable Fabrication of Super(de)wetting Coatings",
+    journal: "Advanced Coating Materials, Wiley-Scrivener",
+    volume: "", pages: "394–457",
+    doi: "10.1002/9781119407652",
+    type: "book-chapter", highlight: false,
+    thumbnail: "thumb-cropped_5.png"
+  },
+  {
+    year: 2018,
+    authors: "Wong, W. S. Y., Gengenbach, T., Nguyen, H. T., Gao, X., Craig, V. S. J., and Tricoli, A.",
+    title: "Dynamically Gas-Phase Switchable Super(de)Wetting States by Reversible Amphiphilic Functionalization: A Powerful Approach for Smart Fluid Gating Membranes",
+    journal: "Advanced Functional Materials",
+    volume: "28", pages: "1704423",
+    doi: "10.1002/adfm.201704423",
+    type: "article", highlight: false,
+    thumbnail: "2018-dynamically-gas-phase-switchable-super-d.jpg"
+  },
+
+  // ── 2017 ──────────────────────────────────────────────────
+
+  {
+    year: 2017,
+    authors: "Wong, W. S. Y., Liu, G., and Tricoli, A.",
+    title: "Superamphiphobic Bionic Proboscis for Contamination-Free Manipulation of Nano- and Core-Shell Droplets",
+    journal: "Small",
+    volume: "13", pages: "1603688",
+    doi: "10.1002/smll.201603688",
+    type: "article", highlight: false,
+    thumbnail: "2017-superamphiphobic-bionic-proboscis-for-co_1.png"
+  },
+
+  {
+    year: 2017,
+    authors: "Wong, W. S. Y., Liu, G., Nasiri, N., Hao, C., Wang, Z., and Tricoli, A.",
+    title: "Omnidirectional Self-Assembly of Transparent Superoleophobic Nanotextures",
+    journal: "ACS Nano",
+    volume: "11", pages: "587–596",
+    doi: "10.1021/acsnano.6b06715",
+    type: "article", highlight: true,
+    thumbnail: "2017-omnidirectional-self-assembly-of-transpa.jpg"
+  },
+
+  // ── 2016 ──────────────────────────────────────────────────
+
+  {
+    year: 2016,
+    authors: "Wong, W. S. Y., Li, M., Nisbet, D. R., Craig, V. S. J., Wang, Z., and Tricoli, A.",
+    title: "Mimosa Origami: a Nanostructure-enabled Directional Self-Organization Regime of Materials",
+    journal: "Science Advances",
+    volume: "2", pages: "e1600417",
+    doi: "10.1126/sciadv.1600417",
+    type: "article", highlight: true,
+    thumbnail: "2016-mimosa-origami-a-nanostructure-enabled-d.jpg"
+  },
+  {
+    year: 2016,
+    authors: "Wong, W. S. Y., Stachurski, Z. H., Nisbet, D. R., and Tricoli, A.",
+    title: "Ultra-Durable and Transparent Self-Cleaning Surfaces by Large-Scale Self-Assembly of Hierarchical Interpenetrated Polymer Networks",
+    journal: "ACS Applied Materials and Interfaces",
+    volume: "8", pages: "13615–13623",
+    doi: "10.1021/acsami.6b03414",
+    type: "article", highlight: true,
+    thumbnail: "2016-ultra-durable-and-transparent-self-clean.jpg"
+  },
+  {
+    year: 2016,
+    authors: "Vahidi, A. K., Wang, Z., Wong, W. S. Y., and Li, Z.",
+    title: "Immobilization of O-Acetylserine Sulfhydrylase as Highly Active and Recyclable Nanobiocatalyst: Efficient Synthesis of beta-Pyrazol-1-yl-L-alanine",
+    journal: "Catalysis Science and Technology",
+    volume: "6", pages: "6286–6293",
+    doi: "10.1039/C6CY00755D",
+    type: "article", highlight: false,
+    thumbnail: "2016-immobilization-of-o-acetylserine-sulfhyd.png"
+  },
+  {
+    year: 2016,
+    authors: "Liu, G., Wong, W. S. Y., Nasiri, N., and Tricoli, A.",
+    title: "Ultraporous Superhydrophobic Gas-Permeable Nano-Layers by Scalable Solvent-Free One-Step Self-Assembly",
+    journal: "Nanoscale",
+    volume: "8", pages: "6085–6093",
+    doi: "10.1039/C5NR09000H",
+    type: "article", highlight: false,
+    thumbnail: "2016-ultraporous-superhydrophobic-gas-permeab.jpg"
+  },
+  {
+    year: 2016,
+    authors: "Wong, W. S. Y., Gutruf, P., Sriram, S., Bhaskaran, M., Wang, Z., and Tricoli, A.",
+    title: "Strain Engineering of Wave-like Nanofibers for Dynamically Switchable Adhesive/Repulsive Surfaces",
+    journal: "Advanced Functional Materials",
+    volume: "26", pages: "399–407",
+    doi: "10.1002/adfm.201503982",
+    type: "article", highlight: false,
+    thumbnail: "2016-strain-engineering-of-wave-like-nanofibe.png"
+  },
+
+  // ── 2015 ──────────────────────────────────────────────────
+  {
+    year: 2015,
+    authors: "Wong, W. S. Y., Nasiri, N., Liu, G., Rumsey-Hill, N., Craig, V. S. J., Nisbet, D. R., and Tricoli, A.",
+    title: "Flexible Transparent Hierarchical Nanomesh for Rose Petal-Like Droplet Manipulation and Lossless Transfer",
+    journal: "Advanced Materials Interfaces",
+    volume: "2", pages: "1500071",
+    doi: "10.1002/admi.201500071",
+    type: "article", highlight: false,
+    thumbnail: "2015-flexible-transparent-hierarchical-nanome.jpg"
+  },
+
+  // ── 2014 ──────────────────────────────────────────────────
+  {
+    year: 2014,
+    authors: "Wong, W. S. Y., Nasiri, N., Rodriguez, A. L., Nisbet, D. R., and Tricoli, A.",
+    title: "Hierarchical Amorphous Nanofibers for Transparent Inherently Super-Hydrophilic Coatings",
+    journal: "Journal of Materials Chemistry A",
+    volume: "2", pages: "15575–15581",
+    doi: "10.1039/C4TA03278K",
+    type: "article", highlight: false,
+    thumbnail: "2014-hierarchical-amorphous-nanofibers-for-tr.jpg"
+  },
+];

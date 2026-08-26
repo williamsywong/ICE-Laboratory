@@ -1,0 +1,51 @@
+// ============================================================
+//  ICE Group — Photo Gallery Data
+//  Add new photos by adding entries to the PHOTOS array.
+//
+//  Fields:
+//    file:     filename in images/Photos/  e.g. "2025-group-01.jpg"
+//    caption:  Short description
+//    year:     4-digit year number e.g. 2025
+//    category: "group" | "lab" | "event" | "conference"
+//    wide:     true = takes up 2 columns in masonry grid (good for panoramas)
+//    tall:     true = takes up 2 rows (good for portrait shots)
+//
+//  To add a photo:
+//    1. Put the image file in the images/Photos/ folder
+//    2. Add an entry here
+//    3. Push to GitHub — done.
+// ============================================================
+
+const PHOTOS = [
+  
+
+// ── 2026 ──────────────────────────────────────────────────
+  
+
+  {
+    file: "People-WW.jpg_v_People-WW.jpg?v=People-WW.jpg_v_People-WW.jpg?v=People-WW.jpg_v_People-WW.jpg%3Fv%3DPeople-WW.jpg_v_People-WW.jpg",
+    caption: "Interfacial Chemical Engineering Laboratory and Okinawa Institute of Science and Technology Collaborators at Okinawa Colloids, Okinawa, 2026",
+    year: 2028,
+    category: "conference",
+    wide: true,
+    tall: false
+  },
+  
+  {
+    file: "placeholder-group-wide.jpg_v_placeholder-group-wide.jpg?v=placeholder-group-wide.jpg_v_placeholder-group-wide.jpg?v=placeholder-group-wide.jpg_v_placeholder-group-wide.jpg%3Fv%3Dplaceholder-group-wide.jpg_v_placeholder-group-wide.jpg",
+    caption: "Interfacial Chemical Engineering Laboratory Established, University of Sydney, 2026",
+    year: 2026,
+    category: "event",
+    wide: true,
+    tall: false
+  },
+
+];
+
+// Category display config
+const PHOTO_CATEGORIES = {
+  group:      { label: "Group",       icon: "👥" },
+  lab:        { label: "Lab",         icon: "🔬" },
+  event:      { label: "Events",      icon: "🎉" },
+  conference: { label: "Conferences", icon: "🎤" },
+};
