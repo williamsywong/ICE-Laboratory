@@ -59,7 +59,7 @@ const GALLERY = [
   { file: "2021_Particle_in_Surface_Patterning.png", caption: "Particle in Surface Patterning", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
   { file: "2019_Particle_on_Surface_Patterning.png", caption: "Particle on Surface Patterning", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
   { file: "2016_Re-entrant_Nanoparticles.jpg", caption: "Nanostructured Re-entrancy", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
-  { file: "2024_Tall_Micropillars.jpg", caption: "100 micron tall pillars", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
+  { file: "", caption: "100 micron tall pillars", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
   { file: "2016_Waveformed_PS_Nanofibers.jpg", caption: "Wave-formed Nanofibers", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
   { file: "2016_Ultrafine_PCL_Nanofibers_edited.jpg", caption: "Nanofiber Structuring", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },
   { file: "2018_SA_Needle.png", caption: "Nanostructured Needle Capillaries", link: "", youtube: "", category: "surface", icon: "🧩", size: "small" },

@@ -26,10 +26,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
-
 
 
 
@@ -100,11 +97,9 @@
   
   
   
-  
   </style>
 </head>
 <body>
-
 
 
 
@@ -127,15 +122,15 @@
     </a>
   </div>
   <ul class="nav-links">
-    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
-    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html" class="active">Gallery</a></li>
-    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
-    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
-    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news" class="" style="position: relative;"><a href="news.html">News</a></li>
-    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
-    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
+    <li data-page="research"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery"><a href="gallery.html" class="active">Gallery</a></li>
+    <li data-page="publications"><a href="publications.html">Publications</a></li>
+    <li data-page="people"><a href="people.html">People</a></li>
+    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news"><a href="news.html">News</a></li>
+    <li data-page="photos"><a href="photos.html">Photos</a></li>
+    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -249,71 +244,67 @@
       <div class="mtile-link-badge">↗</div>
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Superhydrophobic Australian Coins</span></div>
     </a><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/Australian_Coin_with_Moses_Effect.jpg" alt="Superhydrophobic Moses Effect" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/Australian_Coin_with_Moses_Effect.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Superhydrophobic Moses Effect</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2021_Spikey_Nanoparticles.jpg" alt="Nanostructured Spikey Agglomerates" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2021_Spikey_Nanoparticles.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Nanostructured Spikey Agglomerates</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2021_Particle_in_Surface_Patterning.png" alt="Particle in Surface Patterning" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2021_Particle_in_Surface_Patterning.png" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Particle in Surface Patterning</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2019_Particle_on_Surface_Patterning.png" alt="Particle on Surface Patterning" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2019_Particle_on_Surface_Patterning.png" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Particle on Surface Patterning</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_Re-entrant_Nanoparticles.jpg" alt="Nanostructured Re-entrancy" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_Re-entrant_Nanoparticles.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Nanostructured Re-entrancy</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2024_Tall_Micropillars.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
-      
-      <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">100 micron tall pillars</span></div>
-    </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_Waveformed_PS_Nanofibers.jpg" alt="Wave-formed Nanofibers" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_Waveformed_PS_Nanofibers.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Wave-formed Nanofibers</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_Ultrafine_PCL_Nanofibers_edited.jpg" alt="Nanofiber Structuring" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_Ultrafine_PCL_Nanofibers_edited.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Nanofiber Structuring</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2018_SA_Needle.png" alt="Nanostructured Needle Capillaries" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2018_SA_Needle.png" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Nanostructured Needle Capillaries</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2017_CeO_Micro_Dandelions_edited.jpg" alt="Cerium Oxide Dandelions" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2017_CeO_Micro_Dandelions_edited.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Cerium Oxide Dandelions</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2017_CeMnO_Cubes.jpg" alt="Cerium Manganese Oxide Cubes" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2017_CeMnO_Cubes.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Cerium Manganese Oxide Cubes</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_PU-PMMA.jpg" alt="Globular PU-PMMA" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_PU-PMMA.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Globular PU-PMMA</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_Wrinkled_PDMS-PMMA.jpg" alt="Wrinkled PDMS-PMMA" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_Wrinkled_PDMS-PMMA.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Wrinkled PDMS-PMMA</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2016_FeVO_Platelets_edited.jpg" alt="Iron Vanadium Oxide Platelets" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2016_FeVO_Platelets_edited.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Iron Vanadium Oxide Platelets</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2015_Nanopatterned_PS_edited.jpg" alt="Nanopatterned Polystyrene" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2015_Nanopatterned_PS_edited.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Nanopatterned Polystyrene</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2014_PVP-TiO2_Curly.jpg" alt="Curly Amorphous Titania" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2014_PVP-TiO2_Curly.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Curly Amorphous Titania</span></div>
     </div><div class="mtile" data-cms-resize-tracked="1" style="position: relative;">
-      <img src="images/Gallery/2013_Fernleaf_POSS_edited.jpg" alt="Fernleaf-like Nanoparticle Assembly" loading="lazy" style="min-height:150px;object-fit:cover;">
+      <img src="images/Gallery/2013_Fernleaf_POSS_edited.jpg" alt="tile photo" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;">
       
       <div class="mtile-overlay"><span class="mtile-cap" style="position: relative;">Fernleaf-like Nanoparticle Assembly</span></div>
     </div></div>
@@ -363,7 +354,6 @@
 
   render();
 </script>
-
 
 
 

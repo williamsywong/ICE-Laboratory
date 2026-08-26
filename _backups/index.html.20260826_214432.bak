@@ -34,10 +34,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
-
 
 
 
@@ -207,11 +204,9 @@
   
   
   
-  
   </style>
 </head>
 <body>
-
 
 
 
@@ -243,15 +238,15 @@
     </a>
   </div>
   <ul class="nav-links">
-    <li data-page="research"><a href="#research">Research</a></li>
-    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
-    <li data-page="publications"><a href="publications.html">Publications</a></li>
-    <li data-page="people"><a href="people.html">People</a></li>
-    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news"><a href="news.html">News</a></li>
-    <li data-page="photos"><a href="photos.html">Photos</a></li>
-    <li data-page="join"><a href="#contact">Join Us</a></li>
+    <li data-page="research" class="" style="position: relative;"><a href="#research">Research</a></li>
+    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
+    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
+    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news" class="" style="position: relative;"><a href="news.html">News</a></li>
+    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
+    <li data-page="join" class="" style="position: relative;"><a href="#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -336,7 +331,7 @@
         <p class="person-role" style="position: relative;"><a href="index.html#contact" style="color: var(--ice-blue); position: relative;" class="">Apply now →</a></p>
       </div></div>
   <p style="margin-top: 1.5rem; font-size: 13px; color: var(--text-muted); position: relative; width: 616px; height: 24px;" class="">Recruitment is also open to self-funded positions.&nbsp;<a href="#contact" style="color: var(--ice-blue); position: relative;" class="">View open (and fully funded) positions →</a></p>
-<span class="cms-hoverable" style="position: absolute; left: 282px; top: 856px; display: inline-block; z-index: 5;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span></section>
+<span class="cms-hoverable" style="position: absolute; left: 282px; top: 856px; display: inline-block; z-index: 5;"><img src="images/Home/USYD.png" alt="USYD.png" style="width: 234px; max-width: 90vw; height: auto; border-radius: 6px; display: block; outline: rgb(91, 184, 232) solid 2px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span></section>
 </div>
 
 <!-- CONTACT -->
@@ -432,8 +427,7 @@
 
 
 
-<span class="cms-hoverable" style="position: absolute; left: 1118px; top: 766px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 0px; top: 1px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><img src="images/Home/20260817_Group_Logo-removebg.png" alt="20260817_Group_Logo-removebg.png" style="width: 334px; max-width: 90vw; height: auto; border-radius: 6px; display: block; outline: rgb(91, 184, 232) solid 2px; cursor: pointer;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
-
+<span class="cms-hoverable" style="position: absolute; left: 1118px; top: 766px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 0px; top: 1px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><img src="images/Home/20260817_Group_Logo-removebg.png" alt="20260817_Group_Logo-removebg.png" style="width: 334px; max-width: 90vw; height: auto; border-radius: 6px; display: block; outline: rgb(91, 184, 232) solid 2px; cursor: pointer;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
 
 
 </body>
