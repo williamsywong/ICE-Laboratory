@@ -8,11 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
-
 
 
 
@@ -145,11 +142,9 @@
   
   
   
-  
   </style>
 </head>
 <body>
-
 
 
 
@@ -210,7 +205,7 @@
               <span class="news-date-str" style="position: relative;">25 Aug 2026</span>
             </div>
             <h3 class="news-card-title" style="position: relative;">PhD positions open</h3>
-            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">link</a>.</p>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html</a></p>
             <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
           </div>
         </div>
@@ -357,7 +352,6 @@
   renderStats();
   renderGrid();
 </script>
-
 
 
 

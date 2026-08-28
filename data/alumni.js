@@ -51,12 +51,12 @@ const ALUMNI = [
   // ── Postdoctoral researchers ──
 
   // ── PhD alumni ──
-  { name: "Alex Drago-Gonzalez", level: "PhD", focus: "2023-2026", position: "As co-advisor w/ Heikki Nieminen and Robin Ras. Current: ICEYE", institution: "Aalto University" },
-  { name: "Katharina Hegner", level: "PhD", focus: "2020-2023", position: "As co-advisor w/ Doris Vollmer and Hans-Jürgen Butt. Current: Infineon", institution: "Max Planck Institute" },
+  { name: "Alex Drago-Gonzalez", level: "PhD", focus: "2023-2026", position: "As co-advisor w/ Heikki Nieminen and Robin Ras. <br> Current: ICEYE", institution: "Aalto University" },
+  { name: "Katharina Hegner", level: "PhD", focus: "2020-2023", position: "As co-advisor w/ Doris Vollmer and Hans-Jürgen Butt. <br> Current: Infineon", institution: "Max Planck Institute" },
 
   // ── Masters students ──
   { name: "Parham Koochak", level: "Masters", focus: "2024-2026", position: "Current: Ph.D. Candidate, University of Pennsylvania", institution: "Aalto University" },
-  { name: "Lukas Hauer", level: "Masters", focus: "2019-2021", position: "Current: Postdoctoral Researcher, University of Cologne", institution: "Max Planck Institute" },
+  { name: "Lukas Hauer", level: "Masters", focus: "2019-2021", position: "As co-advisor w/ Doris Vollmer. <br> Current: Postdoctoral Researcher, University of Cologne", institution: "Max Planck Institute" },
 
   // ── Undergraduate researchers ──
 

@@ -30,7 +30,7 @@ const NEWS = [
     date: "2026-08-25",
     tag: "Recruitment",
     title: "PhD positions open",
-    body: "We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available.",
+    body: "We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: Doctor of Philosophy (Engineering)",
     link: "mailto:william.swong@sydney.edu.au",
     linkText: "Express interest",
     image: ""

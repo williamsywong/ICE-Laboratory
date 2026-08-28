@@ -7,7 +7,10 @@
 //  Fields:
 //    file:     filename in images/Abstracts/ for the graphical abstract
 //              e.g. "2025-acsnano.jpg". Leave "" to show a placeholder
-//              (icon) until a real image is added.
+//              (icon) until a real image is added — or just add one from
+//              the Site Editor: hover an abstract's icon on the Abstracts
+//              tab and click 📷 to upload an image (✂ to crop it after).
+//              Saving there fills in this field automatically.
 //    icon:     Emoji shown on the placeholder (only used when file is "") 💧 🩸 🫧 ❄️ 🧪 🧴 🍾 🌍 🔬 🧬 🌡 ⚡ 🕯 🌊 🧫 🧩
 //    journal:  Journal name and year, e.g. "ACS Nano · 2025"
 //    title:    Paper title
@@ -27,7 +30,7 @@
 const ABSTRACTS = [
 
   {
-    file: "", icon: "🔬",
+    file: "2026_Caustic.jpg", icon: "🔬",
     journal: "Advanced Functional Materials · 2026",
     title: "Rolling and Impacting Caustic Drops on Super Liquid-Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation",
     authors: "Koochak, P., Liu, K., and Wong, W. S. Y.*",
@@ -36,7 +39,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "⚡",
+    file: "2025_Accelerating.jpg", icon: "⚡",
     journal: "ACS Nano · 2025",
     title: "Self-Accelerating Drops on Silicone-Based Super Liquid Repellent Surfaces",
     authors: "Koochak, P., Lin, M., Afzalifar, A., Hashemi, A., Arunachalam, S., Shoaib, A., Turkki, V., Ala-Nissila, T., Daniel, D., Vuckovac, M., and Wong, W. S. Y.*",
@@ -45,7 +48,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🔬",
+    file: "2024_Plastrons.jpg", icon: "🔬",
     journal: "Advanced Science · 2024",
     title: "Designing Plastrons for Underwater Bubble Capture: From Model Microstructures to Stochastic Nanostructures",
     authors: "Wong, W. S. Y.*, Naga, A., Neef, T., Karunakaran, B., Poulikakos, D., and Ras, R. H. A.",
@@ -54,7 +57,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🌍",
+    file: "2023_Fluoro-Free.jpg", icon: "🌍",
     journal: "Advanced Materials · 2023",
     title: "Design of Fluoro-Free Surfaces Super-Repellent to Low-Surface-Tension Liquids",
     authors: "Wong, W. S. Y.*, Kiseleva, M. S., Zhou, S., Junaid, M., Pitkänen, L., and Ras, R. H. A.*",
@@ -63,7 +66,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🧪",
+    file: "2022_Effervescence.jpg", icon: "🧪",
     journal: "Advanced Functional Materials · 2022",
     title: "Effervescence-Inspired Self-Healing Plastrons for Long-Term Immersion Stability",
     authors: "Wong, W. S. Y.* and Vollmer, D.*",
@@ -72,7 +75,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🫧",
+    file: "2021_Foam.jpg", icon: "🫧",
     journal: "Nature Communications · 2021",
     title: "Super liquid repellent surfaces for anti-foaming and froth management",
     authors: "Wong, W. S. Y.*, Naga, A., Hauer, L., et al., Butt, H-J., and Vollmer, D.*",
@@ -81,7 +84,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "❄️",
+    file: "2020_Capillary.jpg", icon: "❄️",
     journal: "Nano Letters · 2020",
     title: "Capillary Balancing: Designing Frost-Resistant Lubricant-Infused Surfaces",
     authors: "Wong, W. S. Y.*, Hegner, K. I., Donadei, V., Hauer, L., Naga, A., and Vollmer, D.*",
@@ -90,7 +93,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🧪",
+    file: "2019_Enhancement.jpg", icon: "🧪",
     journal: "Nano Letters · 2019",
     title: "Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids",
     authors: "Wong, W. S. Y.*",
@@ -99,7 +102,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🌊",
+    file: "2018_RAF.jpg", icon: "🌊",
     journal: "Advanced Functional Materials · 2018",
     title: "Dynamically Gas-Phase Switchable Super(de)Wetting States by Reversible Amphiphilic Functionalization: A Powerful Approach for Smart Fluid Gating Membranes",
     authors: "Wong, W. S. Y., Gengenbach, T., Nguyen, H. T., Gao, X., Craig, V. S. J., and Tricoli, A.",
@@ -108,7 +111,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🕯",
+    file: "2017_Omnidirectional.jpg", icon: "🕯",
     journal: "ACS Nano · 2017",
     title: "Omnidirectional Self-Assembly of Transparent Superoleophobic Nanotextures",
     authors: "Wong, W. S. Y., Gengenbach, T., Nguyen, H. T., Gao, X., Craig, V. S. J., and Tricoli, A.",
@@ -117,7 +120,7 @@ const ABSTRACTS = [
   },
 
   {
-    file: "", icon: "🧩",
+    file: "2016_Mimosa.jpg", icon: "🧩",
     journal: "Science Advances · 2016",
     title: "Mimosa Origami: a Nanostructure-enabled Directional Self-Organization Regime of Materials",
     authors: "Wong, W. S. Y., Li, M., Nisbet, D. R., Craig, V. S. J., Wang, Z., and Tricoli, A.",

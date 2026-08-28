@@ -13,7 +13,19 @@
 //  publication's thumbnail square, which uploads the image and
 //  gives you the exact filename to paste in here; or just drop a
 //  file into images/Publications/ yourself and set this field.
+//
+//  PI_START_DATE / GROUP_START_DATE ("YYYY-MM-DD") — start dates
+//  for the two "years" stats on the Publications page: the PI's
+//  own research experience, and the group's own existence. Like
+//  the "Years" counter on the News page, these are NOT based on
+//  today's real calendar date — "now" is the most recent year
+//  among the publications below (31 December of that year), so
+//  the count stays deterministic. Each stat hides itself while
+//  it would show 0 (i.e. before its start date has been reached).
 // ============================================================
+
+const PI_START_DATE = "2014-02-01";
+const GROUP_START_DATE = "2027-02-01";
 
 const PUBLICATIONS = [
 

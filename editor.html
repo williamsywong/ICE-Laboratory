@@ -163,6 +163,10 @@ body{font-family:'DM Sans',sans-serif;font-size:13px;color:#2c3e50;background:#f
 [data-cms-tile].selected > .cms-avatar-upload,
 [data-cms-tile].selected > .cms-crop-btn,
 [data-cms-tile].selected > .cms-yt-btn,
+[data-cms-research-card]:hover > .cms-avatar-upload,
+[data-cms-research-card]:hover > .cms-crop-btn,
+[data-cms-research-card].selected > .cms-avatar-upload,
+[data-cms-research-card].selected > .cms-crop-btn,
 [data-cms-card]:hover > .cms-move-handle,
 [data-cms-card]:hover > .cms-del-btn,
 [data-cms-card].selected > .cms-move-handle,
@@ -187,7 +191,10 @@ body{font-family:'DM Sans',sans-serif;font-size:13px;color:#2c3e50;background:#f
 /* A freshly inserted text box — dashed outline is an editor-only affordance
    so it's obvious where it is, stripped (along with this class) on save so
    it never shows on the live site. */
-.cms-new-textbox{ outline: 2px dashed #5bb8e8; }
+.cms-new-textbox {
+  outline: none !important;
+  background: transparent !important;
+}
 .cms-logo-upload, .cms-logo-revert{
   position:absolute; width:20px; height:20px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
@@ -276,7 +283,7 @@ body{font-family:'DM Sans',sans-serif;font-size:13px;color:#2c3e50;background:#f
 /* ══════════════ CROP MODAL ══════════════ */
 #crop-overlay .crop-hint{ color:rgba(255,255,255,0.55); font-size:12px; }
 #crop-overlay .crop-stage{ position:relative; }
-#crop-overlay .crop-box{ position:absolute; border:2px dashed #5bb8e8; background:rgba(91,184,232,0.12); cursor:move; box-sizing:border-box; }
+#crop-overlay .crop-box{ position:absolute; border:none; background:rgba(91,184,232,0.12); cursor:move; box-sizing:border-box; }
 #crop-overlay .crop-handle{ position:absolute; right:-7px; bottom:-7px; width:16px; height:16px; background:#5bb8e8; border-radius:4px; cursor:nwse-resize; box-shadow:0 1px 4px rgba(0,0,0,0.5); }
 #crop-overlay .crop-controls{ display:flex; gap:.6rem; }
 
@@ -986,6 +993,62 @@ function initEditing(id) {
     });
   }
 
+  // ── research area cards (Home page only) — replace the plain white card
+  // background with an uploaded image (a dark tint is layered on top
+  // automatically so the title/description stay readable) ──
+  pg.querySelectorAll('.research-card').forEach(card => {
+    if (card.hasAttribute('data-cms-research-card')) return;
+    card.setAttribute('data-cms-research-card', '1');
+    if (!card.style.position || card.style.position === 'static') card.style.position = 'relative';
+
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this card\'s background image';
+    camBtn.textContent = '📷';
+    card.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerResearchCardUpload(card);
+    });
+
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this card\'s background image';
+    cropBtn.textContent = '✂';
+    card.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const styleAttr = card.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      if (!match) { toast('Add a background image first (📷), then crop it', 'err'); return; }
+      const tmp = new Image();
+      tmp.onload = () => {
+        openCropTool(tmp, dataUrl => {
+          hist.push({ el: card, prevStyle: card.getAttribute('style'), action: 'heroCrop' });
+          setResearchCardBackground(card, dataUrl);
+          card.setAttribute('data-research-orig-name', (card.getAttribute('data-research-orig-name') || 'research') + '-cropped.png');
+          card.removeAttribute('data-replace-existing');
+          document.getElementById('badge').classList.add('on');
+        });
+      };
+      tmp.onerror = () => toast('Could not load that image for cropping', 'err');
+      tmp.src = match[2];
+    });
+
+    card.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); card.classList.add('avatar-drag-over'); });
+    card.addEventListener('dragleave', () => card.classList.remove('avatar-drag-over'));
+    card.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      card.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setResearchCardImage(card, file);
+    });
+  });
+
   // Make free-positioned elements draggable via Alt+drag (fallback) too
   initDrag(pg);
 
@@ -995,6 +1058,7 @@ function initEditing(id) {
     if (img.closest('[data-cms-skip]')) return; // e.g. visitor counter badge — not editable
     if (img.closest('.mtile, .masonry-item, .news-card')) return; // handled by initTiles() instead
     if (img.closest('.pub-thumb')) return; // handled by the publications-thumbnail loop instead
+    if (img.closest('.abstract-figure')) return; // handled by the abstracts-figure loop instead
     if (img.closest('.social-icon')) return; // small fixed-size badge icons (Scholar/ORCID/etc.) — the page's own CSS controls their size; leave them alone entirely so it's never overridden
     img.setAttribute('data-cms-img','1');
     img.style.cursor = 'pointer';
@@ -1191,6 +1255,59 @@ function initEditing(id) {
       thumb.classList.remove('avatar-drag-over');
       const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
       if (file) setPubThumb(thumb, file);
+    });
+  });
+
+  // ── Abstracts figures ── each abstract card has a .abstract-figure slot
+  // (rendered from data/abstracts.js, like every other data-driven list) —
+  // hover it and click 📷 to pick an image, ✂ to crop one that's set. Save
+  // also writes the resulting filename back into that entry's "file" field
+  // in data/abstracts.js (see syncAbstractsData), so it persists across
+  // reloads just like Publications thumbnails.
+  pg.querySelectorAll('.abstract-figure').forEach(fig => {
+    if (fig.hasAttribute('data-cms-tile')) return;
+    fig.setAttribute('data-cms-tile', '1');
+    if (!fig.style.position || fig.style.position === 'static') fig.style.position = 'relative';
+
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this abstract\'s figure image';
+    camBtn.textContent = '📷';
+    fig.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerAbstractFigureUpload(fig);
+    });
+
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this figure image';
+    cropBtn.textContent = '✂';
+    fig.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const img = fig.querySelector('img');
+      if (!img) { toast('Add a figure image first (📷), then crop it', 'err'); return; }
+      openCropTool(img, dataUrl => {
+        hist.push({ el: img, prevSrc: img.getAttribute('src'), prevOrigName: img.getAttribute('data-orig-name'), action: 'imgSrc' });
+        img.src = dataUrl;
+        img.setAttribute('data-orig-name', (img.getAttribute('data-orig-name') || 'abstract') + '-cropped.png');
+        img.removeAttribute('data-replace-existing');
+        document.getElementById('badge').classList.add('on');
+      });
+    });
+
+    fig.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); fig.classList.add('avatar-drag-over'); });
+    fig.addEventListener('dragleave', () => fig.classList.remove('avatar-drag-over'));
+    fig.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      fig.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setAbstractFigure(fig, file);
     });
   });
 
@@ -1706,6 +1823,49 @@ function setHeroPhotoFromFile(hero, file) {
 }
 
 /* ═══════════════════════════════════════════════
+   RESEARCH CARD — add / replace its background image
+   (Home page only). Same layered dark-tint approach as
+   the hero banner, so title/description stay readable.
+═══════════════════════════════════════════════ */
+function setResearchCardBackground(card, srcUrl) {
+  card.style.backgroundImage = `linear-gradient(180deg, rgba(10,22,40,0.45), rgba(10,22,40,0.75)), url('${srcUrl}')`;
+  card.style.backgroundSize = 'cover, cover';
+  card.style.backgroundPosition = 'center, center';
+  card.style.backgroundRepeat = 'no-repeat, no-repeat';
+  card.classList.add('research-card-photo');
+}
+
+function triggerResearchCardUpload(card) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setResearchCardImage(card, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setResearchCardImage(card, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: card, prevStyle: card.getAttribute('style'), action: 'heroCrop' });
+
+    // If this card already has a real (already-saved) image, replace that
+    // exact file on disk when we save, instead of leaving it as an orphan.
+    markReplaceTarget(card, 'bg', 'data-research-orig-name', file.name);
+
+    setResearchCardBackground(card, e.target.result);
+    document.getElementById('badge').classList.add('on');
+    toast('Card image set — click 💾 Save page to store it permanently');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
    GRID TILE — add / replace the tile's photo
    (Gallery, Photos, News). Inserts a real <img> so
    it's picked up by the normal per-page upload folder
@@ -1883,6 +2043,61 @@ function setPubThumb(thumb, file) {
 }
 
 /* ═══════════════════════════════════════════════
+   ABSTRACT FIGURE — add / replace the graphical-abstract
+   image next to an abstract card, replacing its icon
+   placeholder. Same pattern as PUBLICATION THUMBNAIL above.
+═══════════════════════════════════════════════ */
+function triggerAbstractFigureUpload(fig) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setAbstractFigure(fig, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setAbstractFigure(fig, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: fig, prev: fig.innerHTML, action: 'edit' });
+
+    let img = fig.querySelector('img');
+    if (!img) {
+      const placeholder = fig.querySelector('.ph-icon');
+      img = document.createElement('img');
+      img.style.cssText = 'width:100%;border-radius:8px;display:block;';
+      if (placeholder) placeholder.replaceWith(img);
+      else fig.appendChild(img);
+    }
+
+    // Prefer this entry's deterministic suggested filename (derived at render time
+    // from its journal year + title) so re-uploads land on the same file and stay
+    // easy to reference in data/abstracts.js; otherwise replace whatever real file
+    // is already linked, or fall back to the uploaded file's own name.
+    const suggestedName = fig.getAttribute('data-fig-name');
+    const oldSrc = img.getAttribute('src') || '';
+    if (oldSrc && !oldSrc.startsWith('data:')) {
+      markReplaceTarget(img, 'src', 'data-orig-name', file.name);
+    } else {
+      img.setAttribute('data-orig-name', suggestedName || file.name);
+      img.removeAttribute('data-replace-existing');
+    }
+
+    img.src = e.target.result;
+    img.alt = img.alt || 'graphical abstract';
+
+    document.getElementById('badge').classList.add('on');
+    toast('Figure set — click 💾 Save page to store it (replaces the old file)');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
    IMAGE INSERT
 ═══════════════════════════════════════════════ */
 function triggerImgInsert() {
@@ -1940,12 +2155,13 @@ function insertImgAt(src, name, clientX, clientY) {
   wrap.className = 'cms-hoverable';
   wrap.style.cssText = `position:absolute; left:${leftPx}px; top:${topPx}px; display:inline-block; z-index:5;`;
 
-  const img = document.createElement('img');
-  img.src = src;
-  img.alt = name || 'inserted image';
-  img.setAttribute('data-cms-img','1');
-  img.setAttribute('data-orig-name', name || 'image.png'); // preserved for save-time upload
-  img.style.cssText = 'width:280px;max-width:90vw;height:auto;border-radius:6px;display:block;outline:2px solid #5bb8e8;';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = name || 'inserted image';
+    img.setAttribute('data-cms-img','1');
+    img.setAttribute('data-orig-name', name || 'image.png'); // preserved for save-time upload
+    img.className = 'cms-img'; // hover/selected-only outline (editor UI only, never saved) — not a permanent border
+    img.style.cssText = 'width:280px;max-width:90vw;height:auto;border-radius:6px;display:block;';
 
   const moveHandle = document.createElement('span');
   moveHandle.className = 'cms-move-handle';
@@ -2569,12 +2785,13 @@ function buildStandaloneHTML(pg, styleCSS, extraCSSHTML) {
   clone.querySelectorAll('.cms-move-handle, .cms-del-btn, .cms-avatar-upload, .cms-crop-btn, .cms-hero-upload, .cms-hero-crop, .cms-hero-remove, .cms-logo-upload, .cms-logo-revert, .cms-yt-btn').forEach(el => el.remove());
   clone.querySelectorAll('.nav-emblem').forEach(el => { el.removeAttribute('data-has-logo'); el.removeAttribute('data-logo-orig-name'); el.removeAttribute('data-emblem-orig-text'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('.cms-new-textbox').forEach(el => el.classList.remove('cms-new-textbox'));
-  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); });
+  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); el.classList.remove('cms-img'); });
   clone.querySelectorAll('svg[data-cms-svg]').forEach(el => el.removeAttribute('data-cms-svg'));
   clone.querySelectorAll('[data-cms-avatar]').forEach(el => { el.removeAttribute('data-cms-avatar'); el.removeAttribute('data-avatar-orig-name'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-cms-tile]').forEach(el => { el.removeAttribute('data-cms-tile'); el.removeAttribute('data-idx'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-cms-card]').forEach(el => el.removeAttribute('data-cms-card'));
   clone.querySelectorAll('[data-cms-hero]').forEach(el => { el.removeAttribute('data-cms-hero'); el.removeAttribute('data-hero-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-research-card]').forEach(el => { el.removeAttribute('data-cms-research-card'); el.removeAttribute('data-research-orig-name'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-replace-existing]').forEach(el => el.removeAttribute('data-replace-existing'));
   clone.querySelectorAll('img[data-orig-name]').forEach(el => el.removeAttribute('data-orig-name'));
   clone.querySelectorAll('.cms-hoverable').forEach(el => { el.classList.remove('selected','dragging'); });
@@ -2697,9 +2914,10 @@ async function savePage() {
         const dataUrl = match[2];
         const isHero = el.hasAttribute('data-cms-hero');
         const isLogo = el.classList.contains('nav-emblem');
-        const folder = isHero ? uploadFolder : (isLogo ? 'Branding' : 'Headshots');
-        const origNameAttr = isHero ? 'data-hero-orig-name' : (isLogo ? 'data-logo-orig-name' : 'data-avatar-orig-name');
-        const origName = el.getAttribute(origNameAttr) || (isHero ? 'hero.jpg' : (isLogo ? 'logo.png' : 'headshot.png'));
+        const isResearchCard = el.classList.contains('research-card');
+        const folder = (isHero || isResearchCard) ? uploadFolder : (isLogo ? 'Branding' : 'Headshots');
+        const origNameAttr = isHero ? 'data-hero-orig-name' : (isLogo ? 'data-logo-orig-name' : (isResearchCard ? 'data-research-orig-name' : 'data-avatar-orig-name'));
+        const origName = el.getAttribute(origNameAttr) || (isHero ? 'hero.jpg' : (isLogo ? 'logo.png' : (isResearchCard ? 'research.jpg' : 'headshot.png')));
         const overwrite = el.getAttribute('data-replace-existing') === '1';
         try {
           const res = await fetch(SERVER + '/upload-image', {
@@ -2802,11 +3020,17 @@ async function savePage() {
   // so simple positional correspondence with data/research.js is enough).
   let researchSyncData = null;
   if (cur === 'home') {
-    researchSyncData = [...clone.querySelectorAll('#researchGrid .research-card')].map(card => ({
-      icon: readCaptionText(card.querySelector('.card-icon')) || '',
-      title: readCaptionText(card.querySelector('.card-title')) || '',
-      desc: readCaptionText(card.querySelector('.card-desc')) || '',
-    }));
+    researchSyncData = [...clone.querySelectorAll('#researchGrid .research-card')].map(card => {
+      const styleAttr = card.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      const image = match ? match[2].replace(/^images\/Home\//, '') : '';
+      return {
+        icon: readCaptionText(card.querySelector('.card-icon')) || '',
+        title: readCaptionText(card.querySelector('.card-title')) || '',
+        desc: readCaptionText(card.querySelector('.card-desc')) || '',
+        image,
+      };
+    });
   }
 
   let gallerySyncData = null, photosSyncData = null;
@@ -2852,6 +3076,22 @@ async function savePage() {
       })
       .filter(Boolean);
   }
+  // Same idea for Abstracts figures — matched to their data/abstracts.js
+  // entry by a deterministic name (year extracted from "journal" + slugified
+  // title) since only entries that actually have a figure image get one.
+  let abstractsSyncData = null;
+  if (cur === 'abstracts') {
+    abstractsSyncData = [...clone.querySelectorAll('.abstract-figure')]
+      .map(fig => {
+        const img = fig.querySelector('img');
+        if (!img) return null;
+        return {
+          figName: fig.getAttribute('data-fig-name'),
+          file: img.getAttribute('src').replace(/^images\/Abstracts\//, ''),
+        };
+      })
+      .filter(Boolean);
+  }
 
   // Strip editor-only attributes and injected UI controls before saving
   clone.querySelectorAll('[contenteditable]').forEach(el => {
@@ -2863,12 +3103,13 @@ async function savePage() {
   clone.querySelectorAll('.cms-move-handle, .cms-del-btn, .cms-avatar-upload, .cms-crop-btn, .cms-hero-upload, .cms-hero-crop, .cms-hero-remove, .cms-logo-upload, .cms-logo-revert, .cms-yt-btn').forEach(el => el.remove());
   clone.querySelectorAll('.nav-emblem').forEach(el => { el.removeAttribute('data-has-logo'); el.removeAttribute('data-logo-orig-name'); el.removeAttribute('data-emblem-orig-text'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('.cms-new-textbox').forEach(el => el.classList.remove('cms-new-textbox'));
-  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); });
+  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); el.classList.remove('cms-img'); });
   clone.querySelectorAll('svg[data-cms-svg]').forEach(el => el.removeAttribute('data-cms-svg'));
   clone.querySelectorAll('[data-cms-avatar]').forEach(el => { el.removeAttribute('data-cms-avatar'); el.removeAttribute('data-avatar-orig-name'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-cms-tile]').forEach(el => { el.removeAttribute('data-cms-tile'); el.removeAttribute('data-idx'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-cms-card]').forEach(el => el.removeAttribute('data-cms-card'));
   clone.querySelectorAll('[data-cms-hero]').forEach(el => { el.removeAttribute('data-cms-hero'); el.removeAttribute('data-hero-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-research-card]').forEach(el => { el.removeAttribute('data-cms-research-card'); el.removeAttribute('data-research-orig-name'); el.classList.remove('avatar-drag-over'); });
   clone.querySelectorAll('[data-replace-existing]').forEach(el => el.removeAttribute('data-replace-existing'));
   clone.querySelectorAll('img[data-orig-name]').forEach(el => el.removeAttribute('data-orig-name'));
   clone.querySelectorAll('.cms-hoverable').forEach(el => { el.classList.remove('selected','dragging'); });
@@ -2926,6 +3167,11 @@ ${clone.innerHTML}
         if (pubsSyncData) {
           btn.textContent = '🔄 Syncing publications data…';
           await syncPublicationsData(pubsSyncData);
+        }
+        // ...and for Abstracts figures.
+        if (abstractsSyncData) {
+          btn.textContent = '🔄 Syncing abstracts data…';
+          await syncAbstractsData(abstractsSyncData);
         }
         // ...and for the Team grid (index.html and people.html both share data/team.js).
         if (teamSyncData) {
@@ -3151,6 +3397,72 @@ async function syncPublicationsData(thumbData) {
 }
 
 /* ═══════════════════════════════════════════════
+   ABSTRACTS FIGURE SYNC — same approach as Publications
+   thumbnails: matched to its data/abstracts.js entry by a
+   deterministic name (year extracted from "journal" + slugified
+   title, mirroring abstracts.html's own figName logic) rather
+   than array position, since only entries that actually have a
+   figure image get one.
+═══════════════════════════════════════════════ */
+function absFigName(a) {
+  const yearMatch = String(a.journal || '').match(/(\d{4})/);
+  const year = yearMatch ? yearMatch[1] : 'abstract';
+  return `${year}-${pubSlugify(a.title)}.jpg`;
+}
+
+async function syncAbstractsData(figData) {
+  if (!figData || !figData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/abstracts.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/abstracts.js', e); return; }
+
+  let ABSTRACTS;
+  try {
+    ({ ABSTRACTS } = new Function(raw + '\nreturn {ABSTRACTS};')());
+  } catch (e) { console.warn('Could not parse data/abstracts.js', e); return; }
+  if (!Array.isArray(ABSTRACTS)) return;
+
+  // figName -> new filename, from figures that actually have an image set
+  const byName = {};
+  figData.forEach(f => { if (f.figName) byName[f.figName] = f.file; });
+
+  const arrMatch = raw.match(/const ABSTRACTS = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate ABSTRACTS array in data/abstracts.js — skipping data sync'); return; }
+
+  const esc = s => String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  let idx = -1;
+  const newArrText = arrMatch[0].replace(/\{[^{}]*\}/g, chunk => {
+    idx++;
+    const a = ABSTRACTS[idx];
+    if (!a) return chunk;
+    const figName = absFigName(a);
+    if (!(figName in byName)) return chunk; // this entry's figure wasn't touched — leave as-is
+    const newFile = byName[figName];
+    if (/file:\s*"(?:[^"\\]|\\.)*"/.test(chunk)) {
+      return chunk.replace(/file:\s*"(?:[^"\\]|\\.)*"/, `file: "${esc(newFile)}"`);
+    }
+    // no "file" field yet on this entry (shouldn't normally happen) — add one
+    return chunk.replace(/\s*\}$/, `,\n    file: "${esc(newFile)}"\n  }`);
+  });
+
+  const newRaw = raw.slice(0, arrMatch.index) + newArrText + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/abstracts.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Figure saved, but data/abstracts.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
    TEAM DATA SYNC — same problem as Gallery/Photos/Publications:
    both index.html and people.html render "The Team" grid from
    data/team.js on every load, so a name/role/avatar edited in
@@ -3266,10 +3578,11 @@ async function syncResearchData(cardData) {
     RESEARCH[i].icon = c.icon;
     RESEARCH[i].title = c.title;
     RESEARCH[i].desc = c.desc;
+    RESEARCH[i].image = c.image || '';
   });
 
   const entryLines = RESEARCH.map(r =>
-    `  { icon: ${JSON.stringify(r.icon || '')}, title: ${JSON.stringify(r.title || '')}, desc: ${JSON.stringify(r.desc || '')} },`
+    `  { icon: ${JSON.stringify(r.icon || '')}, title: ${JSON.stringify(r.title || '')}, desc: ${JSON.stringify(r.desc || '')}, image: ${JSON.stringify(r.image || '')} },`
   ).join('\n');
 
   const arrMatch = raw.match(/const RESEARCH = \[[\s\S]*?\n\];/);

@@ -16,10 +16,10 @@
 // ============================================================
 
 const RESEARCH = [
-  { icon: "🧪", title: "Surface Chemistry", desc: "Engineering interfacial chemistry, wettability, and surface charge through liquid- and vapor-phase functionalization.", image: "2025_ACSNano.png-cropped.png-cropped.png" },
+  { icon: "🧪", title: "Surface Chemistry", desc: "Engineering interfacial chemistry, wettability, and surface charge through liquid- and vapor-phase functionalization.", image: "2025_ACSNano.png-cropped.png" },
   { icon: "🧩", title: "Surface Engineering", desc: "Designing hierarchical surfaces across nano-, micro-, and macro-scales using self-assembly, particle technologies, lithography, and 3D printing.", image: "2016_Re-entrant_Nanoparticles.jpg" },
   { icon: "🔬", title: "Surface Characterization", desc: "Probing surface structure, chemistry, and interfacial dynamics using advanced microscopy, spectroscopy, and quantitative imaging.", image: "2020_Langmuir.png-cropped.png" },
-  { icon: "🫧", title: "Multiphase Flow & Transport", desc: "Understanding gas–liquid and gas–solid interactions, bubble dynamics, and transport phenomena in multiphase systems and reactors.", image: "Debubbling-crop.gif" },
+  { icon: "🫧", title: "Multiphase Flow & Transport", desc: "Understanding gas–liquid and gas–solid interactions, bubble dynamics, and transport phenomena in multiphase systems and reactors.", image: "2021_Superamphiphobic_Debubbling.gif" },
   { icon: "⚡", title: "Electrochemical Interfaces", desc: "Engineering electrode–electrolyte interfaces and solid-liquid-gas interactions to improve the efficiency and stability of electrochemical systems.", image: "2022_Effervescence.jpg-cropped.png" },
   { icon: "🌍", title: "Sustainable Processing", desc: "Developing energy-passive and sustainable interfacial technologies for water treatment, pollutant removal, and resource-efficient processing.", image: "2023_Fluoro-Free.jpg-cropped.png" },
 ];
