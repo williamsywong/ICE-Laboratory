@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE Group · University of Sydney</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <style>
+
+
+
+    /* ---- HERO ---- */
+    .hero {
+      background: var(--ice-deep);
+      padding: 7rem 3rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(91,184,232,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,111,168,0.12) 0%, transparent 60%);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      max-width: 1100px; margin: 0 auto;
+      position: relative; z-index: 1; align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--ice-bright); margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem; font-weight: 400; line-height: 1.1;
+      color: white; margin-bottom: 1rem;
+    }
+    .hero-title em { font-style: italic; color: var(--ice-bright); }
+    .hero-subtitle {
+      font-size: 13px; font-weight: 400; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--ice-muted);
+      margin-bottom: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(91,184,232,0.15);
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.8;
+      margin-bottom: 2.5rem; max-width: 440px; text-align: justify;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; opacity: 0.92; }
+    .hero-content > * { animation: fadeUp 0.6s ease both; }
+    .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.30s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.38s; }
+    .hero-visual { animation: fadeUp 0.8s 0.2s ease both; }
+
+
+
+    /* ---- RESEARCH CARDS ---- */
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .research-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem 1.75rem; position: relative; overflow: hidden;
+      min-height: 210px;
+      background-size: cover; background-position: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .research-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,22,40,0.08); }
+    .research-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--ice-blue), var(--ice-bright));
+    }
+    /* When a background photo is set, the top accent bar is redundant and
+       title/description switch to light text so they stay readable over
+       the dark tint layered under the photo (see researchCardHTML() below). */
+    .research-card-photo::before { display: none; }
+    .research-card-photo .card-title { color: white; }
+    .research-card-photo .card-desc { color: rgba(255,255,255,0.85); }
+    .research-card-photo .card-icon { filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5)); }
+    .card-icon { font-size: 28px; margin-bottom: 1.25rem; display: block; }
+    .card-title {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600;
+      color: var(--ice-deep); margin-bottom: 0.75rem;
+    }
+    .card-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.7;}
+
+    /* ---- PEOPLE ---- */
+    .full-width-band { background: var(--ice-frost); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .person-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s;
+    }
+    .person-card:hover { transform: translateY(-2px); }
+    .person-card-open { border: 1px dashed var(--border); background: var(--ice-frost); }
+    .person-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; font-weight: 600;
+    }
+    .person-name { font-weight: 500; font-size: 14px; color: var(--ice-deep); margin-bottom: 0.25rem; }
+    .person-role { font-size: 12px; color: var(--text-muted); letter-spacing: 0.3px; }
+
+    /* ---- CONTACT ---- */
+    .contact-band {
+      background: var(--ice-deep); padding: 5rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .contact-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 70% at 90% 50%, rgba(91,184,232,0.07) 0%, transparent 70%);
+    }
+    .contact-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      position: relative; z-index: 1; align-items: start;
+    }
+    .contact-left .section-title { color: white; }
+    .contact-left .section-lead  { color: rgba(255,255,255,0.55); }
+    .contact-detail { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+    .contact-icon {
+      width: 36px; height: 36px; background: rgba(91,184,232,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 16px; color: var(--ice-bright);
+    }
+    .contact-text-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ice-muted); display: block; margin-bottom: 2px; }
+    .contact-text-val   { font-size: 14px; color: rgba(255,255,255,0.8); }
+    .contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-input {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(91,184,232,0.15);
+      border-radius: 8px; padding: 0.7rem 1rem; color: white;
+      font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.3); }
+    .form-input:focus { border-color: var(--ice-bright); }
+    textarea.form-input { resize: vertical; min-height: 110px; }
+    .form-submit {
+      background: var(--ice-blue); color: white; border: none;
+      padding: 0.8rem 1.75rem; border-radius: 8px; font-size: 13px; font-weight: 500;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; align-self: flex-start; transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--ice-bright); }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-emblem" style="position: relative; background-image: url('images/Branding/ICE_Logo.png'); background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+    <a href="index.html" style="text-decoration:none">
+      <span class="nav-name" style="position: relative;">ICE Laboratory · University of Sydney</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li data-page="research"><a href="#research">Research</a></li>
+    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications"><a href="publications.html">Publications</a></li>
+    <li data-page="people"><a href="people.html">People</a></li>
+    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news"><a href="news.html">News</a></li>
+    <li data-page="photos"><a href="photos.html">Photos</a></li>
+    <li data-page="join"><a href="#contact">Join Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" style="position: relative; background-image: linear-gradient(rgba(10, 22, 40, 0.55), rgba(10, 22, 40, 0.75)), url('images/Home/e1c041_4ffdee4d63ff4e2298f3555fc616839c_mv2.gif'); background-size: cover, cover; background-position: center center, center center; background-repeat: no-repeat, no-repeat;">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="hero-eyebrow" style="position: relative; height: 21px; width: 631px;" spellcheck="false">University of Sydney · School of Chemical &amp; Biomolecular Engineering</p>
+      <h1 class="hero-title" style="position: relative;"><em class="" style="position: relative;">Interfacial</em><br>Chemical Engineering</h1>
+      <p class="hero-subtitle" style="position: relative; width: 596px; height: 17px;">Sustainable surface Engineering for next-generation processes</p>
+      <p class="hero-desc" style="position: relative; width: 480px; height: 104px;">We investigate the physics and chemistry at the boundaries between phases — gas, liquid, and solid — to engineer transformative understanding and breakthroughs in energy engineering, environmental science, and advanced materials.</p>
+      <div class="hero-ctas">
+        <a href="#research" class="btn-primary" style="position: relative;">Explore Research</a>
+        <a href="#contact" class="btn-secondary" style="position: relative;">Join the Group</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      
+    </div>
+  </div>
+</div>
+
+
+
+<!-- RESEARCH -->
+<section id="research" style="position: relative;">
+  <span class="section-tag" style="position: relative;">Our Research</span>
+  <h2 class="section-title" style="position: relative;">Where phases meet, science begins</h2>
+  <p class="section-lead" style="position: relative;">The ICE Laboratory focuses on understanding and engineering complex phenomena at interfaces between gas, liquid, and solid phases — from nanoscale molecular interactions to large-scale industrial processes.</p>
+  <div class="research-grid" id="researchGrid"><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2025_ACSNano.png-cropped.png-cropped.png&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">🧪</span>
+      <h3 class="card-title" style="position: relative;">Surface Chemistry</h3>
+      <p class="card-desc" style="position: relative;">Engineering interfacial chemistry, wettability, and surface charge through liquid- and vapor-phase functionalization.</p>
+    </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2016_Re-entrant_Nanoparticles.jpg&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">🧩</span>
+      <h3 class="card-title" style="position: relative;">Surface Engineering</h3>
+      <p class="card-desc" style="position: relative;">Designing hierarchical surfaces across nano-, micro-, and macro-scales using self-assembly, particle technologies, lithography, and 3D printing.</p>
+    </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2020_Langmuir.png-cropped.png&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">🔬</span>
+      <h3 class="card-title" style="position: relative;">Surface Characterization</h3>
+      <p class="card-desc" style="position: relative;">Probing surface structure, chemistry, and interfacial dynamics using advanced microscopy, spectroscopy, and quantitative imaging.</p>
+    </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/Debubbling-crop.gif&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">🫧</span>
+      <h3 class="card-title" style="position: relative;">Multiphase Flow &amp; Transport</h3>
+      <p class="card-desc" style="position: relative;">Understanding gas–liquid and gas–solid interactions, bubble dynamics, and transport phenomena in multiphase systems and reactors.</p>
+    </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2022_Effervescence.jpg-cropped.png&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">⚡</span>
+      <h3 class="card-title" style="position: relative;">Electrochemical Interfaces</h3>
+      <p class="card-desc" style="position: relative;">Engineering electrode–electrolyte interfaces and solid-liquid-gas interactions to improve the efficiency and stability of electrochemical systems.</p>
+    </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2023_Fluoro-Free.jpg-cropped.png&quot;); position: relative;">
+      <span class="card-icon" style="position: relative;">🌍</span>
+      <h3 class="card-title" style="position: relative;">Sustainable Processing</h3>
+      <p class="card-desc" style="position: relative;">Developing energy-passive and sustainable interfacial technologies for water treatment, pollutant removal, and resource-efficient processing.</p>
+    </div></div>
+<span class="cms-hoverable" style="position: absolute; left: 770px; top: 86px; display: inline-block; z-index: 5;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 774px; top: 99px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><img src="images/Home/20260817_Group_Logo-removebg_2.png" alt="20260817_Group_Logo-removebg.png" class="" style="width: 280px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span></section>
+
+<!-- PEOPLE -->
+<div class="full-width-band">
+<section id="people" style="position: relative;">
+  <span class="section-tag" style="position: relative;">The Team</span>
+  <h2 class="section-title" style="position: relative;">People</h2>
+  <p class="section-lead" style="position: relative; width: 530px; height: 55px;">A collaborative team united by curiosity about interfacial engineering.&nbsp;<br><a href="https://williamsywong.github.io/ICE-Laboratory/news.html" target="_blank" rel="noopener">View fully-funded open positions</a>.<br></p>
+  <div class="people-grid" id="teamGridHome"><div class="person-card">
+      <div class="person-avatar" style="background: url(&quot;images/Headshots/People-WW.png&quot;) center center / cover; position: relative;"></div>
+      <p class="person-name" style="position: relative;">Dr. William S. Y. Wong</p>
+      <p class="person-role" style="position: relative;">Lecturer &amp; Group Leader</p>
+    </div><div class="person-card person-card-open">
+        <div class="person-avatar" style="background: linear-gradient(135deg, rgb(212, 234, 247), rgb(168, 200, 232)); font-size: 1.4rem; color: rgb(45, 111, 168); position: relative;">+</div>
+        <p class="person-name" style="color: var(--text-muted); position: relative;">Funded PhD Position Open</p>
+        <p class="person-role" style="position: relative;"><a href="index.html#contact" style="color: var(--ice-blue); position: relative;" class="">Apply now →</a></p>
+      </div><div class="person-card person-card-open">
+        <div class="person-avatar" style="background: linear-gradient(135deg, rgb(212, 234, 247), rgb(168, 200, 232)); font-size: 1.4rem; color: rgb(45, 111, 168); position: relative;">+</div>
+        <p class="person-name" style="color: var(--text-muted); position: relative;">Funded PhD Position Open</p>
+        <p class="person-role" style="position: relative;"><a href="index.html#contact" style="color: var(--ice-blue); position: relative;" class="">Apply now →</a></p>
+      </div><div class="person-card person-card-open">
+        <div class="person-avatar" style="background: linear-gradient(135deg, rgb(212, 234, 247), rgb(168, 200, 232)); font-size: 1.4rem; color: rgb(45, 111, 168); position: relative;">+</div>
+        <p class="person-name" style="color: var(--text-muted); position: relative;">B.Eng. Thesis Project / Master's by Research</p>
+        <p class="person-role" style="position: relative;"><a href="index.html#contact" style="color: var(--ice-blue); position: relative;" class="">Apply now →</a></p>
+      </div><div class="person-card person-card-open">
+        <div class="person-avatar" style="background: linear-gradient(135deg, rgb(212, 234, 247), rgb(168, 200, 232)); font-size: 1.4rem; color: rgb(45, 111, 168); position: relative;">+</div>
+        <p class="person-name" style="color: var(--text-muted); position: relative;">Self-funded Positions (Ph.D. / PD fellowships)</p>
+        <p class="person-role" style="position: relative;"><a href="index.html#contact" style="color: var(--ice-blue); position: relative;" class="">Apply now →</a></p>
+      </div></div>
+  <p style="margin-top: 1.5rem; font-size: 13px; color: var(--text-muted); position: relative; width: 1007px; height: 66px;" class="">Recruitment takes place on a rolling basis and is open to self-funded positions.&nbsp;<br><br>Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">link</a>.<br></p>
+
+</section></div>
+
+<!-- CONTACT -->
+<div class="contact-band" id="contact" style="position: relative;">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="section-tag" style="color: var(--ice-bright); position: relative;">Contact</span>
+      <h2 class="section-title" style="position: relative;">Get in Touch</h2>
+      <p class="section-lead" style="position: relative;">We welcome enquiries from prospective students, collaborators, and industry partners.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div><span class="contact-text-label" style="position: relative;">Address</span><span class="contact-text-val" style="position: relative;">School of Chemical &amp; Biomolecular Engineering<br>The University of Sydney, NSW 2006</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div><span class="contact-text-label" style="position: relative;">Email</span><span class="contact-text-val" style="position: relative;">william.swong@sydney.edu.au</span></div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" action="https://formsubmit.co/william.swong@sydney.edu.au" method="POST">
+        <input type="hidden" name="_next" value="https://williamsywong.github.io/ICE-Laboratory/">
+        <div class="form-row">
+          <input type="text" name="name" class="form-input" placeholder="Name" required="">
+          <input type="email" name="email" class="form-input" placeholder="Email" required="">
+        </div>
+        <input type="text" name="_subject" class="form-input" placeholder="Subject" required="">
+        <textarea name="message" class="form-input" placeholder="Your message…" required=""></textarea>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left" style="position: relative; width: 562px; height: 12px;">© 2026 ICE Laboratory · Interfacial Chemical Engineering for Next-Generation Processes</span>
+  <span class="footer-visitors" data-cms-skip="1"><img src="https://api.visitorbadge.io/api/visitors?path=ice-group-usyd-website&amp;label=Visitors&amp;countColor=%235bb8e8&amp;style=flat-square&amp;labelColor=%230a1628" alt="Visitor count"></span>
+  <span class="footer-usyd" style="position: relative;">The University of Sydney</span>
+</footer>
+
+
+
+
+<script src="data/research.js"></script>
+<script>
+  // Research area cards now live in data/research.js (RESEARCH array) — edit
+  // that file to add/remove/reorder cards; the Site Editor's text edits to
+  // an existing card's icon/title/description/photo sync back there on Save.
+  function researchCardHTML(r) {
+    const hasImage = !!r.image;
+    const style = hasImage
+      ? ` style="background-image:linear-gradient(180deg, rgba(10,22,40,0.45), rgba(10,22,40,0.75)), url('images/Home/${r.image}');"`
+      : '';
+    return `<div class="research-card${hasImage ? ' research-card-photo' : ''}"${style}>
+      <span class="card-icon">${r.icon}</span>
+      <h3 class="card-title">${r.title}</h3>
+      <p class="card-desc">${r.desc}</p>
+    </div>`;
+  }
+  document.getElementById('researchGrid').innerHTML = RESEARCH.map(researchCardHTML).join('');
+</script>
+
+<script src="data/team.js"></script>
+<script>
+  // Team roster now lives in data/team.js (TEAM array) — shared with people.html —
+  // edit that one file to add/remove/reorder team members or open positions.
+  function personCardHTML(m) {
+    if (m.open) {
+      return `<div class="person-card person-card-open">
+        <div class="person-avatar" style="background:linear-gradient(135deg,#d4eaf7,#a8c8e8); font-size:1.4rem; color:#2d6fa8;">+</div>
+        <p class="person-name" style="color:var(--text-muted);">${m.role}</p>
+        <p class="person-role"><a href="${m.link || 'index.html#contact'}" style="color:var(--ice-blue);">${m.linkText || 'Apply now →'}</a></p>
+      </div>`;
+    }
+    const avatarStyle = m.photo
+      ? `background:url('images/Headshots/${m.photo}') center center / cover;`
+      : `background:${m.color || 'linear-gradient(135deg,#5bb8e8,#1a3a5c)'};`;
+    return `<div class="person-card">
+      <div class="person-avatar" style="${avatarStyle}">${m.photo ? '' : (m.initials || '')}</div>
+      <p class="person-name">${m.name}</p>
+      <p class="person-role">${m.role}</p>
+    </div>`;
+  }
+  document.getElementById('teamGridHome').innerHTML = TEAM.map(personCardHTML).join('');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="cms-hoverable" style="position: absolute; left: 1118px; top: 766px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 0px; top: 1px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -7px; top: 85px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

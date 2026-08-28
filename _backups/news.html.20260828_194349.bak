@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE Group · University of Sydney</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <style>
+
+
+
+
+    .page-hero {
+      background: var(--ice-deep);
+      padding: 5rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 85% 40%, rgba(91,184,232,0.07) 0%, transparent 70%);
+    }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 400; color: white; margin-bottom: 0.75rem;
+    }
+    .page-hero p { color: rgba(255,255,255,0.5); font-size: 15px; max-width: 480px; }
+
+    /* Stats strip */
+    .stats-strip {
+      background: var(--ice-mid); padding: 1.5rem 3rem;
+      display: flex; gap: 3rem; justify-content: flex-start;
+      border-bottom: 1px solid rgba(91,184,232,0.1);
+    }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--ice-bright); display: block; }
+    .stat-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+    /* Controls */
+    .controls-bar {
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem; display: flex; align-items: center;
+      gap: 0.75rem; flex-wrap: wrap;
+      position: sticky; top: 64px; z-index: 50;
+    }
+    .controls-bar label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .filter-btn {
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 20px; padding: 0.3rem 0.9rem;
+      font-size: 12px; color: var(--text-muted); cursor: pointer;
+      transition: all 0.18s; font-family: 'DM Sans', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--ice-blue); color: var(--ice-blue); }
+    .filter-btn.active { background: var(--ice-blue); border-color: var(--ice-blue); color: white; font-weight: 500; }
+    .controls-spacer { flex: 1; }
+
+    /* News grid */
+    .news-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem; }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .news-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .news-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,22,40,0.08); }
+
+    .news-card-img {
+      width: 100%; height: 160px;
+      object-fit: cover; display: block;
+    }
+    .news-card-img-placeholder {
+      width: 100%; height: 8px;
+    }
+
+    .news-card-body { padding: 1.25rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+
+    .news-card-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .news-tag-pill {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 20px;
+      display: inline-block;
+    }
+    .news-date-str { font-size: 11px; color: var(--text-muted); }
+
+    .news-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--ice-deep); margin-bottom: 0.6rem; line-height: 1.4; text-align: justify; 
+    }
+    .news-card-body-text {
+      font-size: 13px; color: var(--text-muted); line-height: 1.7;
+      flex: 1; margin-bottom: 1rem; text-align: justify; 
+    }
+    .news-card-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 500; color: var(--ice-blue);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .news-card-link:hover { color: var(--ice-bright); }
+    .news-card-link::after { content: '↗'; font-size: 11px; }
+
+    /* Featured / latest card — full width */
+    .news-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+    .news-card.featured .news-card-img {
+      width: 320px; height: auto; flex-shrink: 0; border-radius: 0;
+    }
+    .news-card.featured .news-card-img-placeholder {
+      width: 8px; height: auto; flex-shrink: 0;
+    }
+    .news-card.featured .news-card-title { font-size: 1.3rem; text-align: justify; }
+    .news-card.featured .news-card-body-text { font-size: 14px; text-align: justify; }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center; padding: 4rem; color: var(--text-muted); font-size: 15px;
+    }
+    .no-results span { display: block; font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.35; }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-emblem" style="position: relative; background-image: url('images/Branding/ICE_Logo.png'); background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+    <a href="index.html" style="text-decoration:none">
+      <span class="nav-name" style="position: relative;">ICE Laboratory · University of Sydney</span>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
+    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
+    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news" class="" style="position: relative;"><a href="news.html" class="active">News</a></li>
+    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
+    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero" style="position: relative; background-image: linear-gradient(rgba(10, 22, 40, 0.55), rgba(10, 22, 40, 0.75)), url('images/News/SLIPS_Drainage.gif'); background-size: cover, cover; background-position: center center, center center; background-repeat: no-repeat, no-repeat;">
+  <div class="page-hero-inner">
+    <span class="section-tag" style="color: var(--ice-bright); position: relative;">Latest from the ICE Laboratory at the University of sydney</span>
+    <h1 class="" style="position: relative;">News</h1>
+    <p class="" style="position: relative;">Publications, awards, grants, events, and milestones.</p>
+  </div>
+</div>
+
+<div class="stats-strip" id="newsStats"><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">Total items</span></div></div>
+
+<div class="controls-bar">
+  <label>Filter:</label>
+  <button class="filter-btn active" data-tag="all">All</button>
+  <button class="filter-btn" data-tag="Publication" style="display: none;">Publications</button>
+  <button class="filter-btn" data-tag="Award" style="display: none;">Awards</button>
+  <button class="filter-btn" data-tag="Grant" style="display: none;">Grants</button>
+  <button class="filter-btn" data-tag="Recruitment">Recruitment</button>
+  <button class="filter-btn" data-tag="Event" style="display: none;">Events</button>
+  <button class="filter-btn" data-tag="Milestone">Milestones</button>
+  <button class="filter-btn" data-tag="Welcome" style="display: none;">Welcome</button>
+</div>
+
+<div class="news-wrap">
+  <div class="news-grid" id="newsGrid">
+        <div class="news-card featured" data-cms-resize-tracked="1" style="position: relative;">
+          <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-tag-pill" style="background: rgb(240, 235, 250); color: rgb(107, 63, 160); position: relative;">Recruitment</span>
+              <span class="news-date-str" style="position: relative;">25 Aug 2026</span>
+            </div>
+            <h3 class="news-card-title" style="position: relative;">PhD positions open</h3>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">link</a>.</p>
+            <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
+          </div>
+        </div>
+        <div class="news-card" data-cms-resize-tracked="1" style="position: relative;">
+          <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-tag-pill" style="background: rgb(230, 250, 243); color: rgb(10, 102, 64); position: relative;">Milestone</span>
+              <span class="news-date-str" style="position: relative;">1 Aug 2026</span>
+            </div>
+            <h3 class="news-card-title" style="position: relative;">The Interfacial Chemical Engineering (ICE) Laboratory is officially established at the University of Sydney</h3>
+            <p class="news-card-body-text" style="position: relative;">William S. Y. Wong joins the School of Chemical &amp; Biomolecular Engineering as Lecturer and Group Leader.</p>
+            
+          </div>
+        </div></div>
+</div>
+
+<footer>
+  <span class="footer-left" style="position: relative; width: 562px; height: 12px;">© 2026 ICE Laboratory · Interfacial Chemical Engineering for Next-Generation Processes</span>
+  <span class="footer-visitors" data-cms-skip="1"><img src="https://api.visitorbadge.io/api/visitors?path=ice-group-usyd-website&amp;label=Visitors&amp;countColor=%235bb8e8&amp;style=flat-square&amp;labelColor=%230a1628" alt="Visitor count"></span>
+  <span class="footer-usyd" style="position: relative;">The University of Sydney</span>
+</footer>
+
+<script src="data/news.js"></script>
+<script>
+  let activeTag = 'all';
+
+  function formatDate(str) {
+    const d = new Date(str + 'T00:00:00');
+    return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function tagStyle(tag) {
+    const c = NEWS_TAG_COLORS[tag] || { bg: '#f0f0f0', color: '#555' };
+    return `background:${c.bg};color:${c.color}`;
+  }
+
+  // Full years elapsed since 1 Feb 2027 (when the lab's "years running" count
+  // starts) — negative/zero before that date, which renderStats hides.
+  // Parses "YYYY-MM-DD" as a LOCAL date (not UTC) — new Date("YYYY-MM-DD")
+  // parses as UTC midnight, which can silently shift a day in either
+  // direction depending on the browser's timezone. This avoids that.
+  function parseLocalDate(str) {
+    const [y, m, d] = String(str).split('-').map(Number);
+    return new Date(y, (m || 1) - 1, d || 1);
+  }
+
+  // Full years elapsed since NEWS_START_DATE (data/news.js) — negative/zero
+  // before that date, which renderStats hides. Deliberately NOT based on the
+  // real-world clock: "now" here is the most recent date among the NEWS
+  // entries below, so this stays fully deterministic and adding a
+  // further-dated NEWS entry is enough to preview a "future" state of the
+  // site (change NEWS_START_DATE in data/news.js to move the start point).
+  function yearsSinceStart() {
+    if (typeof NEWS_START_DATE !== 'string' || !NEWS.length) return 0;
+    const start = parseLocalDate(NEWS_START_DATE);
+    if (isNaN(start.getTime())) return 0;
+
+    const latestMs = Math.max(...NEWS.map(n => parseLocalDate(n.date).getTime()));
+    const now = new Date(latestMs);
+    if (isNaN(now.getTime())) return 0;
+
+    let years = now.getFullYear() - start.getFullYear();
+    const hadAnniversaryThisYear =
+      now.getMonth() > start.getMonth() ||
+      (now.getMonth() === start.getMonth() && now.getDate() >= start.getDate());
+    if (!hadAnniversaryThisYear) years--;
+    return Math.max(0, years);
+  }
+
+  function renderStats() {
+    const pubs   = NEWS.filter(n => n.tag === 'Publication').length;
+    const awards = NEWS.filter(n => n.tag === 'Award' || n.tag === 'Grant').length;
+    const total  = NEWS.length;
+    const years  = yearsSinceStart();
+
+    // Zero-value stats are hidden entirely rather than shown as "0".
+    const stats = [
+      { num: total,  label: 'Total items' },
+      { num: pubs,   label: 'Publications' },
+      { num: awards, label: 'Awards &amp; Grants' },
+      { num: years,  label: 'Years' },
+    ].filter(s => s.num > 0);
+
+    document.getElementById('newsStats').innerHTML = stats.map(s =>
+      `<div class="stat-item"><span class="stat-num">${s.num}</span><span class="stat-label">${s.label}</span></div>`
+    ).join('');
+  }
+
+  function renderGrid() {
+    let items = [...NEWS].sort((a, b) => b.date.localeCompare(a.date));
+    if (activeTag !== 'all') items = items.filter(n => n.tag === activeTag);
+
+    const grid = document.getElementById('newsGrid');
+    if (!items.length) {
+      grid.innerHTML = `<div class="no-results"><span>📰</span>No news items match this filter.</div>`;
+      return;
+    }
+
+    grid.innerHTML = items.map((item, i) => {
+      const featured = (i === 0 && activeTag === 'all') ? 'featured' : '';
+      const imgEl = item.image
+        ? `<img class="news-card-img" src="images/News/${item.image}" alt="${item.title}">`
+        : `<div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>`;
+      const linkEl = item.link
+        ? `<a class="news-card-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`
+        : '';
+      return `
+        <div class="news-card ${featured}">
+          ${imgEl}
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-tag-pill" style="${tagStyle(item.tag)}">${item.tag}</span>
+              <span class="news-date-str">${formatDate(item.date)}</span>
+            </div>
+            <h3 class="news-card-title">${item.title}</h3>
+            <p class="news-card-body-text">${item.body}</p>
+            ${linkEl}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTag = btn.dataset.tag;
+      renderGrid();
+    });
+  });
+
+  // Only show a filter button when at least one NEWS entry actually has that
+  // tag ("All" shows as long as there's any news item at all).
+  function renderFilterButtons() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const tag = btn.dataset.tag;
+      const hasEntries = tag === 'all' ? NEWS.length > 0 : NEWS.some(n => n.tag === tag);
+      btn.style.display = hasEntries ? '' : 'none';
+    });
+  }
+
+  renderFilterButtons();
+  renderStats();
+  renderGrid();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
