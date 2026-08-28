@@ -1,0 +1,3626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICE Group — Site Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style id="page-styles"></style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;font-size:13px;color:#2c3e50;background:#f0f7fc;overflow-x:hidden}
+
+/* ══════════════ TOP BAR ══════════════ */
+#bar{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  height:50px;display:flex;align-items:center;
+  background:#0a1628;border-bottom:1px solid rgba(91,184,232,0.2);
+  box-shadow:0 2px 16px rgba(0,0,0,0.4);
+}
+#bar-logo{display:flex;align-items:center;gap:9px;padding:0 1rem;border-right:1px solid rgba(255,255,255,0.08);height:100%;flex-shrink:0}
+#bar-em{width:26px;height:26px;border-radius:5px;background:linear-gradient(135deg,#5bb8e8,#2d6fa8);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff}
+#bar-txt{font-size:11px;font-weight:500;color:rgba(255,255,255,0.8);line-height:1.3}
+#bar-txt small{display:block;font-size:9px;color:rgba(91,184,232,0.65);font-weight:400}
+
+#bar-pages{display:flex;align-items:center;height:100%;padding:0 4px;gap:1px;flex:1;overflow-x:auto}
+.pbtn{height:100%;padding:0 .8rem;background:transparent;border:none;color:rgba(255,255,255,0.4);font-size:11.5px;font-family:'DM Sans',sans-serif;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.pbtn:hover{color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.04)}
+.pbtn.on{color:#5bb8e8;border-bottom-color:#5bb8e8;background:rgba(91,184,232,0.08);font-weight:500}
+
+#bar-right{display:flex;align-items:center;gap:6px;padding:0 .85rem;border-left:1px solid rgba(255,255,255,0.08);height:100%;flex-shrink:0}
+#srv-dot{width:8px;height:8px;border-radius:50%;background:#555;transition:background .3s;flex-shrink:0}
+#srv-dot.on{background:#1a9e6b} #srv-dot.off{background:#e05a4b}
+#srv-lbl{font-size:10px;color:rgba(255,255,255,0.3);margin-right:4px}
+#badge{font-size:10px;background:rgba(91,184,232,0.12);color:#5bb8e8;border:1px solid rgba(91,184,232,0.25);border-radius:20px;padding:1px 7px;display:none}
+#badge.on{display:inline-block}
+.bar-btn{height:28px;padding:0 .7rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;border-radius:5px;transition:all .15s;white-space:nowrap}
+.bar-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+#btn-save{background:#2d6fa8;border-color:#2d6fa8;color:#fff;font-weight:500}
+#btn-save:hover{background:#5bb8e8;border-color:#5bb8e8}
+#btn-save.saving{background:#92580a;border-color:#92580a}
+#btn-save.saved{background:#1a9e6b;border-color:#1a9e6b}
+#btn-save.err{background:#e05a4b;border-color:#e05a4b}
+
+/* ══════════════ TOOLBAR ══════════════ */
+#toolbar{
+  position:fixed;top:50px;left:0;right:0;z-index:9998;
+  height:40px;display:flex;align-items:center;gap:4px;
+  background:#0d1f38;border-bottom:1px solid rgba(91,184,232,0.12);
+  padding:0 .75rem;overflow-x:auto;
+}
+.tb-sep{width:1px;height:22px;background:rgba(255,255,255,0.1);margin:0 3px;flex-shrink:0}
+.tb-btn{height:28px;padding:0 .55rem;background:transparent;border:none;color:rgba(255,255,255,0.5);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;border-radius:4px;transition:all .15s;display:flex;align-items:center;gap:4px;flex-shrink:0;white-space:nowrap}
+.tb-btn:hover{background:rgba(255,255,255,0.08);color:#fff}
+.tb-btn.active{background:rgba(91,184,232,0.15);color:#5bb8e8}
+.tb-select{height:26px;padding:0 .5rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:11.5px;font-family:'DM Sans',sans-serif;border-radius:4px;cursor:pointer;flex-shrink:0}
+.tb-color{width:26px;height:26px;border:none;border-radius:4px;cursor:pointer;background:transparent;padding:1px;flex-shrink:0}
+.tb-hint{font-size:10px;color:rgba(255,255,255,0.2);margin-left:auto;flex-shrink:0;padding:0 .5rem}
+
+/* ══════════════ OFFLINE BANNER ══════════════ */
+#offline-banner{display:none;background:#1a0a06;border-bottom:1px solid rgba(224,90,75,0.3);padding:.5rem 1.5rem;font-size:12px;color:rgba(224,90,75,0.9);text-align:center;position:fixed;top:90px;left:0;right:0;z-index:9997}
+#offline-banner.show{display:block}
+#offline-banner code{font-family:monospace;font-size:11px;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:3px}
+
+/* ══════════════ PAGE FRAME ══════════════ */
+#frame{margin-top:90px;min-height:calc(100vh - 90px)}
+#frame.banner-up{margin-top:122px}
+.pg{display:none} .pg.on{display:block}
+
+/* ══════════════ EDIT STATES ══════════════ */
+.editable{
+  outline:2px dashed transparent;outline-offset:3px;border-radius:3px;
+  cursor:text;transition:outline-color .15s,background .15s;
+  position:relative;
+}
+.editable:hover{outline-color:rgba(91,184,232,0.45);background:rgba(91,184,232,0.05)}
+.editable.selected{
+  outline:2px solid #5bb8e8!important;background:rgba(91,184,232,0.06)!important;
+}
+
+/* draggable wrapper */
+.drag-wrap{
+  position:relative;display:inline-block;
+}
+.drag-wrap.dragging{opacity:.6;cursor:grabbing!important}
+.drag-handle{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:32px;height:10px;background:#5bb8e8;border-radius:3px 3px 0 0;
+  cursor:grab;display:none;align-items:center;justify-content:center;
+  font-size:8px;color:#fff;letter-spacing:1px;z-index:10;
+}
+.drag-handle::after{content:'⣿';font-size:10px}
+.editable.selected ~ .drag-handle,
+.drag-wrap:hover .drag-handle{display:flex}
+
+/* delete button */
+.del-btn{
+  position:absolute;top:-10px;right:-10px;
+  width:20px;height:20px;background:#e05a4b;border:none;border-radius:50%;
+  color:#fff;font-size:13px;cursor:pointer;display:none;
+  align-items:center;justify-content:center;z-index:11;line-height:1;
+}
+.drag-wrap:hover .del-btn,
+.editable.selected + .del-btn{display:flex}
+
+/* image drop zone */
+.img-drop-zone{
+  border:2px dashed rgba(91,184,232,0.3);border-radius:8px;
+  padding:2rem;text-align:center;color:rgba(91,184,232,0.5);
+  font-size:12px;cursor:pointer;transition:all .2s;
+  background:rgba(91,184,232,0.04);
+  min-height:100px;display:flex;align-items:center;justify-content:center;
+}
+.img-drop-zone.drag-over{border-color:#5bb8e8;background:rgba(91,184,232,0.1);color:#5bb8e8}
+.img-drop-zone:hover{border-color:rgba(91,184,232,0.5)}
+
+/* inserted images */
+.cms-img{
+  max-width:100%;display:block;border-radius:6px;
+  cursor:move;
+  outline:2px solid transparent;transition:outline-color .15s;
+}
+.cms-img:hover{outline-color:rgba(91,184,232,0.5)}
+.cms-img.selected{outline-color:#5bb8e8}
+
+/* resize handle on selected editable (text blocks only — images use the custom ⇲ grip) */
+.editable.selected{resize:both;overflow:auto;min-width:40px;min-height:1em;display:inline-block}
+
+/* move + delete corner controls */
+.cms-move-handle, .cms-del-btn{
+  position:absolute; width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; line-height:1; color:#fff; z-index:50;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.35);
+  user-select:none;
+}
+.cms-move-handle{ top:6px; left:6px; background:#2d6fa8; cursor:grab; font-size:12px; }
+.cms-move-handle:active{ cursor:grabbing; }
+.cms-del-btn{ top:6px; right:6px; background:#e05a4b; cursor:pointer; font-size:12px; }
+.cms-del-btn:hover{ transform:scale(1.15); }
+.cms-move-handle:hover{ transform:scale(1.15); }
+
+.editable:hover .cms-move-handle,
+.editable:hover .cms-del-btn,
+.editable.selected .cms-move-handle,
+.editable.selected .cms-del-btn,
+.editable:hover .cms-avatar-upload,
+.editable.selected .cms-avatar-upload,
+.editable:hover .cms-crop-btn,
+.editable.selected .cms-crop-btn,
+.cms-hoverable:hover > .cms-move-handle,
+.cms-hoverable:hover > .cms-del-btn,
+.cms-hoverable:hover > .cms-crop-btn,
+.cms-hoverable.selected > .cms-move-handle,
+.cms-hoverable.selected > .cms-del-btn,
+.cms-hoverable.selected > .cms-crop-btn,
+[data-cms-tile]:hover > .cms-move-handle,
+[data-cms-tile]:hover > .cms-avatar-upload,
+[data-cms-tile]:hover > .cms-crop-btn,
+[data-cms-tile]:hover > .cms-yt-btn,
+[data-cms-tile].selected > .cms-move-handle,
+[data-cms-tile].selected > .cms-avatar-upload,
+[data-cms-tile].selected > .cms-crop-btn,
+[data-cms-tile].selected > .cms-yt-btn,
+[data-cms-research-card]:hover > .cms-avatar-upload,
+[data-cms-research-card]:hover > .cms-crop-btn,
+[data-cms-research-card].selected > .cms-avatar-upload,
+[data-cms-research-card].selected > .cms-crop-btn,
+[data-cms-card]:hover > .cms-move-handle,
+[data-cms-card]:hover > .cms-del-btn,
+[data-cms-card].selected > .cms-move-handle,
+[data-cms-card].selected > .cms-del-btn{
+  opacity:1; pointer-events:auto;
+}
+
+/* logo emblem ("ICE" square) — move/delete sit outside the icon's top corners
+   (instead of overlapping its tiny 36×36 face), and two more controls —
+   upload / revert-to-text — sit outside its bottom corners. */
+.nav-emblem{ overflow: visible; }
+.nav-emblem > .cms-move-handle{ top:-11px; left:-11px; }
+.nav-emblem > .cms-del-btn{ top:-11px; right:-11px; }
+
+/* "ICE Group · University of Sydney" header text — same idea: a single
+   one-line text box, so move/delete sit outside it rather than covering
+   the very text they're next to. */
+.nav-name{ overflow: visible; }
+.nav-name > .cms-move-handle{ top:-11px; left:-11px; }
+.nav-name > .cms-del-btn{ top:-11px; right:-11px; }
+
+/* A freshly inserted text box — dashed outline is an editor-only affordance
+   so it's obvious where it is, stripped (along with this class) on save so
+   it never shows on the live site. */
+.cms-new-textbox {
+  outline: none !important;
+  background: transparent !important;
+}
+.cms-logo-upload, .cms-logo-revert{
+  position:absolute; width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; line-height:1; color:#fff; z-index:50;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.35); cursor:pointer; user-select:none;
+}
+.cms-logo-upload{ bottom:-11px; left:-11px; background:#2d6fa8; }
+.cms-logo-upload:hover{ transform:scale(1.15); background:#5bb8e8; }
+.cms-logo-revert{ bottom:-11px; right:-11px; background:#8a5cc9; }
+.cms-logo-revert:hover{ transform:scale(1.15); background:#a374d9; }
+.nav-emblem:hover .cms-logo-upload,
+.nav-emblem.selected .cms-logo-upload{ opacity:1; pointer-events:auto; }
+.nav-emblem[data-has-logo="1"]:hover .cms-logo-revert,
+.nav-emblem[data-has-logo="1"].selected .cms-logo-revert{ opacity:1; pointer-events:auto; }
+
+/* avatar sphere — photo upload button */
+.cms-avatar-upload{
+  position:absolute; bottom:6px; right:6px; width:24px; height:24px; border-radius:50%;
+  background:#2d6fa8; display:flex; align-items:center; justify-content:center;
+  font-size:12px; line-height:1; color:#fff; cursor:pointer; z-index:12;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4); user-select:none;
+}
+.cms-avatar-upload:hover{ transform:scale(1.15); background:#5bb8e8; }
+[class*="avatar"].avatar-drag-over{ outline:3px dashed #5bb8e8 !important; outline-offset:2px; }
+
+/* crop button — sits opposite the camera/upload button */
+.cms-crop-btn{
+  position:absolute; bottom:6px; left:6px; width:24px; height:24px; border-radius:50%;
+  background:#8a5cc9; display:flex; align-items:center; justify-content:center;
+  font-size:12px; line-height:1; color:#fff; cursor:pointer; z-index:12;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4); user-select:none;
+}
+.cms-crop-btn:hover{ transform:scale(1.15); background:#a374d9; }
+
+/* YouTube-link button — Gallery tiles only, sits bottom-center (camera is
+   bottom-right, crop is bottom-left, so this is the one free edge left). */
+.cms-yt-btn{
+  position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+  width:24px; height:24px; border-radius:50%;
+  background:#c9414c; display:flex; align-items:center; justify-content:center;
+  font-size:12px; line-height:1; color:#fff; cursor:pointer; z-index:12;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4); user-select:none;
+}
+.cms-yt-btn:hover{ transform:translateX(-50%) scale(1.15); background:#e8525f; }
+
+/* resize handle — bottom-right corner grip for freely-inserted/dropped images */
+.cms-resize-handle{
+  position:absolute; bottom:6px; right:6px; width:16px; height:16px; border-radius:4px;
+  background:#5bb8e8; cursor:nwse-resize; z-index:13;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4);
+}
+.cms-resize-handle::after{
+  content:''; position:absolute; right:3px; bottom:3px; width:6px; height:6px;
+  border-right:2px solid rgba(10,22,40,0.55); border-bottom:2px solid rgba(10,22,40,0.55);
+}
+.cms-resize-handle:hover{ transform:scale(1.15); background:#7ec8e3; }
+.cms-hoverable:hover > .cms-resize-handle,
+.cms-hoverable.selected > .cms-resize-handle{ opacity:1; pointer-events:auto; }
+
+/* hero banner — image/GIF upload, crop, remove controls */
+.cms-hero-upload, .cms-hero-crop, .cms-hero-remove{
+  position:absolute; top:14px; width:34px; height:34px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; line-height:1; color:#fff; cursor:pointer; z-index:20;
+  opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+  box-shadow:0 2px 8px rgba(0,0,0,0.45); user-select:none;
+}
+.cms-hero-upload{ right:14px; background:#2d6fa8; }
+.cms-hero-upload:hover{ transform:scale(1.1); background:#5bb8e8; }
+.cms-hero-crop{ right:56px; background:#8a5cc9; }
+.cms-hero-crop:hover{ transform:scale(1.1); background:#a374d9; }
+.cms-hero-remove{ right:98px; background:#c94b4b; }
+.cms-hero-remove:hover{ transform:scale(1.1); background:#e05a4b; }
+[data-cms-hero]:hover .cms-hero-upload,
+[data-cms-hero]:hover .cms-hero-crop,
+[data-cms-hero]:hover .cms-hero-remove,
+[data-cms-hero].avatar-drag-over .cms-hero-upload{
+  opacity:1; pointer-events:auto;
+}
+
+/* ══════════════ CROP MODAL ══════════════ */
+#crop-overlay .crop-hint{ color:rgba(255,255,255,0.55); font-size:12px; }
+#crop-overlay .crop-stage{ position:relative; }
+#crop-overlay .crop-box{ position:absolute; border:none; background:rgba(91,184,232,0.12); cursor:move; box-sizing:border-box; }
+#crop-overlay .crop-handle{ position:absolute; right:-7px; bottom:-7px; width:16px; height:16px; background:#5bb8e8; border-radius:4px; cursor:nwse-resize; box-shadow:0 1px 4px rgba(0,0,0,0.5); }
+#crop-overlay .crop-controls{ display:flex; gap:.6rem; }
+
+/* ══════════════ TOAST ══════════════ */
+#toast{position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);background:#0a1628;border:1px solid rgba(91,184,232,0.3);color:#5bb8e8;font-size:11.5px;padding:.55rem 1.2rem;border-radius:8px;display:none;z-index:99999;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+#toast.on{display:block} #toast.ok{border-color:rgba(26,158,107,0.4);color:#1a9e6b} #toast.err{border-color:rgba(224,90,75,0.4);color:#e05a4b}
+
+/* ══════════════ SITE STYLES ══════════════ */
+:root{--ib:#2d6fa8;--ibr:#5bb8e8;--id:#0a1628;--im:#1a3a5c;--if:#f0f7fc;--bo:rgba(45,111,168,0.15)}
+.s-nav{background:#0a1628;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:54px;border-bottom:1px solid rgba(91,184,232,0.12)}
+.s-nlogo{display:flex;align-items:center;gap:10px}
+.s-nem{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#5bb8e8,#2d6fa8);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff}
+.s-nname{font-size:12px;font-weight:500;color:#fff}.s-nname span{color:#5bb8e8}
+.s-nlinks{display:flex;gap:1.25rem;list-style:none}
+.s-nlinks li{font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.4px}
+.s-hero{background:#0a1628;padding:3rem 2rem 2.5rem;position:relative;overflow:hidden}
+.s-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 80% 50%,rgba(91,184,232,0.08) 0%,transparent 70%)}
+.s-hg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:960px;margin:0 auto;position:relative;z-index:1;align-items:center}
+.s-eye{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#5bb8e8;display:block;margin-bottom:.75rem}
+.s-h1{font-size:2rem;font-weight:400;line-height:1.1;color:#fff;margin-bottom:.6rem}
+.s-h1 em{font-style:italic;color:#5bb8e8}
+.s-hsub{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#6b8fa8;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:.5px solid rgba(91,184,232,0.15)}
+.s-hdesc{color:rgba(255,255,255,0.62);font-size:13px;line-height:1.75;margin-bottom:1.5rem}
+.s-hbtns{display:flex;gap:.6rem}
+.s-bp{background:#2d6fa8;color:#fff;border:none;padding:.5rem 1.1rem;border-radius:5px;font-size:11px}
+.s-bs{background:transparent;color:rgba(255,255,255,0.65);border:.5px solid rgba(91,184,232,0.3);padding:.5rem 1.1rem;border-radius:5px;font-size:11px}
+.s-sec{padding:2rem;max-width:960px;margin:0 auto}
+.s-stag{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#2d6fa8;display:block;margin-bottom:.4rem}
+.s-stitle{font-size:1.35rem;font-weight:500;color:#0a1628;margin-bottom:.3rem;line-height:1.2}
+.s-slead{color:#567a96;font-size:13px;margin-bottom:1.5rem;line-height:1.7;max-width:480px}
+.s-rg{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.s-rc{background:#fff;border:.5px solid var(--bo);border-radius:10px;padding:1.2rem 1rem;position:relative;overflow:hidden}
+.s-rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#2d6fa8,#5bb8e8)}
+.s-ci{font-size:20px;margin-bottom:.75rem;display:block}
+.s-ct{font-size:.85rem;font-weight:500;color:#0a1628;margin-bottom:.35rem}
+.s-cd{font-size:12px;color:#567a96;line-height:1.6}
+.s-fwb{background:var(--if);border-top:.5px solid var(--bo);border-bottom:.5px solid var(--bo)}
+.s-pg{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.s-pc{background:#fff;border:.5px solid var(--bo);border-radius:10px;padding:1.2rem 1rem;text-align:center}
+.s-pav{width:48px;height:48px;border-radius:50%;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:500;color:#fff}
+.s-pn{font-weight:500;font-size:13px;color:#0a1628;margin-bottom:2px}
+.s-pr{font-size:11px;color:#567a96}
+.s-nl{display:flex;flex-direction:column;gap:.6rem}
+.s-ni{background:#fff;border:.5px solid var(--bo);border-radius:8px;padding:.9rem 1.1rem;display:flex;gap:1rem;align-items:flex-start}
+.s-nd{min-width:40px;text-align:center}
+.s-nmo{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#6b8fa8;display:block}
+.s-ndy{font-size:1.1rem;font-weight:500;color:#2d6fa8;display:block}
+.s-ntag{font-size:8.5px;font-weight:500;text-transform:uppercase;color:#fff;background:#2d6fa8;padding:1px 6px;border-radius:3px;display:inline-block;margin-bottom:2px}
+.s-ntt{font-size:12.5px;font-weight:500;color:#0a1628;margin-bottom:1px}
+.s-nb{font-size:11px;color:#567a96}
+.s-cb{background:#0a1628;padding:2.5rem 2rem;position:relative;overflow:hidden}
+.s-cb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 90% 50%,rgba(91,184,232,0.07) 0%,transparent 70%)}
+.s-ci2{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;position:relative;z-index:1;align-items:start}
+.s-ctl .s-stitle{color:#fff}.s-ctl .s-slead{color:rgba(255,255,255,0.5)}
+.s-cdr{display:flex;gap:.65rem;margin-bottom:.9rem;align-items:flex-start}
+.s-cic{width:28px;height:28px;background:rgba(91,184,232,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;color:#5bb8e8}
+.s-clbl{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:#6b8fa8;display:block;margin-bottom:1px}
+.s-cval{font-size:12.5px;color:rgba(255,255,255,0.78)}
+.s-cf{display:flex;flex-direction:column;gap:.5rem}
+.s-fr{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.s-fi{background:rgba(255,255,255,0.06);border:.5px solid rgba(91,184,232,0.15);border-radius:7px;padding:.55rem .8rem;color:#fff;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;width:100%}
+.s-fi::placeholder{color:rgba(255,255,255,0.25)}
+textarea.s-fi{resize:vertical;min-height:80px}
+.s-fsub{background:#2d6fa8;color:#fff;border:none;padding:.6rem 1.2rem;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;align-self:flex-start}
+.s-ph{background:#0a1628;padding:2.5rem 2rem 2rem;position:relative;overflow:hidden}
+.s-ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 85% 40%,rgba(91,184,232,0.07) 0%,transparent 70%)}
+.s-phi{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.s-ph h1{font-size:2rem;font-weight:400;color:#fff;margin-bottom:.5rem}
+.s-ph p{color:rgba(255,255,255,0.45);font-size:13px;max-width:440px}
+.s-ngrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.s-nc{background:#fff;border:.5px solid var(--bo);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.s-nc-top{height:5px}
+.s-nc-body{padding:1.1rem 1.2rem;flex:1;display:flex;flex-direction:column}
+.s-nc-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.s-nc-pill{font-size:9.5px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:2px 8px;border-radius:20px;display:inline-block}
+.s-nc-date{font-size:10.5px;color:#567a96}
+.s-nc-title{font-size:.92rem;font-weight:500;color:#0a1628;margin-bottom:.5rem;line-height:1.4}
+.s-nc-text{font-size:12px;color:#567a96;line-height:1.65;flex:1;margin-bottom:.75rem}
+.s-nc-link{font-size:11.5px;font-weight:500;color:#2d6fa8;text-decoration:none}
+.s-nc-link::after{content:'↗';font-size:10px;margin-left:3px}
+.s-nc.feat{grid-column:1/-1;flex-direction:row}
+.s-nc.feat .s-nc-top{width:5px;height:auto;flex-shrink:0}
+.s-nc.feat .s-nc-title{font-size:1.1rem}
+.s-pi-hdr{background:linear-gradient(135deg,#0a1628,#1a3a5c);padding:2rem;display:flex;gap:1.75rem;align-items:flex-start}
+.s-pi-av{width:76px;height:76px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#5bb8e8,#2d6fa8);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:500;color:#fff;border:2px solid rgba(91,184,232,0.35)}
+.s-pi-name{font-size:1.35rem;font-weight:500;color:#fff;margin-bottom:.2rem}
+.s-pi-title{font-size:12px;color:#5bb8e8;margin-bottom:.2rem;font-weight:500}
+.s-pi-dept{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:1rem}
+.s-badges{display:flex;gap:.45rem;flex-wrap:wrap}
+.s-badge{font-size:10px;padding:3px 9px;border-radius:20px;border:.5px solid rgba(91,184,232,0.3);color:rgba(255,255,255,0.65)}
+.s-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem}
+.s-about p{font-size:13px;color:#2c3e50;line-height:1.8;margin-bottom:.75rem}
+.s-ir{display:flex;gap:.65rem;margin-bottom:.75rem;align-items:flex-start}
+.s-iic{width:28px;height:28px;background:var(--if);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.s-ilbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#567a96;display:block;margin-bottom:1px}
+.s-ival{font-size:12.5px;color:#2c3e50}
+.s-footer{background:#050d1a;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-top:.5px solid rgba(91,184,232,0.08)}
+.s-fl{font-size:10.5px;color:rgba(255,255,255,0.3)}
+.s-fr2{font-size:10.5px;color:rgba(255,255,255,0.2)}
+.stat-strip{background:#1a3a5c;padding:1.25rem 2rem;display:flex;gap:2.5rem;border-bottom:.5px solid rgba(91,184,232,0.1)}
+.stat-n{font-size:1.4rem;font-weight:500;color:#5bb8e8;display:block}
+.stat-l{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+</style>
+</head>
+<body>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div id="bar">
+  <div id="bar-logo">
+    <div id="bar-em">ICE</div>
+    <div id="bar-txt">Site Editor<small>Hover for ✥ move / ✕ delete</small></div>
+  </div>
+  <div id="bar-pages">
+    <button class="pbtn on" onclick="go('home',this)">🏠 Home</button>
+    <button class="pbtn" onclick="go('abstracts',this)" data-navid="abstracts" data-icon="📄">📄 Abstracts</button>
+    <button class="pbtn" onclick="go('gallery',this)" data-navid="gallery" data-icon="🖼">🖼 Gallery</button>
+    <button class="pbtn" onclick="go('pubs',this)" data-navid="publications" data-icon="📚">📚 Publications</button>
+    <button class="pbtn" onclick="go('people',this)" data-navid="people" data-icon="👤">👤 People</button>
+    <button class="pbtn" onclick="go('alumni',this)" data-navid="alumni" data-icon="🎓">🎓 Alumni</button>
+    <button class="pbtn" onclick="go('news',this)" data-navid="news" data-icon="📰">📰 News</button>
+    <button class="pbtn" onclick="go('photos',this)" data-navid="photos" data-icon="📷">📷 Photos</button>
+    <button class="pbtn" onclick="goToSection('contact',this)" title="Scroll to the Join Us section on the Home page">🤝 Join Us</button>
+  </div>
+  <div id="bar-right">
+    <div id="srv-dot" class="off"></div>
+    <span id="srv-lbl">offline</span>
+    <span id="badge">unsaved</span>
+    <button class="bar-btn" onclick="undoLast()">↩ Undo</button>
+    <button class="bar-btn" id="btn-preview" onclick="previewPage()">👁 Preview</button>
+    <button class="bar-btn" id="btn-save" onclick="savePage()">💾 Save page</button>
+  </div>
+</div>
+
+<!-- ══════════ FORMAT TOOLBAR ══════════ -->
+<div id="toolbar">
+  <!-- Font -->
+  <select class="tb-select" id="tb-font" onchange="fmt('fontName',this.value)" title="Font">
+    <option value="DM Sans">DM Sans</option>
+    <option value="Playfair Display">Playfair Display</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Arial">Arial</option>
+    <option value="monospace">Monospace</option>
+  </select>
+  <!-- Size -->
+  <select class="tb-select" id="tb-size" onchange="fmt('fontSize',this.value)" title="Size" style="width:54px">
+    <option value="1">10</option><option value="2">13</option><option value="3" selected>16</option>
+    <option value="4">18</option><option value="5">24</option><option value="6">32</option><option value="7">48</option>
+  </select>
+  <div class="tb-sep"></div>
+  <!-- Style -->
+  <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+  <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+  <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+  <div class="tb-sep"></div>
+  <!-- Color -->
+  <span style="font-size:10px;color:rgba(255,255,255,0.35);flex-shrink:0">Color</span>
+  <button class="tb-btn" onclick="setColor('#2c3e50')" title="Dark (body)" style="color:#2c3e50;background:#fff;width:22px;height:22px;border-radius:4px;padding:0;font-size:8px">A</button>
+  <button class="tb-btn" onclick="setColor('#5bb8e8')" title="Ice Blue" style="background:#5bb8e8;width:22px;height:22px;border-radius:4px;padding:0"></button>
+  <button class="tb-btn" onclick="setColor('#2d6fa8')" title="Deep Blue" style="background:#2d6fa8;width:22px;height:22px;border-radius:4px;padding:0"></button>
+  <button class="tb-btn" onclick="setColor('#0a1628')" title="Navy" style="background:#0a1628;width:22px;height:22px;border-radius:4px;padding:0"></button>
+  <button class="tb-btn" onclick="setColor('#567a96')" title="Muted" style="background:#567a96;width:22px;height:22px;border-radius:4px;padding:0"></button>
+  <button class="tb-btn" onclick="setColor('#ffffff')" title="White" style="background:#fff;border:1px solid #ddd;width:22px;height:22px;border-radius:4px;padding:0"></button>
+  <input class="tb-color" type="color" id="tb-custom-color" onchange="setColor(this.value)" title="Custom colour" value="#2c3e50">
+  <div class="tb-sep"></div>
+  <!-- Align -->
+  <button class="tb-btn" onclick="fmt('justifyLeft')" title="Left">⬅</button>
+  <button class="tb-btn" onclick="fmt('justifyCenter')" title="Centre">↔</button>
+  <button class="tb-btn" onclick="fmt('justifyRight')" title="Right">➡</button>
+  <div class="tb-sep"></div>
+  <!-- Delete / insert -->
+  <button class="tb-btn" onclick="insertLink()" title="Add hyperlink to selected text or image">🔗 Link</button>
+  <button class="tb-btn" onclick="fmt('unlink')" title="Remove hyperlink">🔗✕ Unlink</button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" onclick="deleteSelected()" title="Delete selected element" style="color:#e05a4b">🗑 Delete</button>
+  <button class="tb-btn" onclick="triggerImgInsert()" title="Insert image">🖼 Insert image</button>
+  <button class="tb-btn" onclick="triggerTextBoxInsert()" title="Insert a new text box anywhere on the page">➕ Add text</button>
+  <button class="tb-btn" onclick="triggerAddTeamMember()" title="Add a new team member card (Home / People pages only)">👤➕ Add team member</button>
+  <button class="tb-btn" onclick="triggerHeroUploadForCurrentPage()" title="Set/replace this page's hero banner image or GIF">🏞 Hero image</button>
+  <input type="file" id="img-file-input" accept="image/*" style="display:none" onchange="insertImageFromFile(this)">
+  <div class="tb-hint">Hover any element for ✥ move / ✕ delete · Ctrl+Z to undo</div>
+</div>
+
+<!-- ══════════ OFFLINE BANNER ══════════ -->
+<div id="offline-banner">
+  ⚠️ Server offline — double-click <code>START_EDITOR.bat</code> first, then refresh. Save will copy to clipboard as fallback.
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGES  (loaded fresh from server each switch)
+════════════════════════════════════════════════ -->
+<div id="frame">
+  <div class="pg on" id="pg-home"></div>
+  <div class="pg" id="pg-news"></div>
+  <div class="pg" id="pg-people"></div>
+  <div class="pg" id="pg-pubs"></div>
+  <div class="pg" id="pg-alumni"></div>
+  <div class="pg" id="pg-photos"></div>
+  <div class="pg" id="pg-gallery"></div>
+  <div class="pg" id="pg-abstracts"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════════ */
+const SERVER = 'http://localhost:8000';
+const PAGE_FILES = {
+  home:'index.html', news:'news.html', people:'people.html',
+  pubs:'publications.html', alumni:'alumni.html', photos:'photos.html',
+  gallery:'gallery.html', abstracts:'abstracts.html'
+};
+
+// Which images/<Folder>/ an uploaded image goes into, based on the page it was dropped on.
+const UPLOAD_FOLDERS = {
+  home:'Home', news:'News', people:'People', pubs:'Publications',
+  alumni:'Alumni', photos:'Photos', gallery:'Gallery', abstracts:'Abstracts'
+};
+
+// Every target FILE we might need to sync header/footer into (keyed by nav-id filename, not editor page-id)
+const ALL_HTML_FILES = ['index.html','news.html','people.html','publications.html','alumni.html','photos.html','gallery.html','abstracts.html'];
+
+// Correct href for each standard nav item, depending on which file it appears in.
+const NAV_HREF_MAP = {
+  'index.html': { research:'#research', people:'people.html', publications:'publications.html', alumni:'alumni.html', news:'news.html', photos:'photos.html', gallery:'gallery.html', abstracts:'abstracts.html', join:'#contact' }
+};
+ALL_HTML_FILES.forEach(f => {
+  if (f !== 'index.html') {
+    NAV_HREF_MAP[f] = { research:'index.html#research', people:'people.html', publications:'publications.html', alumni:'alumni.html', news:'news.html', photos:'photos.html', gallery:'gallery.html', abstracts:'abstracts.html', join:'index.html#contact' };
+  }
+});
+// Which nav-id should get the "active" class on which file
+const ACTIVE_ON = { 'people.html':'people', 'publications.html':'publications', 'alumni.html':'alumni', 'news.html':'news', 'photos.html':'photos', 'gallery.html':'gallery', 'abstracts.html':'abstracts' };
+
+let cur = 'home';
+let serverOnline = false;
+let hist = [];
+let selEl = null;
+let loaded = {}; // track which pages have been fetched
+let pageStyles = {}; // per-page <style> block contents, keyed by page id
+let pageExternalCSS = {}; // per-page extra <link rel="stylesheet"> hrefs (e.g. a map library), keyed by page id
+
+// Shared by buildStandaloneHTML() and savePage() so any extra stylesheet a
+// page links to (e.g. Leaflet for the Alumni collaborators map) survives
+// being saved, instead of only the two hardcoded <link> tags.
+function extraCSSLinksHTML(id) {
+  return (pageExternalCSS[id] || []).map(href => `\n  <link rel="stylesheet" href="${href}">`).join('');
+}
+let pageHeadExtras = {}; // per-page extra <head> tags (meta, title) keyed by page id
+
+/* ═══════════════════════════════════════════════
+   SERVER CHECK
+═══════════════════════════════════════════════ */
+async function checkServer() {
+  try {
+    await fetch(SERVER+'/save',{method:'OPTIONS',signal:AbortSignal.timeout(1500)});
+    serverOnline = true;
+  } catch { serverOnline = false; }
+  document.getElementById('srv-dot').className = serverOnline ? 'on' : 'off';
+  document.getElementById('srv-lbl').textContent = serverOnline ? 'server on' : 'offline';
+  document.getElementById('srv-lbl').style.color = serverOnline ? 'rgba(26,158,107,0.7)' : 'rgba(224,90,75,0.5)';
+  document.getElementById('offline-banner').className = serverOnline ? '' : 'show';
+  document.getElementById('frame').className = serverOnline ? '' : 'banner-up';
+}
+checkServer();
+setInterval(checkServer, 5000);
+
+/* ═══════════════════════════════════════════════
+   LOAD PAGE FROM DISK (always fresh)
+═══════════════════════════════════════════════ */
+async function loadPage(id) {
+  const filename = PAGE_FILES[id];
+  const container = document.getElementById('pg-' + id);
+  if (!serverOnline) {
+    // fallback static content if server offline
+    if (!container.innerHTML.trim()) {
+      container.innerHTML = `<div style="padding:3rem;text-align:center;color:#567a96">
+        <p style="font-size:1.1rem;margin-bottom:.5rem">Start the server to load live page content</p>
+        <p style="font-size:12px">Double-click <strong>START_EDITOR.bat</strong>, then refresh this page</p>
+      </div>`;
+    }
+    return;
+  }
+  try {
+    const res = await fetch(SERVER + '/' + filename + '?nocache=' + Date.now());
+    let html = await res.text();
+
+    // Extract the page's own <style> blocks from its <head> and inject them
+    // so the page renders with its real formatting (colours, layout, fonts).
+    const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+    const headHTML = headMatch ? headMatch[1] : '';
+    const styleBlocks = [...headHTML.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)]
+      .map(m => m[1]).join('\n\n');
+    document.getElementById('page-styles').textContent = styleBlocks;
+    pageStyles[id] = styleBlocks; // remember so Save can re-embed it
+
+    // Also bring in any external stylesheet the page's <head> links to (e.g. a
+    // map library's CSS) — inject a real <link> into the editor's own head so
+    // it actually renders while editing, not just when the file is opened
+    // directly in a browser. Dedup by href so switching pages repeatedly
+    // doesn't pile up duplicate <link> tags.
+    const linkHrefs = [...headHTML.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*>/gi)]
+      .map(tag => (tag[0].match(/href=["']([^"']+)["']/) || [])[1])
+      .filter(Boolean);
+    linkHrefs.forEach(href => {
+      if (!document.querySelector(`link[data-cms-external-css="${href}"]`)) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        link.setAttribute('data-cms-external-css', href);
+        document.head.appendChild(link);
+      }
+    });
+    pageExternalCSS[id] = linkHrefs; // remember so Save/Preview can re-embed these too
+
+    // Strip doctype/html/head/body wrappers — extract body content only
+    const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+    container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+    // Collect every <script> on the page (both inline and external data/*.js
+    // files) and execute them together in one isolated function scope. This
+    // is essential: these pages declare top-level `const`/`let` (e.g.
+    // `const PUBLICATIONS = [...]`), and simply re-inserting <script> tags on
+    // every visit redeclares those bindings in the shared global scope,
+    // which throws a SyntaxError and silently kills the page's rendering
+    // after the first visit.
+    //
+    // CRITICAL: we do NOT remove or replace the original <script> tags in
+    // the DOM. Doing so used to mean that clicking Save captured a page with
+    // its data permanently baked in and its <script src="data/news.js">
+    // reference destroyed — so future edits to data/news.js would silently
+    // stop taking effect. Instead we leave the original tags exactly as
+    // they are (they stay inert; setting innerHTML never auto-executes
+    // them) and run the combined code via `new Function()`, which needs no
+    // script element in the DOM at all.
+    const scriptEls = [...container.querySelectorAll('script')];
+    let combinedJS = '';
+    for (const oldScript of scriptEls) {
+      if (oldScript.src) {
+        try {
+          const srcAttr = oldScript.getAttribute('src');
+          // Absolute URLs (e.g. a CDN-hosted library) are fetched directly;
+          // local paths (e.g. data/alumni.js) go through the local server.
+          const fetchUrl = /^https?:\/\//i.test(srcAttr)
+            ? srcAttr
+            : SERVER + '/' + srcAttr + '?nocache=' + Date.now();
+          const scriptRes = await fetch(fetchUrl);
+          combinedJS += '\n' + (await scriptRes.text()) + '\n';
+        } catch (e) {
+          console.warn('Could not fetch script', oldScript.getAttribute('src'), e);
+        }
+      } else {
+        combinedJS += '\n' + oldScript.textContent + '\n';
+      }
+      // Original script tag is left in place, untouched — not removed, not replaced.
+    }
+    if (combinedJS.trim()) {
+      try {
+        new Function(combinedJS)();
+      } catch (e) {
+        console.error('Error running page script for', filename, e);
+      }
+    }
+
+    // Give dynamically-rendered content (e.g. publications/news/photos scripts) a moment to run
+    setTimeout(() => initEditing(id), 120);
+  } catch(e) {
+    container.innerHTML = `<div style="padding:2rem;color:#e05a4b">Could not load ${filename}: ${e.message}</div>`;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE SWITCH
+═══════════════════════════════════════════════ */
+async function go(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.pbtn').forEach(b => b.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  btn.classList.add('on');
+  cur = id;
+  selEl = null;
+  window.scrollTo(0,0);
+  await loadPage(id);
+}
+
+// "Research" and "Join Us" aren't separate files — they're sections within
+// the Home page. This switches to Home (loading it if needed) and then
+// scrolls straight to the requested section, so they're still reachable
+// as one click from the tab bar.
+async function goToSection(anchorId, btn) {
+  const homeBtn = document.querySelector('.pbtn[onclick*="go(\'home\'"]');
+  if (cur !== 'home') {
+    await go('home', homeBtn);
+  }
+  document.querySelectorAll('.pbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  setTimeout(() => {
+    const target = document.getElementById(anchorId) || document.querySelector('#pg-home [id="' + anchorId + '"]');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+/* ═══════════════════════════════════════════════
+   MAKE ELEMENTS EDITABLE
+═══════════════════════════════════════════════ */
+// ── shared helper: attach move + delete handles to any element ──
+// (top-level, not nested in initEditing, so other functions like
+// triggerAddTeamMember can reuse it too)
+function attachHandles(el, opts) {
+  opts = opts || {};
+  const moveHandle = document.createElement('span');
+  moveHandle.className = 'cms-move-handle';
+  moveHandle.setAttribute('contenteditable','false');
+  moveHandle.title = (opts.reorderUl || opts.gridReorder) ? 'Drag to reorder' : 'Drag to move';
+  moveHandle.textContent = '✥';
+  el.appendChild(moveHandle);
+  moveHandle.addEventListener('mousedown', e => {
+    e.preventDefault(); e.stopPropagation();
+    if (opts.reorderUl) beginNavReorderDrag(el, opts.reorderUl, e);
+    else if (opts.gridReorder) beginTileReorderDrag(el, opts.gridReorder, e);
+    else beginElementDrag(el, e);
+  });
+
+  if (opts.moveOnly) return; // no delete cross for this element
+
+  const delBtn = document.createElement('span');
+  delBtn.className = 'cms-del-btn';
+  delBtn.setAttribute('contenteditable','false');
+  delBtn.title = 'Delete this element';
+  delBtn.textContent = '✕';
+  el.appendChild(delBtn);
+  delBtn.addEventListener('mousedown', e => e.stopPropagation());
+  delBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); deleteElement(el); });
+}
+
+function initEditing(id) {
+  const pg = document.getElementById('pg-'+id);
+  const tags = ['p','h1','h2','h3','h4','h5','span','em','strong','li','td','a'];
+
+  // ── text elements (paragraphs, headings, spans, links, list items…) ──
+  pg.querySelectorAll(tags.join(',')).forEach(el => {
+    if (['INPUT','TEXTAREA','SELECT','BUTTON'].includes(el.tagName)) return;
+    if (el.hasAttribute('data-cms')) return;
+    if (el.closest('[data-cms-skip]')) return; // e.g. visitor counter badge, embedded map controls — not editable
+    if (!el.textContent.trim()) return;
+    if (el.querySelectorAll(tags.join(',')).length > 2) return;
+
+    // Tile containers (Gallery/Photos/News grid items) are handled as a
+    // whole unit by initTiles() below — don't also make the container
+    // itself directly contenteditable (it may be an <a> tag).
+    if (el.classList.contains('mtile') || el.classList.contains('masonry-item') || el.classList.contains('news-card')) return;
+
+    // Anchors inside nav-links <li> are edited via their parent <li> instead
+    // (avoids double handles on the same visible nav item).
+    const navLi = el.closest('.nav-links li');
+    if (el.tagName === 'A' && navLi && el.parentElement === navLi) return;
+
+    // The "ICE Group · University of Sydney" header text has two nested
+    // spans purely for coloring — edit it as ONE text box (the outer
+    // .nav-name), not three overlapping ones.
+    if (el.closest('.nav-name') && el !== el.closest('.nav-name')) return;
+
+    // Its wrapping <a> (a plain "click logo to go home" link with no text
+    // of its own) shouldn't get its own separate, overlapping edit controls.
+    if (el.tagName === 'A' && el.querySelector(':scope > .nav-name')) return;
+
+    el.setAttribute('data-cms','1');
+    el.setAttribute('contenteditable','true');
+    el.classList.add('editable');
+
+    // The header brand text sits inside a "click logo to go home" <a> link —
+    // stop that link from firing while editing it (same fix as Gallery tiles).
+    if (el.classList.contains('nav-name')) {
+      el.addEventListener('click', e => e.preventDefault());
+    }
+
+    const isNavLi = el.tagName === 'LI' && el.closest('.nav-links');
+    // Always establish a positioning context so the move/delete handles
+    // anchor correctly to this element's own corner (even nav li's, which
+    // use DOM reordering rather than left/top offsets for movement).
+    if (!el.style.position || el.style.position === 'static') {
+      el.style.position = 'relative';
+    }
+    attachHandles(el, isNavLi ? { reorderUl: el.closest('.nav-links') } : {});
+
+    el.addEventListener('focus', () => {
+      selEl = el;
+      document.querySelectorAll('.editable').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      hist.push({el, prev: el.innerHTML, action:'edit'});
+      document.getElementById('badge').classList.add('on');
+    });
+    el.addEventListener('input', () => document.getElementById('badge').classList.add('on'));
+    el.addEventListener('keydown', e => {
+      if (e.key==='Escape') { el.blur(); }
+    });
+  });
+
+  // ── logo emblem ("ICE" square) — a <div>, not covered by the tag list above.
+  // Editable as text (default "ICE" mark), and also upload-able as your own
+  // logo image — same upload/revert pattern used by avatars/hero banner, just
+  // sized and positioned for this small icon. ──
+  pg.querySelectorAll('.nav-emblem').forEach(el => {
+    if (el.hasAttribute('data-cms')) return;
+    el.setAttribute('data-cms','1');
+    el.setAttribute('contenteditable','true');
+    el.classList.add('editable');
+    if (!el.style.position || el.style.position === 'static') el.style.position = 'relative';
+    attachHandles(el);
+    el.addEventListener('focus', () => {
+      selEl = el;
+      document.querySelectorAll('.editable').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      hist.push({el, prev: el.innerHTML, action:'edit'});
+      document.getElementById('badge').classList.add('on');
+    });
+    el.addEventListener('input', () => document.getElementById('badge').classList.add('on'));
+
+    // Remember the original "ICE" text so a logo image can be reverted back to it later.
+    if (!el.hasAttribute('data-emblem-orig-text')) {
+      const origText = [...el.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join('').trim();
+      el.setAttribute('data-emblem-orig-text', origText || 'ICE');
+    }
+    // If this page was reloaded and already has a logo image set, flag it so
+    // the revert button shows immediately (no hover/select needed first).
+    if (el.style.backgroundImage && el.style.backgroundImage !== 'none') el.setAttribute('data-has-logo', '1');
+
+    // upload button (🖼) — replace the "ICE" text with your own logo image
+    const logoBtn = document.createElement('span');
+    logoBtn.className = 'cms-logo-upload';
+    logoBtn.setAttribute('contenteditable','false');
+    logoBtn.title = 'Upload your own group logo';
+    logoBtn.textContent = '🖼';
+    el.appendChild(logoBtn);
+    logoBtn.addEventListener('mousedown', e => e.stopPropagation());
+    logoBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerLogoUpload(el);
+    });
+
+    // revert button (↺) — only shown once a custom logo image is actually set
+    const logoRevertBtn = document.createElement('span');
+    logoRevertBtn.className = 'cms-logo-revert';
+    logoRevertBtn.setAttribute('contenteditable','false');
+    logoRevertBtn.title = 'Remove logo image, revert to "ICE" text';
+    logoRevertBtn.textContent = '↺';
+    el.appendChild(logoRevertBtn);
+    logoRevertBtn.addEventListener('mousedown', e => e.stopPropagation());
+    logoRevertBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      revertLogoImage(el);
+    });
+
+    // also allow dropping an image file straight onto the emblem
+    el.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); el.classList.add('avatar-drag-over'); });
+    el.addEventListener('dragleave', () => el.classList.remove('avatar-drag-over'));
+    el.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      el.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setLogoImage(el, file);
+    });
+  });
+
+  // ── avatar spheres (PI / PD / PhD / initials) — editable text + upload-a-headshot ──
+  pg.querySelectorAll('[class*="avatar"]').forEach(el => {
+    if (el.hasAttribute('data-cms-avatar')) return;
+    if (el.closest('[data-cms-skip]')) return;
+    el.setAttribute('data-cms-avatar','1');
+    el.setAttribute('contenteditable','true');
+    el.classList.add('editable');
+    if (!el.style.position || el.style.position === 'static') el.style.position = 'relative';
+    attachHandles(el, { moveOnly: true });
+
+    el.addEventListener('focus', () => {
+      selEl = el;
+      document.querySelectorAll('.editable').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      hist.push({el, prev: el.innerHTML, prevStyle: el.getAttribute('style'), action:'edit'});
+      document.getElementById('badge').classList.add('on');
+    });
+    el.addEventListener('input', () => document.getElementById('badge').classList.add('on'));
+
+    // camera button — click to pick a headshot photo
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable','false');
+    camBtn.title = 'Upload a headshot photo';
+    camBtn.textContent = '📷';
+    el.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerAvatarUpload(el);
+    });
+
+    // crop button — only meaningful once a real headshot photo is set
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this headshot';
+    cropBtn.textContent = '✂';
+    el.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const styleAttr = el.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      if (!match) { toast('Add a headshot photo first (📷), then crop it', 'err'); return; }
+      const tmp = new Image();
+      tmp.onload = () => {
+        openCropTool(tmp, dataUrl => {
+          hist.push({ el, prevStyle: el.getAttribute('style'), action: 'avatarCrop' });
+          const freshStyle = (el.getAttribute('style') || '').replace(match[0], `url('${dataUrl}')`);
+          el.setAttribute('style', freshStyle);
+          el.setAttribute('data-avatar-orig-name', (el.getAttribute('data-avatar-orig-name') || 'headshot') + '-cropped.png');
+          el.removeAttribute('data-replace-existing');
+          document.getElementById('badge').classList.add('on');
+        });
+      };
+      tmp.onerror = () => toast('Could not load that photo for cropping', 'err');
+      tmp.src = match[2];
+    });
+
+    // also allow dropping an image file straight onto the sphere
+    el.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); el.classList.add('avatar-drag-over'); });
+    el.addEventListener('dragleave', () => el.classList.remove('avatar-drag-over'));
+    el.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      el.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setAvatarPhoto(el, file);
+    });
+  });
+
+  // ── hero banner — replace the plain gradient background with an uploaded
+  // image or GIF (drag-and-drop, or the small 🖼 button); works the same way
+  // on every page since every page's hero uses the same .hero/.page-hero class ──
+  const hero = pg.querySelector('.hero, .page-hero');
+  if (hero && !hero.hasAttribute('data-cms-hero')) {
+    hero.setAttribute('data-cms-hero', '1');
+    if (!hero.style.position || hero.style.position === 'static') hero.style.position = 'relative';
+
+    const heroUploadBtn = document.createElement('span');
+    heroUploadBtn.className = 'cms-hero-upload';
+    heroUploadBtn.setAttribute('contenteditable', 'false');
+    heroUploadBtn.title = 'Add / replace the hero banner image (photos or GIFs)';
+    heroUploadBtn.textContent = '🖼';
+    hero.appendChild(heroUploadBtn);
+    heroUploadBtn.addEventListener('mousedown', e => e.stopPropagation());
+    heroUploadBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerHeroUpload(hero);
+    });
+
+    const heroCropBtn = document.createElement('span');
+    heroCropBtn.className = 'cms-hero-crop';
+    heroCropBtn.setAttribute('contenteditable', 'false');
+    heroCropBtn.title = 'Crop the hero banner image';
+    heroCropBtn.textContent = '✂';
+    hero.appendChild(heroCropBtn);
+    heroCropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    heroCropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const styleAttr = hero.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      if (!match) { toast('Add a hero image first (🖼), then crop it', 'err'); return; }
+      const tmp = new Image();
+      tmp.onload = () => {
+        openCropTool(tmp, dataUrl => {
+          hist.push({ el: hero, prevStyle: hero.getAttribute('style'), action: 'heroCrop' });
+          setHeroBackground(hero, dataUrl);
+          hero.setAttribute('data-hero-orig-name', (hero.getAttribute('data-hero-orig-name') || 'hero') + '-cropped.png');
+          hero.removeAttribute('data-replace-existing');
+          document.getElementById('badge').classList.add('on');
+        });
+      };
+      tmp.onerror = () => toast('Could not load that image for cropping (animated GIFs crop to a still frame)', 'err');
+      tmp.src = match[2];
+    });
+
+    const heroRemoveBtn = document.createElement('span');
+    heroRemoveBtn.className = 'cms-hero-remove';
+    heroRemoveBtn.setAttribute('contenteditable', 'false');
+    heroRemoveBtn.title = 'Remove the hero banner image';
+    heroRemoveBtn.textContent = '✕';
+    hero.appendChild(heroRemoveBtn);
+    heroRemoveBtn.addEventListener('mousedown', e => e.stopPropagation());
+    heroRemoveBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const styleAttr = hero.getAttribute('style') || '';
+      if (!/background-image/.test(styleAttr)) { toast('No hero image set', 'err'); return; }
+      hist.push({ el: hero, prevStyle: hero.getAttribute('style'), action: 'heroCrop' });
+      clearHeroBackground(hero);
+      document.getElementById('badge').classList.add('on');
+      toast('Hero image removed — click 💾 Save page to store it');
+    });
+
+    hero.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); hero.classList.add('avatar-drag-over'); });
+    hero.addEventListener('dragleave', () => hero.classList.remove('avatar-drag-over'));
+    hero.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      hero.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setHeroPhotoFromFile(hero, file);
+    });
+  }
+
+  // ── research area cards (Home page only) — replace the plain white card
+  // background with an uploaded image (a dark tint is layered on top
+  // automatically so the title/description stay readable) ──
+  pg.querySelectorAll('.research-card').forEach(card => {
+    if (card.hasAttribute('data-cms-research-card')) return;
+    card.setAttribute('data-cms-research-card', '1');
+    if (!card.style.position || card.style.position === 'static') card.style.position = 'relative';
+
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this card\'s background image';
+    camBtn.textContent = '📷';
+    card.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerResearchCardUpload(card);
+    });
+
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this card\'s background image';
+    cropBtn.textContent = '✂';
+    card.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const styleAttr = card.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      if (!match) { toast('Add a background image first (📷), then crop it', 'err'); return; }
+      const tmp = new Image();
+      tmp.onload = () => {
+        openCropTool(tmp, dataUrl => {
+          hist.push({ el: card, prevStyle: card.getAttribute('style'), action: 'heroCrop' });
+          setResearchCardBackground(card, dataUrl);
+          card.setAttribute('data-research-orig-name', (card.getAttribute('data-research-orig-name') || 'research') + '-cropped.png');
+          card.removeAttribute('data-replace-existing');
+          document.getElementById('badge').classList.add('on');
+        });
+      };
+      tmp.onerror = () => toast('Could not load that image for cropping', 'err');
+      tmp.src = match[2];
+    });
+
+    card.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); card.classList.add('avatar-drag-over'); });
+    card.addEventListener('dragleave', () => card.classList.remove('avatar-drag-over'));
+    card.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      card.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setResearchCardImage(card, file);
+    });
+  });
+
+  // Make free-positioned elements draggable via Alt+drag (fallback) too
+  initDrag(pg);
+
+  // ── images (uploaded or already on the page) ──
+  pg.querySelectorAll('img').forEach(img => {
+    if (img.hasAttribute('data-cms-img')) return;
+    if (img.closest('[data-cms-skip]')) return; // e.g. visitor counter badge — not editable
+    if (img.closest('.mtile, .masonry-item, .news-card')) return; // handled by initTiles() instead
+    if (img.closest('.pub-thumb')) return; // handled by the publications-thumbnail loop instead
+    if (img.closest('.abstract-figure')) return; // handled by the abstracts-figure loop instead
+    if (img.closest('.social-icon')) return; // small fixed-size badge icons (Scholar/ORCID/etc.) — the page's own CSS controls their size; leave them alone entirely so it's never overridden
+    img.setAttribute('data-cms-img','1');
+    img.style.cursor = 'pointer';
+    img.style.display = 'block';
+    img.style.height = 'auto'; // width drives the size; height always follows the image's real aspect ratio
+
+    const wrap = document.createElement('span');
+    wrap.className = 'cms-hoverable';
+    wrap.style.cssText = 'position:relative;display:inline-block;';
+    img.parentNode.insertBefore(wrap, img);
+    wrap.appendChild(img);
+    attachHandles(wrap);
+    attachResizeHandle(wrap, img);
+    attachCropButton(wrap, img);
+
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.editable,.cms-hoverable').forEach(el => el.classList.remove('selected'));
+      wrap.classList.add('selected');
+      selEl = img;
+    });
+  });
+
+  // ── inline SVG graphics (e.g. the phase-diagram schematic) ──
+  pg.querySelectorAll('svg').forEach(svg => {
+    if (svg.hasAttribute('data-cms-svg')) return;
+    svg.setAttribute('data-cms-svg','1');
+
+    // Lock in current pixel size so the wrapper can be resized predictably
+    const box = svg.getBoundingClientRect();
+    if (box.width && box.height) {
+      svg.style.width = box.width + 'px';
+      svg.style.height = box.height + 'px';
+    }
+
+    const wrap = document.createElement('span');
+    wrap.className = 'cms-hoverable';
+    wrap.style.cssText = 'position:relative;display:inline-block;resize:both;overflow:hidden;';
+    if (box.width && box.height) {
+      wrap.style.width = box.width + 'px';
+      wrap.style.height = box.height + 'px';
+    }
+    svg.parentNode.insertBefore(wrap, svg);
+    wrap.appendChild(svg);
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    attachHandles(wrap);
+    trackResize(wrap);
+
+    wrap.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.editable,.cms-hoverable').forEach(el => el.classList.remove('selected'));
+      wrap.classList.add('selected');
+      selEl = svg;
+    });
+  });
+
+  // ── Gallery / Photos / News grid tiles: move (reorder), resize, add-photo, crop ──
+  // These tiles are rendered from a data/*.js array (GALLERY / PHOTOS / NEWS), so —
+  // per the same rule applied to Publications and Abstracts — they are NOT deletable
+  // from the editor: add/remove/reorder of actual entries belongs in the data file
+  // itself, which is the one place a delete here would otherwise silently get
+  // overwritten on reload.
+  // Gallery and Photos are the exception for photo/caption edits specifically: Save
+  // also writes the new photo filename + caption back into data/gallery.js /
+  // data/photos.js (see syncGalleryData / syncPhotosData), so those two fields DO
+  // persist across reloads for those two pages. News tile photos remain a
+  // same-session-only convenience — add the resulting filename to that entry's data
+  // file by hand to make it permanent.
+  pg.querySelectorAll('.mtile, .masonry-item, .news-card').forEach(tile => {
+    if (tile.hasAttribute('data-cms-tile')) return;
+    tile.setAttribute('data-cms-tile', '1');
+    if (!tile.style.position || tile.style.position === 'static') tile.style.position = 'relative';
+    tile.style.resize = 'both';
+    tile.style.overflow = 'hidden';
+
+    const container = tile.parentElement;
+    attachHandles(tile, { gridReorder: container, moveOnly: true });
+    trackResize(tile);
+
+    // Prevent tiles that are real links (Gallery) from navigating away while editing
+    if (tile.tagName === 'A') {
+      tile.addEventListener('click', e => { e.preventDefault(); });
+    }
+
+    // camera button — add / replace this tile's photo
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload'; // reuse the same round camera-badge styling
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this tile\'s photo';
+    camBtn.textContent = '📷';
+    tile.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerTilePhotoUpload(tile);
+    });
+
+    // crop button — crops whichever photo is currently on the tile
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this tile\'s photo';
+    cropBtn.textContent = '✂';
+    tile.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const img = tile.querySelector('img');
+      if (!img) { toast('Add a photo to this tile first (📷), then crop it', 'err'); return; }
+      openCropTool(img, dataUrl => {
+        hist.push({ el: img, prevSrc: img.getAttribute('src'), prevOrigName: img.getAttribute('data-orig-name'), action: 'imgSrc' });
+        img.src = dataUrl;
+        img.setAttribute('data-orig-name', (img.getAttribute('data-orig-name') || img.alt || 'tile') + '-cropped.png');
+        img.removeAttribute('data-replace-existing');
+        document.getElementById('badge').classList.add('on');
+      });
+    });
+
+    // Drop an image file straight onto the tile too
+    tile.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); tile.classList.add('avatar-drag-over'); });
+    tile.addEventListener('dragleave', () => tile.classList.remove('avatar-drag-over'));
+    tile.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      tile.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setTilePhoto(tile, file);
+    });
+
+    // YouTube-link button — Gallery tiles only. Links (or unlinks) a video;
+    // Save writes it into data/gallery.js so it persists across reloads.
+    if (tile.closest('#mosaic')) {
+      const ytBtn = document.createElement('span');
+      ytBtn.className = 'cms-yt-btn';
+      ytBtn.setAttribute('contenteditable', 'false');
+      ytBtn.title = 'Link a YouTube video to this tile';
+      ytBtn.textContent = '🎬';
+      tile.appendChild(ytBtn);
+      ytBtn.addEventListener('mousedown', e => e.stopPropagation());
+      ytBtn.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        triggerYouTubeLink(tile);
+      });
+    }
+  });
+
+  // ── Publications thumbnails ── each publication row has a small .pub-thumb
+  // square (rendered from data/publications.js, like every other data-driven
+  // list) — hover it and click 📷 to pick an image, ✂ to crop one that's set.
+  // Save also writes the resulting filename back into that entry's "thumbnail"
+  // field in data/publications.js (see syncPublicationsData), so it persists
+  // across reloads just like Gallery/Photos.
+  pg.querySelectorAll('.pub-thumb').forEach(thumb => {
+    if (thumb.hasAttribute('data-cms-tile')) return;
+    thumb.setAttribute('data-cms-tile', '1');
+    if (!thumb.style.position || thumb.style.position === 'static') thumb.style.position = 'relative';
+
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this publication\'s thumbnail';
+    camBtn.textContent = '📷';
+    thumb.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerPubThumbUpload(thumb);
+    });
+
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this thumbnail';
+    cropBtn.textContent = '✂';
+    thumb.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const img = thumb.querySelector('img');
+      if (!img) { toast('Add a thumbnail first (📷), then crop it', 'err'); return; }
+      openCropTool(img, dataUrl => {
+        hist.push({ el: img, prevSrc: img.getAttribute('src'), prevOrigName: img.getAttribute('data-orig-name'), action: 'imgSrc' });
+        img.src = dataUrl;
+        img.setAttribute('data-orig-name', (img.getAttribute('data-orig-name') || 'thumb') + '-cropped.png');
+        img.removeAttribute('data-replace-existing');
+        document.getElementById('badge').classList.add('on');
+      });
+    });
+
+    thumb.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); thumb.classList.add('avatar-drag-over'); });
+    thumb.addEventListener('dragleave', () => thumb.classList.remove('avatar-drag-over'));
+    thumb.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      thumb.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setPubThumb(thumb, file);
+    });
+  });
+
+  // ── Abstracts figures ── each abstract card has a .abstract-figure slot
+  // (rendered from data/abstracts.js, like every other data-driven list) —
+  // hover it and click 📷 to pick an image, ✂ to crop one that's set. Save
+  // also writes the resulting filename back into that entry's "file" field
+  // in data/abstracts.js (see syncAbstractsData), so it persists across
+  // reloads just like Publications thumbnails.
+  pg.querySelectorAll('.abstract-figure').forEach(fig => {
+    if (fig.hasAttribute('data-cms-tile')) return;
+    fig.setAttribute('data-cms-tile', '1');
+    if (!fig.style.position || fig.style.position === 'static') fig.style.position = 'relative';
+
+    const camBtn = document.createElement('span');
+    camBtn.className = 'cms-avatar-upload';
+    camBtn.setAttribute('contenteditable', 'false');
+    camBtn.title = 'Add / replace this abstract\'s figure image';
+    camBtn.textContent = '📷';
+    fig.appendChild(camBtn);
+    camBtn.addEventListener('mousedown', e => e.stopPropagation());
+    camBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      triggerAbstractFigureUpload(fig);
+    });
+
+    const cropBtn = document.createElement('span');
+    cropBtn.className = 'cms-crop-btn';
+    cropBtn.setAttribute('contenteditable', 'false');
+    cropBtn.title = 'Crop this figure image';
+    cropBtn.textContent = '✂';
+    fig.appendChild(cropBtn);
+    cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+    cropBtn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const img = fig.querySelector('img');
+      if (!img) { toast('Add a figure image first (📷), then crop it', 'err'); return; }
+      openCropTool(img, dataUrl => {
+        hist.push({ el: img, prevSrc: img.getAttribute('src'), prevOrigName: img.getAttribute('data-orig-name'), action: 'imgSrc' });
+        img.src = dataUrl;
+        img.setAttribute('data-orig-name', (img.getAttribute('data-orig-name') || 'abstract') + '-cropped.png');
+        img.removeAttribute('data-replace-existing');
+        document.getElementById('badge').classList.add('on');
+      });
+    });
+
+    fig.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); fig.classList.add('avatar-drag-over'); });
+    fig.addEventListener('dragleave', () => fig.classList.remove('avatar-drag-over'));
+    fig.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      fig.classList.remove('avatar-drag-over');
+      const file = [...e.dataTransfer.files].find(f => f.type.startsWith('image/'));
+      if (file) setAbstractFigure(fig, file);
+    });
+  });
+
+  // Content cards (Home/People "team" grid, Alumni & Collaborator cards) are now all
+  // rendered from data/*.js files (see data/team.js, data/alumni.js) rather than being
+  // hand-authored in each page's HTML, so — per the rule used throughout this editor —
+  // they're edited via their data file rather than deleted here. (The .cms-card
+  // infrastructure below is kept in place in case a future hardcoded card section is
+  // added directly to a page's HTML; just add its selector to the query below.)
+
+  // Set up image drop zone on the whole page
+  initImageDrop(pg);
+}
+
+function initImageDrop(pg) {
+  // Global drop handling is already attached to #frame; nothing per-page needed.
+}
+
+/* ═══════════════════════════════════════════════
+   DELETE (used by cross button and Delete key)
+═══════════════════════════════════════════════ */
+function deleteElement(el) {
+  if (!el || !el.parentNode) return;
+  hist.push({action:'delete', el, parent: el.parentNode, next: el.nextSibling, prev: el.outerHTML});
+  el.remove();
+  if (selEl === el) selEl = null;
+  document.getElementById('badge').classList.add('on');
+  toast('Deleted — click ↩ Undo to restore');
+}
+
+/* ═══════════════════════════════════════════════
+   DRAG A SPECIFIC ELEMENT FROM ITS MOVE HANDLE
+═══════════════════════════════════════════════ */
+function beginElementDrag(el, e) {
+  const startX = e.clientX, startY = e.clientY;
+  if (!el.style.position || el.style.position === 'static') el.style.position = 'relative';
+  const origX = parseInt(el.style.left)||0, origY = parseInt(el.style.top)||0;
+  const prevLeft = el.style.left, prevTop = el.style.top;
+  el.classList.add('dragging');
+  document.body.style.cursor = 'grabbing';
+
+  function mm(ev) {
+    el.style.left = (origX + ev.clientX - startX) + 'px';
+    el.style.top  = (origY + ev.clientY - startY) + 'px';
+    document.getElementById('badge').classList.add('on');
+  }
+  function mu() {
+    el.classList.remove('dragging');
+    document.body.style.cursor = '';
+    document.removeEventListener('mousemove', mm);
+    document.removeEventListener('mouseup', mu);
+    if (el.style.left !== prevLeft || el.style.top !== prevTop) {
+      hist.push({ action:'move', el, prevLeft, prevTop });
+    }
+  }
+  document.addEventListener('mousemove', mm);
+  document.addEventListener('mouseup', mu);
+}
+
+/* ═══════════════════════════════════════════════
+   RESIZE TRACKING (for images / SVG wrappers using
+   the native CSS resize:both corner handle) — lets
+   Ctrl+Z / ↩ Undo restore the previous size.
+═══════════════════════════════════════════════ */
+function trackResize(el) {
+  if (el.hasAttribute('data-cms-resize-tracked')) return;
+  el.setAttribute('data-cms-resize-tracked', '1');
+
+  el.addEventListener('mousedown', e => {
+    const rect = el.getBoundingClientRect();
+    const nearCorner = (rect.right - e.clientX) < 22 && (rect.bottom - e.clientY) < 22;
+    if (!nearCorner) return; // not grabbing the resize handle — a normal click/edit
+
+    const startW = el.style.width || rect.width + 'px';
+    const startH = el.style.height || rect.height + 'px';
+
+    function onUp() {
+      document.removeEventListener('mouseup', onUp);
+      // Give the browser's native resize a tick to finish applying the new size
+      requestAnimationFrame(() => {
+        const newW = el.style.width, newH = el.style.height;
+        if (newW && newH && (newW !== startW || newH !== startH)) {
+          hist.push({ action:'resize', el, prevW: startW, prevH: startH });
+          document.getElementById('badge').classList.add('on');
+        }
+      });
+    }
+    document.addEventListener('mouseup', onUp);
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   NAV "PULL AND SNAP" REORDER DRAG
+   Used for <li> items inside .nav-links — dragging the
+   move handle live-reorders the item among its siblings
+   instead of free pixel positioning.
+═══════════════════════════════════════════════ */
+function getDragAfterElement(ul, x, dragging) {
+  const items = [...ul.querySelectorAll(':scope > li')].filter(li => li !== dragging);
+  let closest = { offset: -Infinity, el: null };
+  items.forEach(li => {
+    const box = li.getBoundingClientRect();
+    const offset = x - (box.left + box.width / 2);
+    if (offset < 0 && offset > closest.offset) {
+      closest = { offset, el: li };
+    }
+  });
+  return closest.el;
+}
+
+function beginNavReorderDrag(li, ul, e) {
+  const prevOrder = [...ul.querySelectorAll(':scope > li')];
+  li.classList.add('dragging');
+  li.style.opacity = '0.5';
+  document.body.style.cursor = 'grabbing';
+
+  function mm(ev) {
+    const after = getDragAfterElement(ul, ev.clientX, li);
+    if (after == null) ul.appendChild(li);
+    else ul.insertBefore(li, after);
+    document.getElementById('badge').classList.add('on');
+  }
+  function mu() {
+    li.classList.remove('dragging');
+    li.style.opacity = '';
+    document.body.style.cursor = '';
+    document.removeEventListener('mousemove', mm);
+    document.removeEventListener('mouseup', mu);
+
+    const newOrder = [...ul.querySelectorAll(':scope > li')];
+    const changed = newOrder.some((el, i) => el !== prevOrder[i]);
+    if (changed) {
+      hist.push({ action:'reorder', parent: ul, prevOrder });
+      toast('Reordered — snapped into new position');
+    }
+  }
+  document.addEventListener('mousemove', mm);
+  document.addEventListener('mouseup', mu);
+}
+
+/* ═══════════════════════════════════════════════
+   GRID TILE "PULL AND SNAP" REORDER DRAG
+   Generalised version of the nav reorder for tiles
+   in a masonry/grid layout (Gallery, Photos, News).
+   Reorders based on which sibling tile the cursor is
+   currently hovering over, not just X position.
+═══════════════════════════════════════════════ */
+function getGridDragTarget(container, x, y, dragging) {
+  const children = [...container.children].filter(c => c !== dragging && c.hasAttribute && (c.hasAttribute('data-cms-tile') || c.hasAttribute('data-cms-card')));
+  for (const child of children) {
+    const r = child.getBoundingClientRect();
+    if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+      const before = (x < r.left + r.width / 2) || (y < r.top + r.height / 2);
+      return { ref: child, before };
+    }
+  }
+  return null;
+}
+
+function beginTileReorderDrag(tile, container, e) {
+  const prevOrder = [...container.children];
+  tile.classList.add('dragging');
+  tile.style.opacity = '0.5';
+  document.body.style.cursor = 'grabbing';
+
+  function mm(ev) {
+    const target = getGridDragTarget(container, ev.clientX, ev.clientY, tile);
+    if (target) {
+      if (target.before) container.insertBefore(tile, target.ref);
+      else container.insertBefore(tile, target.ref.nextSibling);
+    }
+    document.getElementById('badge').classList.add('on');
+  }
+  function mu() {
+    tile.classList.remove('dragging');
+    tile.style.opacity = '';
+    document.body.style.cursor = '';
+    document.removeEventListener('mousemove', mm);
+    document.removeEventListener('mouseup', mu);
+
+    const newOrder = [...container.children];
+    const changed = newOrder.some((el, i) => el !== prevOrder[i]);
+    if (changed) {
+      hist.push({ action:'reorder', parent: container, prevOrder });
+      toast('Tile reordered');
+    }
+  }
+  document.addEventListener('mousemove', mm);
+  document.addEventListener('mouseup', mu);
+}
+
+/* ═══════════════════════════════════════════════
+   DRAG TO REPOSITION
+═══════════════════════════════════════════════ */
+function initDrag(pg) {
+  pg.querySelectorAll('.editable').forEach(el => {
+    if (el.getAttribute('data-draggable')) return;
+    el.setAttribute('data-draggable','1');
+    el.addEventListener('mousedown', startDrag);
+  });
+}
+
+let dragEl = null, dragStartX, dragStartY, dragOrigX, dragOrigY, dragPrevLeft, dragPrevTop;
+
+function startDrag(e) {
+  if (e.target.isContentEditable && document.activeElement === e.target) return; // editing, not dragging
+  if (e.button !== 0) return;
+  if (!e.altKey) return; // hold Alt to drag
+  e.preventDefault();
+  dragEl = e.currentTarget;
+  const rect = dragEl.getBoundingClientRect();
+  dragStartX = e.clientX; dragStartY = e.clientY;
+  dragPrevLeft = dragEl.style.left; dragPrevTop = dragEl.style.top;
+  if (!dragEl.style.position || dragEl.style.position === 'static') {
+    dragEl.style.position = 'relative';
+    dragEl.style.left = '0px'; dragEl.style.top = '0px';
+  }
+  dragOrigX = parseInt(dragEl.style.left)||0;
+  dragOrigY = parseInt(dragEl.style.top)||0;
+  dragEl.classList.add('dragging');
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('mouseup', stopDrag);
+}
+
+function onDrag(e) {
+  if (!dragEl) return;
+  dragEl.style.left = (dragOrigX + e.clientX - dragStartX) + 'px';
+  dragEl.style.top  = (dragOrigY + e.clientY - dragStartY) + 'px';
+  document.getElementById('badge').classList.add('on');
+}
+
+function stopDrag() {
+  if (dragEl) {
+    dragEl.classList.remove('dragging');
+    if (dragEl.style.left !== dragPrevLeft || dragEl.style.top !== dragPrevTop) {
+      hist.push({ action:'move', el: dragEl, prevLeft: dragPrevLeft, prevTop: dragPrevTop });
+    }
+  }
+  dragEl = null;
+  document.removeEventListener('mousemove', onDrag);
+  document.removeEventListener('mouseup', stopDrag);
+}
+
+/* ═══════════════════════════════════════════════
+   DELETE SELECTED (toolbar button / keyboard)
+═══════════════════════════════════════════════ */
+function deleteSelected() {
+  if (!selEl) { toast('Click an element first, then press Delete','err'); return; }
+  const target = (selEl.tagName === 'IMG' && selEl.closest('.cms-hoverable')) ? selEl.closest('.cms-hoverable') : selEl;
+  deleteElement(target);
+}
+
+// Delete with Backspace/Delete when nothing is focused (e.g. image selected)
+document.addEventListener('keydown', e => {
+  if ((e.key==='Delete'||e.key==='Backspace') && selEl && document.activeElement !== selEl) {
+    e.preventDefault();
+    deleteSelected();
+  }
+});
+
+// Ctrl+Z / Cmd+Z — undo last action, anywhere on the page
+document.addEventListener('keydown', e => {
+  const isUndo = (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z';
+  if (isUndo) {
+    e.preventDefault();
+    undoLast();
+  }
+}, true);
+
+/* ═══════════════════════════════════════════════
+   FORMAT COMMANDS
+═══════════════════════════════════════════════ */
+function fmt(cmd, val) {
+  document.execCommand(cmd, false, val||null);
+  document.getElementById('badge').classList.add('on');
+}
+function setColor(hex) {
+  document.execCommand('foreColor', false, hex);
+  document.getElementById('badge').classList.add('on');
+}
+
+function insertLink() {
+  const sel = window.getSelection();
+  const hasTextSel = sel && sel.toString().trim().length > 0;
+  const imgSelected = selEl && selEl.tagName === 'IMG';
+
+  const url = prompt(hasTextSel || imgSelected
+    ? 'Enter the URL to link to:'
+    : 'Select some text or click an image first, then enter the URL:', 'https://');
+  if (!url) return;
+
+  if (imgSelected) {
+    // Wrap image in an anchor
+    const img = selEl;
+    if (img.parentElement.tagName === 'A') {
+      img.parentElement.href = url;
+      img.parentElement.target = '_blank';
+    } else {
+      const a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      img.parentNode.insertBefore(a, img);
+      a.appendChild(img);
+    }
+    document.getElementById('badge').classList.add('on');
+    toast('Link added to image');
+  } else if (hasTextSel) {
+    document.execCommand('createLink', false, url);
+    // Ensure it opens in new tab
+    const anchors = document.querySelectorAll('a[href="'+url+'"]');
+    anchors.forEach(a => { a.target='_blank'; a.rel='noopener'; });
+    document.getElementById('badge').classList.add('on');
+    toast('Link added to text');
+  } else {
+    toast('Select text or click an image first', 'err');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   REPLACE-IN-PLACE HELPER
+   Called right before swapping an <img src> or a
+   background-image url() for a NEW photo. If the
+   element currently points at a real, already-saved
+   file (not a data: URL), remembers that file's name
+   and flags it so savePage() tells the server to
+   overwrite that exact file instead of writing the
+   new photo under a brand-new filename and leaving
+   the old one behind as an orphan.
+═══════════════════════════════════════════════ */
+function markReplaceTarget(el, kind, nameAttr, newFileName) {
+  let oldUrl = '';
+  if (kind === 'src') {
+    oldUrl = el.getAttribute('src') || '';
+  } else { // 'bg' — background-image, possibly layered with a gradient
+    const styleAttr = el.getAttribute('style') || '';
+    const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+    oldUrl = match ? match[2] : '';
+  }
+  if (oldUrl && !oldUrl.startsWith('data:')) {
+    el.setAttribute(nameAttr, oldUrl.split('/').pop());
+    el.setAttribute('data-replace-existing', '1');
+  } else {
+    el.setAttribute(nameAttr, newFileName);
+    el.removeAttribute('data-replace-existing');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   AVATAR SPHERE — headshot photo upload
+   Replaces the initials (PI / PD / PhD / WW etc.)
+   with a real photo filling the circle.
+═══════════════════════════════════════════════ */
+function triggerAvatarUpload(el) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setAvatarPhoto(el, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setAvatarPhoto(el, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const prevText = [...el.childNodes]
+      .filter(n => n.nodeType === Node.TEXT_NODE)
+      .map(n => n.textContent).join('');
+    hist.push({ el, prevText, prevStyle: el.getAttribute('style'), action:'avatarPhoto' });
+
+    // If this avatar already has a real (already-saved) headshot, replace that
+    // exact file on disk when we save, instead of leaving it behind as an orphan.
+    markReplaceTarget(el, 'bg', 'data-avatar-orig-name', file.name);
+
+    el.style.backgroundImage = `url(${e.target.result})`;
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
+
+    // Clear the initials text but keep the camera button (and its listeners) in place
+    [...el.childNodes].forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) node.remove();
+    });
+
+    document.getElementById('badge').classList.add('on');
+    toast('Headshot set — click 💾 Save page to store it permanently');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   NAV LOGO EMBLEM — upload your own group logo to
+   replace the plain "ICE" mark, or revert back to it.
+   The logo is shown whole (never cropped) inside the
+   same 36×36 rounded-square slot in the nav bar.
+═══════════════════════════════════════════════ */
+function triggerLogoUpload(el) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setLogoImage(el, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setLogoImage(el, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const prevText = [...el.childNodes]
+      .filter(n => n.nodeType === Node.TEXT_NODE)
+      .map(n => n.textContent).join('');
+    hist.push({ el, prevText, prevStyle: el.getAttribute('style'), prevHasLogo: el.getAttribute('data-has-logo'), action:'logoImage' });
+
+    // If a real (already-saved) logo file is already set, overwrite that exact
+    // file on disk when saved, instead of leaving it behind as an orphan.
+    markReplaceTarget(el, 'bg', 'data-logo-orig-name', file.name);
+
+    // 'contain' (not 'cover') so the whole logo is always visible, never cropped.
+    el.style.backgroundImage = `url(${e.target.result})`;
+    el.style.backgroundSize = 'contain';
+    el.style.backgroundPosition = 'center';
+    el.style.backgroundRepeat = 'no-repeat';
+    el.setAttribute('data-has-logo', '1');
+
+    // Clear the "ICE" text but keep the control buttons (and their listeners) in place
+    [...el.childNodes].forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) node.remove();
+    });
+
+    document.getElementById('badge').classList.add('on');
+    toast('Logo set — click 💾 Save page to store it permanently');
+  };
+  reader.readAsDataURL(file);
+}
+
+function revertLogoImage(el) {
+  if (el.getAttribute('data-has-logo') !== '1') return; // nothing to revert
+  hist.push({ el, prevStyle: el.getAttribute('style'), prevHasLogo: el.getAttribute('data-has-logo'), action:'logoRevert' });
+  el.style.removeProperty('background-image');
+  el.style.removeProperty('background-size');
+  el.style.removeProperty('background-position');
+  el.style.removeProperty('background-repeat');
+  el.removeAttribute('data-has-logo');
+  el.removeAttribute('data-logo-orig-name');
+  el.removeAttribute('data-replace-existing');
+  const origText = el.getAttribute('data-emblem-orig-text') || 'ICE';
+  el.insertBefore(document.createTextNode(origText), el.firstChild);
+  document.getElementById('badge').classList.add('on');
+  toast('Logo removed — click 💾 Save page to store it permanently', 'ok');
+}
+
+/* ═══════════════════════════════════════════════
+   HERO BANNER — image/GIF upload, crop, remove
+   Replaces the plain gradient background of the
+   page's .hero / .page-hero section with a real
+   photo or animated GIF. Works the same way on
+   every page (Home, People, Alumni, Gallery, etc.)
+   since they all share the same hero markup pattern.
+═══════════════════════════════════════════════ */
+function setHeroBackground(hero, srcUrl) {
+  // Layer a dark gradient on top of the photo so the white hero text/heading
+  // stays legible no matter how bright the uploaded image or GIF is.
+  hero.style.backgroundImage = `linear-gradient(rgba(10,22,40,0.55), rgba(10,22,40,0.75)), url('${srcUrl}')`;
+  hero.style.backgroundSize = 'cover, cover';
+  hero.style.backgroundPosition = 'center, center';
+  hero.style.backgroundRepeat = 'no-repeat, no-repeat';
+}
+
+function clearHeroBackground(hero) {
+  hero.style.removeProperty('background-image');
+  hero.style.removeProperty('background-size');
+  hero.style.removeProperty('background-position');
+  hero.style.removeProperty('background-repeat');
+  hero.removeAttribute('data-hero-orig-name');
+}
+
+function triggerHeroUpload(hero) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setHeroPhotoFromFile(hero, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setHeroPhotoFromFile(hero, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: hero, prevStyle: hero.getAttribute('style'), action: 'heroCrop' });
+
+    // If the hero already has a real (already-saved) banner image, replace that
+    // exact file on disk when we save, instead of leaving it behind as an orphan.
+    markReplaceTarget(hero, 'bg', 'data-hero-orig-name', file.name);
+
+    setHeroBackground(hero, e.target.result);
+    document.getElementById('badge').classList.add('on');
+    const isGif = file.type === 'image/gif';
+    toast((isGif ? '🎞 Animated hero banner set' : '🖼 Hero banner set') + ' — click 💾 Save page to store it permanently');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   RESEARCH CARD — add / replace its background image
+   (Home page only). Same layered dark-tint approach as
+   the hero banner, so title/description stay readable.
+═══════════════════════════════════════════════ */
+function setResearchCardBackground(card, srcUrl) {
+  card.style.backgroundImage = `linear-gradient(180deg, rgba(10,22,40,0.45), rgba(10,22,40,0.75)), url('${srcUrl}')`;
+  card.style.backgroundSize = 'cover, cover';
+  card.style.backgroundPosition = 'center, center';
+  card.style.backgroundRepeat = 'no-repeat, no-repeat';
+  card.classList.add('research-card-photo');
+}
+
+function triggerResearchCardUpload(card) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setResearchCardImage(card, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setResearchCardImage(card, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: card, prevStyle: card.getAttribute('style'), action: 'heroCrop' });
+
+    // If this card already has a real (already-saved) image, replace that
+    // exact file on disk when we save, instead of leaving it as an orphan.
+    markReplaceTarget(card, 'bg', 'data-research-orig-name', file.name);
+
+    setResearchCardBackground(card, e.target.result);
+    document.getElementById('badge').classList.add('on');
+    toast('Card image set — click 💾 Save page to store it permanently');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   GRID TILE — add / replace the tile's photo
+   (Gallery, Photos, News). Inserts a real <img> so
+   it's picked up by the normal per-page upload folder
+   at save time (Gallery→images/Gallery/, etc.)
+═══════════════════════════════════════════════ */
+function triggerTilePhotoUpload(tile) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setTilePhoto(tile, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setTilePhoto(tile, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: tile, prev: tile.innerHTML, action:'edit' });
+
+    let img = tile.querySelector('img');
+    if (!img) {
+      const placeholder = tile.querySelector('.mtile-ph, .photo-placeholder, .news-card-img-placeholder');
+      img = document.createElement('img');
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
+      if (placeholder) placeholder.replaceWith(img);
+      else tile.insertBefore(img, tile.firstChild);
+    }
+
+    // If this tile already has a real (already-saved) photo, replace that exact
+    // file on disk when we save — instead of leaving the old one behind as an
+    // orphan and writing the new photo under a brand-new filename.
+    markReplaceTarget(img, 'src', 'data-orig-name', file.name);
+
+    img.src = e.target.result;
+    img.alt = img.alt || 'tile photo';
+
+    document.getElementById('badge').classList.add('on');
+    const autoSyncs = !!tile.closest('#mosaic') || !!tile.closest('#galleryWrap'); // Gallery + Photos sync their data file on save; News doesn't (yet)
+    toast(autoSyncs
+      ? 'Photo set — click 💾 Save page to store it (replaces the old file)'
+      : 'Photo set — click 💾 Save page, then copy the resulting filename into this entry\'s data file to make it permanent');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   GALLERY TILE — link (or unlink) a YouTube video.
+   Save writes the video ID back into that tile's
+   "youtube" field in data/gallery.js (see
+   syncGalleryData), so it persists across reloads,
+   same as the tile's photo/caption.
+═══════════════════════════════════════════════ */
+
+// Accepts a full YouTube URL (watch/youtu.be/embed/shorts, with or without
+// extra query params) or a bare 11-char video ID, and returns just the ID.
+function extractYouTubeId(input) {
+  if (!input) return '';
+  input = String(input).trim();
+  if (/^[\w-]{11}$/.test(input)) return input;
+  const patterns = [
+    /youtube\.com\/watch\?v=([\w-]{11})/,
+    /youtu\.be\/([\w-]{11})/,
+    /youtube\.com\/embed\/([\w-]{11})/,
+    /youtube\.com\/shorts\/([\w-]{11})/,
+  ];
+  for (const re of patterns) {
+    const m = input.match(re);
+    if (m) return m[1];
+  }
+  return '';
+}
+
+function triggerYouTubeLink(tile) {
+  const current = tile.getAttribute('data-youtube') || '';
+  const input = prompt('Paste a YouTube link (leave blank to remove):', current ? `https://youtu.be/${current}` : '');
+  if (input === null) return; // cancelled
+
+  const existingImg = tile.querySelector('img');
+  const placeholder = tile.querySelector('.mtile-ph');
+  hist.push({
+    el: tile, action: 'tileYoutube',
+    prevYoutube: current,
+    addedImg: !existingImg, // will this action create a new <img> where none existed?
+    prevPlaceholderHTML: placeholder ? placeholder.outerHTML : null,
+  });
+
+  const trimmed = input.trim();
+  if (!trimmed) {
+    tile.removeAttribute('data-youtube');
+    document.getElementById('badge').classList.add('on');
+    toast('YouTube link removed — click 💾 Save page to store it', 'ok');
+    return;
+  }
+
+  const id = extractYouTubeId(trimmed);
+  if (!id) { toast('Couldn\'t recognize that as a YouTube link', 'err'); return; }
+  tile.setAttribute('data-youtube', id);
+
+  // If this tile doesn't already have its own uploaded photo, show YouTube's
+  // thumbnail now so the editor preview matches what Save will produce —
+  // an uploaded photo (if any) always stays as the thumbnail instead.
+  if (!existingImg) {
+    const newImg = document.createElement('img');
+    newImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
+    newImg.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    newImg.alt = 'tile photo';
+    if (placeholder) placeholder.replaceWith(newImg);
+    else tile.insertBefore(newImg, tile.firstChild);
+  }
+
+  document.getElementById('badge').classList.add('on');
+  toast('YouTube video linked — click 💾 Save page to store it');
+}
+
+/* ═══════════════════════════════════════════════
+   PUBLICATION ROW — add / replace its thumbnail
+   (the small square next to each entry). Save writes
+   the resulting filename back into that entry's
+   "thumbnail" field in data/publications.js (see
+   syncPublicationsData), so it persists across reloads.
+═══════════════════════════════════════════════ */
+function triggerPubThumbUpload(thumb) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setPubThumb(thumb, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setPubThumb(thumb, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: thumb, prev: thumb.innerHTML, action: 'edit' });
+
+    let img = thumb.querySelector('img');
+    if (!img) {
+      const placeholder = thumb.querySelector('.pub-thumb-ph');
+      img = document.createElement('img');
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+      if (placeholder) placeholder.replaceWith(img);
+      else thumb.appendChild(img);
+    }
+
+    // Prefer this entry's deterministic suggested filename (derived at render time
+    // from its year + title) so re-uploads land on the same file and stay easy to
+    // reference in data/publications.js; otherwise replace whatever real file is
+    // already linked, or fall back to the uploaded file's own name.
+    const suggestedName = thumb.getAttribute('data-thumb-name');
+    const oldSrc = img.getAttribute('src') || '';
+    if (oldSrc && !oldSrc.startsWith('data:')) {
+      markReplaceTarget(img, 'src', 'data-orig-name', file.name);
+    } else {
+      img.setAttribute('data-orig-name', suggestedName || file.name);
+      img.removeAttribute('data-replace-existing');
+    }
+
+    img.src = e.target.result;
+    img.alt = img.alt || 'publication thumbnail';
+
+    document.getElementById('badge').classList.add('on');
+    toast('Thumbnail set — click 💾 Save page to store it (replaces the old file)');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   ABSTRACT FIGURE — add / replace the graphical-abstract
+   image next to an abstract card, replacing its icon
+   placeholder. Same pattern as PUBLICATION THUMBNAIL above.
+═══════════════════════════════════════════════ */
+function triggerAbstractFigureUpload(fig) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.style.display = 'none';
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (file) setAbstractFigure(fig, file);
+    input.remove();
+  });
+  document.body.appendChild(input);
+  input.click();
+}
+
+function setAbstractFigure(fig, file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    hist.push({ el: fig, prev: fig.innerHTML, action: 'edit' });
+
+    let img = fig.querySelector('img');
+    if (!img) {
+      const placeholder = fig.querySelector('.ph-icon');
+      img = document.createElement('img');
+      img.style.cssText = 'width:100%;border-radius:8px;display:block;';
+      if (placeholder) placeholder.replaceWith(img);
+      else fig.appendChild(img);
+    }
+
+    // Prefer this entry's deterministic suggested filename (derived at render time
+    // from its journal year + title) so re-uploads land on the same file and stay
+    // easy to reference in data/abstracts.js; otherwise replace whatever real file
+    // is already linked, or fall back to the uploaded file's own name.
+    const suggestedName = fig.getAttribute('data-fig-name');
+    const oldSrc = img.getAttribute('src') || '';
+    if (oldSrc && !oldSrc.startsWith('data:')) {
+      markReplaceTarget(img, 'src', 'data-orig-name', file.name);
+    } else {
+      img.setAttribute('data-orig-name', suggestedName || file.name);
+      img.removeAttribute('data-replace-existing');
+    }
+
+    img.src = e.target.result;
+    img.alt = img.alt || 'graphical abstract';
+
+    document.getElementById('badge').classList.add('on');
+    toast('Figure set — click 💾 Save page to store it (replaces the old file)');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════
+   IMAGE INSERT
+═══════════════════════════════════════════════ */
+function triggerImgInsert() {
+  document.getElementById('img-file-input').click();
+}
+
+// Always-available toolbar entry point for the hero banner image/GIF — the
+// same upload the 🖼 button on the hero itself opens, but reachable without
+// having to find and hover that button first.
+function triggerHeroUploadForCurrentPage() {
+  const pg = document.getElementById('pg-' + cur);
+  const hero = pg && pg.querySelector('.hero, .page-hero');
+  if (!hero) { toast('This page has no hero banner', 'err'); return; }
+  triggerHeroUpload(hero);
+}
+
+function insertImageFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  // Insert near the centre of the currently visible page area when using the toolbar button
+  const cx = window.innerWidth / 2, cy = window.innerHeight / 2 + window.scrollY;
+  reader.onload = e => insertImgAt(e.target.result, file.name, cx, cy);
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function insertImg(src, name) {
+  // Fallback (no coordinates) — centre of current page container
+  const pg = document.getElementById('pg-'+cur);
+  const rect = pg.getBoundingClientRect();
+  insertImgAt(src, name, rect.left + rect.width/2, rect.top + rect.height/2 + window.scrollY);
+}
+
+/* Insert an image at a specific viewport position (clientX/clientY-style coords) */
+function insertImgAt(src, name, clientX, clientY) {
+  const pg = document.getElementById('pg-'+cur);
+
+  // Find the section under the drop point to anchor positioning to
+  const under = document.elementFromPoint(
+    Math.min(Math.max(clientX, 0), window.innerWidth-1),
+    Math.min(Math.max(clientY - window.scrollY, 0), window.innerHeight-1)
+  );
+  let container = (under && under.closest && under.closest('section, .s-sec, .hero, .page-hero, .contact-band, #frame')) || pg;
+  if (!container || !pg.contains(container)) container = pg;
+
+  if (!container.style.position || container.style.position === 'static') {
+    container.style.position = 'relative';
+  }
+  const cRect = container.getBoundingClientRect();
+  const leftPx = Math.round(clientX - cRect.left);
+  const topPx  = Math.round(clientY - cRect.top);
+
+  const wrap = document.createElement('span');
+  wrap.className = 'cms-hoverable';
+  wrap.style.cssText = `position:absolute; left:${leftPx}px; top:${topPx}px; display:inline-block; z-index:5;`;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = name || 'inserted image';
+    img.setAttribute('data-cms-img','1');
+    img.setAttribute('data-orig-name', name || 'image.png'); // preserved for save-time upload
+    img.className = 'cms-img'; // hover/selected-only outline (editor UI only, never saved) — not a permanent border
+    img.style.cssText = 'width:280px;max-width:90vw;height:auto;border-radius:6px;display:block;';
+
+  const moveHandle = document.createElement('span');
+  moveHandle.className = 'cms-move-handle';
+  moveHandle.title = 'Drag to move';
+  moveHandle.textContent = '✥';
+  moveHandle.addEventListener('mousedown', e => { e.preventDefault(); e.stopPropagation(); beginElementDrag(wrap, e); });
+
+  const delBtn = document.createElement('span');
+  delBtn.className = 'cms-del-btn';
+  delBtn.title = 'Delete this image';
+  delBtn.textContent = '✕';
+  delBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); deleteElement(wrap); });
+
+  wrap.appendChild(img);
+  wrap.appendChild(moveHandle);
+  wrap.appendChild(delBtn);
+  attachResizeHandle(wrap, img);
+  attachCropButton(wrap, img);
+
+  img.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.editable,.cms-hoverable').forEach(el => el.classList.remove('selected'));
+    wrap.classList.add('selected');
+    selEl = img;
+  });
+
+  container.appendChild(wrap);
+  hist.push({action:'insert', el:wrap});
+  document.getElementById('badge').classList.add('on');
+  toast('Image inserted — drag the ✥ handle to reposition, ⇲ corner to resize (aspect ratio kept)');
+}
+
+/* ═══════════════════════════════════════════════
+   INSERT A NEW TEXT BOX — same free-floating pattern as
+   inserted images (draggable via ✥, deletable via ✕),
+   dropped wherever you click/drop it on the page.
+═══════════════════════════════════════════════ */
+function triggerTextBoxInsert() {
+  const cx = window.innerWidth / 2, cy = window.innerHeight / 2 + window.scrollY;
+  insertTextBoxAt(cx, cy);
+}
+
+function insertTextBoxAt(clientX, clientY) {
+  const pg = document.getElementById('pg-'+cur);
+
+  const under = document.elementFromPoint(
+    Math.min(Math.max(clientX, 0), window.innerWidth-1),
+    Math.min(Math.max(clientY - window.scrollY, 0), window.innerHeight-1)
+  );
+  let container = (under && under.closest && under.closest('section, .s-sec, .hero, .page-hero, .contact-band, #frame')) || pg;
+  if (!container || !pg.contains(container)) container = pg;
+
+  if (!container.style.position || container.style.position === 'static') {
+    container.style.position = 'relative';
+  }
+  const cRect = container.getBoundingClientRect();
+  const leftPx = Math.round(clientX - cRect.left);
+  const topPx  = Math.round(clientY - cRect.top);
+
+  const wrap = document.createElement('span');
+  wrap.className = 'cms-hoverable';
+  wrap.style.cssText = `position:absolute; left:${leftPx}px; top:${topPx}px; display:inline-block; z-index:5; min-width:140px;`;
+
+  const p = document.createElement('p');
+  p.textContent = 'New text — click to edit';
+  p.setAttribute('contenteditable', 'true');
+  p.className = 'cms-new-textbox';
+  p.style.cssText = 'margin:0; padding:4px 6px; min-width:140px; cursor:text; border-radius:4px; font-size:15px; line-height:1.5;';
+
+  const moveHandle = document.createElement('span');
+  moveHandle.className = 'cms-move-handle';
+  moveHandle.setAttribute('contenteditable','false');
+  moveHandle.title = 'Drag to move';
+  moveHandle.textContent = '✥';
+  moveHandle.addEventListener('mousedown', e => { e.preventDefault(); e.stopPropagation(); beginElementDrag(wrap, e); });
+
+  const delBtn = document.createElement('span');
+  delBtn.className = 'cms-del-btn';
+  delBtn.setAttribute('contenteditable','false');
+  delBtn.title = 'Delete this text box';
+  delBtn.textContent = '✕';
+  delBtn.addEventListener('mousedown', e => e.stopPropagation());
+  delBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); deleteElement(wrap); });
+
+  wrap.appendChild(p);
+  wrap.appendChild(moveHandle);
+  wrap.appendChild(delBtn);
+
+  p.addEventListener('focus', () => {
+    document.querySelectorAll('.editable,.cms-hoverable').forEach(el => el.classList.remove('selected'));
+    wrap.classList.add('selected');
+    selEl = p;
+    hist.push({el:p, prev:p.innerHTML, action:'edit'});
+    document.getElementById('badge').classList.add('on');
+  });
+  p.addEventListener('input', () => document.getElementById('badge').classList.add('on'));
+  p.addEventListener('click', e => e.stopPropagation());
+  p.addEventListener('keydown', e => { if (e.key === 'Escape') p.blur(); });
+
+  container.appendChild(wrap);
+  hist.push({action:'insert', el:wrap});
+  document.getElementById('badge').classList.add('on');
+
+  // Focus immediately with the placeholder text selected, so typing replaces it right away
+  requestAnimationFrame(() => {
+    p.focus();
+    const range = document.createRange();
+    range.selectNodeContents(p);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+
+  toast('Text box added — start typing, drag ✥ to reposition');
+}
+
+/* ═══════════════════════════════════════════════
+   ADD TEAM MEMBER — inserts a brand-new card into "The Team"
+   grid (Home or People page only — the two share data/team.js).
+   Trying to "convert" an existing open-position card into a real
+   member by editing its text isn't reliable (selecting across its
+   nested <a> "Apply now" link and retyping can silently lose the
+   text — a Chrome contenteditable quirk, same class of bug as the
+   header text box), so this creates a proper new card instead,
+   reusing the exact same editing (avatar upload, text editing)
+   every other card already has, plus its own delete button since
+   this one — unlike the curated existing entries — is meant to be
+   easy to undo if added by mistake.
+═══════════════════════════════════════════════ */
+function triggerAddTeamMember() {
+  if (cur !== 'home' && cur !== 'people') {
+    toast('Switch to the Home or People page to add a team member', 'err');
+    return;
+  }
+  const prefix = cur === 'home' ? 'person' : 'member';
+  const gridId = cur === 'home' ? 'teamGridHome' : 'teamGridPeople';
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  const card = document.createElement('div');
+  card.className = `${prefix}-card`;
+  card.setAttribute('data-cms-card', '1');
+  card.style.position = 'relative';
+  card.innerHTML = `
+    <div class="${prefix}-avatar" style="background:linear-gradient(135deg,#5bb8e8,#1a3a5c);">NN</div>
+    <p class="${prefix}-name">New Member</p>
+    <p class="${prefix}-role">Role / Title</p>
+  `;
+
+  // Always append at the end — inserting before an existing card would shift
+  // every later entry's array position, and the save-time sync (which maps
+  // DOM position straight to data/team.js index) would silently overwrite
+  // the wrong entries. Appending keeps every existing entry's position fixed
+  // and lands the new one at the one index guaranteed not to collide: the end.
+  grid.appendChild(card);
+
+  attachHandles(card, { gridReorder: grid });
+  hist.push({ action: 'insert', el: card });
+
+  // Wire up editability for just the new elements (avatar upload, text
+  // editing) by re-running the page's normal init pass — every sub-pass
+  // guards on "already wired" attributes, so this only touches what's new.
+  initEditing(cur);
+
+  document.getElementById('badge').classList.add('on');
+  toast('Team member added — edit the name/role, click 📷 for a photo, then Save');
+
+  requestAnimationFrame(() => {
+    const nameEl = card.querySelector(`.${prefix}-name`);
+    if (!nameEl) return;
+    nameEl.focus();
+    const range = document.createRange();
+    range.selectNodeContents(nameEl);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+}
+
+// Global drag-and-drop for images — dropped exactly where the mouse is released
+const frameEl = document.getElementById('frame');
+frameEl.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect='copy'; });
+frameEl.addEventListener('drop', e => {
+  e.preventDefault();
+  const files = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+  const dropX = e.clientX, dropY = e.clientY + window.scrollY;
+  files.forEach((f, i) => {
+    const reader = new FileReader();
+    reader.onload = ev => insertImgAt(ev.target.result, f.name, dropX + i*18, dropY + i*18);
+    reader.readAsDataURL(f);
+  });
+});
+
+/* ═══════════════════════════════════════════════
+   IMAGE CROP TOOL
+   Adds a ✂ crop button to any inserted/dropped image
+   (wrap = its .cms-hoverable, img = the live <img>).
+   Reused directly for tile photos and, via a small
+   temporary <img>, for avatar-sphere headshots too.
+═══════════════════════════════════════════════ */
+function attachCropButton(wrap, img) {
+  const cropBtn = document.createElement('span');
+  cropBtn.className = 'cms-crop-btn';
+  cropBtn.setAttribute('contenteditable', 'false');
+  cropBtn.title = 'Crop this image';
+  cropBtn.textContent = '✂';
+  wrap.appendChild(cropBtn);
+  cropBtn.addEventListener('mousedown', e => e.stopPropagation());
+  cropBtn.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    openCropTool(img, dataUrl => {
+      hist.push({ el: img, prevSrc: img.getAttribute('src'), prevOrigName: img.getAttribute('data-orig-name'), action: 'imgSrc' });
+      img.src = dataUrl;
+      img.setAttribute('data-orig-name', (img.getAttribute('data-orig-name') || img.alt || 'image') + '-cropped.png');
+      img.removeAttribute('data-replace-existing');
+      // Keep the wrapper/tile's pixel size in sync with the freshly-cropped image
+      if (img.style.width) img.style.height = 'auto';
+      document.getElementById('badge').classList.add('on');
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   IMAGE RESIZE HANDLE
+   A small ⇲ grip in the bottom-right corner of a
+   freely-inserted/dropped image. Dragging it only
+   ever changes the image's WIDTH — height is always
+   left as 'auto', so the browser derives it from the
+   image's real aspect ratio automatically, meaning
+   the picture can be freely enlarged or shrunk and
+   never gets stretched/distorted.
+═══════════════════════════════════════════════ */
+function attachResizeHandle(wrap, img) {
+  const handle = document.createElement('span');
+  handle.className = 'cms-resize-handle';
+  handle.setAttribute('contenteditable', 'false');
+  handle.title = 'Drag to resize (aspect ratio is kept)';
+  wrap.appendChild(handle);
+
+  handle.addEventListener('mousedown', e => {
+    e.preventDefault(); e.stopPropagation();
+    const startX = e.clientX;
+    const startWidth = img.getBoundingClientRect().width;
+    const prevWidthStyle = img.style.width;
+    const prevHeightStyle = img.style.height;
+    const minWidth = 40;
+    const maxWidth = window.innerWidth * 0.95;
+
+    function mm(ev) {
+      const newWidth = Math.min(Math.max(startWidth + (ev.clientX - startX), minWidth), maxWidth);
+      img.style.width = newWidth + 'px';
+      img.style.height = 'auto';
+    }
+    function mu() {
+      document.removeEventListener('mousemove', mm);
+      document.removeEventListener('mouseup', mu);
+      if (img.style.width !== prevWidthStyle) {
+        hist.push({ action: 'resize', el: img, prevW: prevWidthStyle || startWidth + 'px', prevH: prevHeightStyle || 'auto' });
+        document.getElementById('badge').classList.add('on');
+      }
+    }
+    document.addEventListener('mousemove', mm);
+    document.addEventListener('mouseup', mu);
+  });
+}
+
+// srcImg must be a live, already-loaded <img> (naturalWidth/naturalHeight available).
+// onApply(dataUrl) is called once the person clicks "Apply crop".
+function openCropTool(srcImg, onApply) {
+  if (!srcImg || !srcImg.naturalWidth) {
+    toast('Image is still loading — try again in a moment', 'err');
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.id = 'crop-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(5,13,26,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;';
+
+  const maxW = Math.min(window.innerWidth * 0.82, 900);
+  const maxH = window.innerHeight * 0.62;
+  const ratio = Math.min(maxW / srcImg.naturalWidth, maxH / srcImg.naturalHeight, 1);
+  const dispW = Math.max(Math.round(srcImg.naturalWidth * ratio), 1);
+  const dispH = Math.max(Math.round(srcImg.naturalHeight * ratio), 1);
+
+  const stage = document.createElement('div');
+  stage.className = 'crop-stage';
+  stage.style.cssText = `width:${dispW}px;height:${dispH}px;`;
+
+  const preview = document.createElement('img');
+  preview.src = srcImg.currentSrc || srcImg.src;
+  preview.style.cssText = `display:block;width:${dispW}px;height:${dispH}px;user-select:none;pointer-events:none;`;
+  stage.appendChild(preview);
+
+  // Crop box — starts covering the full image, in displayed (on-screen) pixels
+  const box = { x: 0, y: 0, w: dispW, h: dispH };
+  const boxEl = document.createElement('div');
+  boxEl.className = 'crop-box';
+  function paintBox() {
+    boxEl.style.left = box.x + 'px'; boxEl.style.top = box.y + 'px';
+    boxEl.style.width = box.w + 'px'; boxEl.style.height = box.h + 'px';
+  }
+  paintBox();
+
+  const resizeHandle = document.createElement('div');
+  resizeHandle.className = 'crop-handle';
+  boxEl.appendChild(resizeHandle);
+  stage.appendChild(boxEl);
+
+  // Drag the box to move the crop area
+  boxEl.addEventListener('mousedown', e => {
+    if (e.target === resizeHandle) return;
+    e.preventDefault();
+    const sx = e.clientX, sy = e.clientY, ox = box.x, oy = box.y;
+    function mm(ev) {
+      box.x = Math.min(Math.max(ox + ev.clientX - sx, 0), dispW - box.w);
+      box.y = Math.min(Math.max(oy + ev.clientY - sy, 0), dispH - box.h);
+      paintBox();
+    }
+    function mu() { document.removeEventListener('mousemove', mm); document.removeEventListener('mouseup', mu); }
+    document.addEventListener('mousemove', mm);
+    document.addEventListener('mouseup', mu);
+  });
+
+  // Drag the corner handle to resize the crop area
+  resizeHandle.addEventListener('mousedown', e => {
+    e.preventDefault(); e.stopPropagation();
+    const sx = e.clientX, sy = e.clientY, ow = box.w, oh = box.h;
+    function mm(ev) {
+      box.w = Math.min(Math.max(ow + ev.clientX - sx, 24), dispW - box.x);
+      box.h = Math.min(Math.max(oh + ev.clientY - sy, 24), dispH - box.y);
+      paintBox();
+    }
+    function mu() { document.removeEventListener('mousemove', mm); document.removeEventListener('mouseup', mu); }
+    document.addEventListener('mousemove', mm);
+    document.addEventListener('mouseup', mu);
+  });
+
+  const hint = document.createElement('div');
+  hint.className = 'crop-hint';
+  hint.textContent = 'Drag the box to move it, drag the ◢ corner to resize it — then Apply crop.';
+
+  const controls = document.createElement('div');
+  controls.className = 'crop-controls';
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'bar-btn';
+  cancelBtn.textContent = '✕ Cancel';
+  const applyBtn = document.createElement('button');
+  applyBtn.className = 'bar-btn';
+  applyBtn.style.cssText = 'background:#1a9e6b;border-color:#1a9e6b;color:#fff;font-weight:500;';
+  applyBtn.textContent = '✓ Apply crop';
+  controls.appendChild(cancelBtn);
+  controls.appendChild(applyBtn);
+
+  overlay.appendChild(hint);
+  overlay.appendChild(stage);
+  overlay.appendChild(controls);
+  document.body.appendChild(overlay);
+
+  function close() { overlay.remove(); }
+  cancelBtn.addEventListener('click', close);
+  overlay.addEventListener('mousedown', e => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function escClose(e) {
+    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', escClose); }
+  });
+
+  applyBtn.addEventListener('click', () => {
+    const scaleX = srcImg.naturalWidth / dispW;
+    const scaleY = srcImg.naturalHeight / dispH;
+    const sx = Math.round(box.x * scaleX), sy = Math.round(box.y * scaleY);
+    const sw = Math.max(Math.round(box.w * scaleX), 1), sh = Math.max(Math.round(box.h * scaleY), 1);
+    const canvas = document.createElement('canvas');
+    canvas.width = sw; canvas.height = sh;
+    const ctx = canvas.getContext('2d');
+    try {
+      ctx.drawImage(srcImg, sx, sy, sw, sh, 0, 0, sw, sh);
+      const dataUrl = canvas.toDataURL('image/png');
+      close();
+      onApply(dataUrl);
+      toast('✂ Cropped — click 💾 Save page to store it permanently', 'ok');
+    } catch (err) {
+      toast('Crop failed: ' + err.message, 'err');
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   UNDO
+═══════════════════════════════════════════════ */
+function undoLast() {
+  if (!hist.length) return;
+  const h = hist.pop();
+  if (h.action === 'delete') {
+    if (h.next && h.next.parentNode) h.parent.insertBefore(h.el, h.next);
+    else h.parent.appendChild(h.el);
+  } else if (h.action === 'insert') {
+    if (h.el && h.el.parentNode) h.el.remove();
+  } else if (h.action === 'reorder') {
+    // restore original order of nav items
+    h.parent.innerHTML = '';
+    h.prevOrder.forEach(el => h.parent.appendChild(el));
+  } else if (h.action === 'avatarPhoto') {
+    // revert the sphere back to its initials, keep the camera button intact
+    if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+    else h.el.removeAttribute('style');
+    h.el.removeAttribute('data-avatar-orig-name');
+    [...h.el.childNodes].forEach(node => { if (node.nodeType === Node.TEXT_NODE) node.remove(); });
+    h.el.insertBefore(document.createTextNode(h.prevText || ''), h.el.firstChild);
+  } else if (h.action === 'logoImage') {
+    // revert the emblem back to its previous state (text or an earlier logo)
+    if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+    else h.el.removeAttribute('style');
+    if (h.prevHasLogo) h.el.setAttribute('data-has-logo', h.prevHasLogo);
+    else h.el.removeAttribute('data-has-logo');
+    h.el.removeAttribute('data-logo-orig-name');
+    [...h.el.childNodes].forEach(node => { if (node.nodeType === Node.TEXT_NODE) node.remove(); });
+    h.el.insertBefore(document.createTextNode(h.prevText || ''), h.el.firstChild);
+  } else if (h.action === 'logoRevert') {
+    // restore the logo image that was just reverted away
+    if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+    else h.el.removeAttribute('style');
+    if (h.prevHasLogo) h.el.setAttribute('data-has-logo', h.prevHasLogo);
+    else h.el.removeAttribute('data-has-logo');
+    [...h.el.childNodes].forEach(node => { if (node.nodeType === Node.TEXT_NODE) node.remove(); });
+  } else if (h.action === 'tileYoutube') {
+    // restore a Gallery tile's previous YouTube link; if this action had
+    // created a brand-new <img> where there was none before, put the
+    // original placeholder back rather than touching the tile's own
+    // buttons (a full innerHTML restore would kill their listeners).
+    if (h.prevYoutube) h.el.setAttribute('data-youtube', h.prevYoutube);
+    else h.el.removeAttribute('data-youtube');
+    if (h.addedImg) {
+      const img = h.el.querySelector('img');
+      if (img && h.prevPlaceholderHTML) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = h.prevPlaceholderHTML;
+        img.replaceWith(tmp.firstElementChild);
+      }
+    }
+  } else if (h.action === 'resize') {
+    // restore the image/SVG wrapper to its previous pixel dimensions
+    h.el.style.width = h.prevW;
+    h.el.style.height = h.prevH;
+  } else if (h.action === 'move') {
+    // restore the element's previous position (images, SVG, avatars, etc.)
+    h.el.style.left = h.prevLeft;
+    h.el.style.top = h.prevTop;
+  } else if (h.action === 'imgSrc') {
+    // restore an image's previous source (used by the crop tool)
+    h.el.setAttribute('src', h.prevSrc);
+    if (h.prevOrigName) h.el.setAttribute('data-orig-name', h.prevOrigName);
+    else h.el.removeAttribute('data-orig-name');
+  } else if (h.action === 'avatarCrop') {
+    // restore an avatar sphere's previous background-image (used by the crop tool)
+    if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+    else h.el.removeAttribute('style');
+  } else if (h.action === 'heroCrop') {
+    // restore the hero banner's previous background (used by upload/crop/remove)
+    if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+    else h.el.removeAttribute('style');
+  } else {
+    h.el.innerHTML = h.prev;
+    if (h.prevStyle !== undefined) {
+      if (h.prevStyle) h.el.setAttribute('style', h.prevStyle);
+      else h.el.removeAttribute('style');
+    }
+  }
+  if (!hist.length) document.getElementById('badge').classList.remove('on');
+  toast('Undone', 'ok', 1500);
+}
+
+/* ═══════════════════════════════════════════════
+   HEADER / FOOTER GLOBAL SYNC
+   Runs after every successful Save — propagates the
+   current page's nav (logo, name, links) and footer
+   text to every other page's file on disk, adjusting
+   each link's href to be correct for that target page.
+═══════════════════════════════════════════════ */
+function extractHeaderFooterData(clone) {
+  const data = { navItems: [], emblem: '', iceGroup: '', univ: '', footerLeft: '', footerVisitors: '', footerUsyd: '' };
+
+  const ul = clone.querySelector('.nav-links');
+  if (ul) {
+    [...ul.children].forEach(li => {
+      if (li.tagName !== 'LI') return;
+      const navId = li.getAttribute('data-page');
+      const a = li.querySelector('a');
+      if (navId && NAV_HREF_MAP['index.html'][navId] !== undefined) {
+        data.navItems.push({ id: navId, label: a ? a.innerHTML.trim() : li.textContent.trim() });
+      } else {
+        // Unrecognised / custom nav item — carry over verbatim
+        data.navItems.push({ id: null, raw: li.outerHTML });
+      }
+    });
+  }
+  const emblemEl = clone.querySelector('.nav-emblem');
+  const navNameEl = clone.querySelector('.nav-name');
+  const footerLeftEl = clone.querySelector('.footer-left');
+  const footerVisitorsEl = clone.querySelector('.footer-visitors');
+  const footerUsydEl = clone.querySelector('.footer-usyd');
+
+  if (emblemEl) {
+    data.emblem = emblemEl.innerHTML.trim();
+    // Also carry the emblem's own style attribute (background-image url,
+    // sizing, etc.) — a logo image lives there, not in the innerHTML text.
+    data.emblemStyle = emblemEl.getAttribute('style') || '';
+  }
+  if (navNameEl) {
+    data.navName = navNameEl.innerHTML.trim();
+    data.navNameStyle = navNameEl.getAttribute('style') || '';
+  }
+  if (footerLeftEl) {
+    data.footerLeft = footerLeftEl.innerHTML.trim();
+    data.footerLeftStyle = footerLeftEl.getAttribute('style') || '';
+  }
+  if (footerVisitorsEl) data.footerVisitors = footerVisitorsEl.outerHTML;
+  if (footerUsydEl) {
+    data.footerUsyd = footerUsydEl.innerHTML.trim();
+    data.footerUsydStyle = footerUsydEl.getAttribute('style') || '';
+  }
+
+  return data;
+}
+
+function buildNavLinksHTML(navItems, targetFile) {
+  const hrefMap = NAV_HREF_MAP[targetFile];
+  const activeId = ACTIVE_ON[targetFile];
+  const lis = navItems.map(item => {
+    if (item.id === null) return item.raw; // custom item, carried over as-is
+    const href = hrefMap[item.id];
+    const cls = (item.id === activeId) ? ' class="active"' : '';
+    return `    <li data-page="${item.id}"><a href="${href}"${cls}>${item.label}</a></li>`;
+  });
+  return '<ul class="nav-links">\n' + lis.join('\n') + '\n  </ul>';
+}
+
+async function syncHeaderFooter(clone, sourceFile) {
+  const data = extractHeaderFooterData(clone);
+  const targets = ALL_HTML_FILES.filter(f => f !== sourceFile);
+  let syncedCount = 0;
+
+  await Promise.all(targets.map(async targetFile => {
+    try {
+      const res = await fetch(SERVER + '/' + targetFile + '?nocache=' + Date.now());
+      let raw = await res.text();
+
+      // nav-links list
+      const navHTML = buildNavLinksHTML(data.navItems, targetFile);
+      raw = raw.replace(/<ul class="nav-links">[\s\S]*?<\/ul>/, navHTML);
+
+      // logo emblem + name pieces — replace the whole tag (attributes included),
+      // since a logo image lives in the style attribute, not just the inner text.
+      if (data.emblem || data.emblemStyle) {
+        const styleAttr = data.emblemStyle ? ` style="${data.emblemStyle.replace(/"/g, '&quot;')}"` : '';
+        raw = raw.replace(/<div class="nav-emblem"[^>]*>[\s\S]*?<\/div>/, `<div class="nav-emblem"${styleAttr}>${data.emblem}</div>`);
+      }
+      if (data.navName || data.navNameStyle) {
+        const styleAttr = data.navNameStyle ? ` style="${data.navNameStyle.replace(/"/g, '&quot;')}"` : '';
+        raw = raw.replace(/<span class="nav-name"[^>]*>[\s\S]*?<\/span>/, `<span class="nav-name"${styleAttr}>${data.navName}</span>`);
+      }
+
+      // footer text + visitor badge — same "tolerate any attributes" fix as
+      // the nav emblem/name above: these spans pick up a style="position:
+      // relative..." (and sometimes a resize width/height) once edited, so a
+      // regex expecting the bare, attribute-less opening tag silently stops
+      // matching — on EVERY page, source and target alike — and the sync
+      // becomes a permanent no-op from that point on.
+      if (data.footerLeft || data.footerLeftStyle) {
+        const styleAttr = data.footerLeftStyle ? ` style="${data.footerLeftStyle.replace(/"/g, '&quot;')}"` : '';
+        raw = raw.replace(/<span class="footer-left"[^>]*>[\s\S]*?<\/span>/, `<span class="footer-left"${styleAttr}>${data.footerLeft}</span>`);
+      }
+      if (data.footerVisitors) raw = raw.replace(/<span class="footer-visitors"[\s\S]*?<\/span>/, data.footerVisitors);
+      if (data.footerUsyd || data.footerUsydStyle) {
+        const styleAttr = data.footerUsydStyle ? ` style="${data.footerUsydStyle.replace(/"/g, '&quot;')}"` : '';
+        raw = raw.replace(/<span class="footer-usyd"[^>]*>[\s\S]*?<\/span>/, `<span class="footer-usyd"${styleAttr}>${data.footerUsyd}</span>`);
+      }
+
+      const saveRes = await fetch(SERVER + '/save', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ filename: targetFile, content: raw })
+      });
+      const saveData = await saveRes.json();
+      if (saveData.ok) syncedCount++;
+    } catch (e) {
+      console.warn('Header/footer sync failed for', targetFile, e);
+    }
+  }));
+
+  if (syncedCount) toast(`✓ Header & footer synced to ${syncedCount} other page${syncedCount>1?'s':''}`, 'ok', 4000);
+
+  // Update the editor's own tab labels to match any renamed nav links
+  syncEditorTabLabels(data.navItems);
+}
+
+function syncEditorTabLabels(navItems) {
+  navItems.forEach(item => {
+    if (!item.id) return;
+    const btn = document.querySelector(`.pbtn[data-navid="${item.id}"]`);
+    if (btn) {
+      const icon = btn.getAttribute('data-icon') || '';
+      const plainLabel = item.label.replace(/<[^>]+>/g, ''); // strip any bold/italic markup for tab text
+      btn.textContent = (icon ? icon + ' ' : '') + plainLabel;
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   PREVIEW — shows the current page exactly as a
+   visitor would see it, with no editor chrome,
+   including any unsaved edits made so far.
+═══════════════════════════════════════════════ */
+function buildStandaloneHTML(pg, styleCSS, extraCSSHTML) {
+  const clone = pg.cloneNode(true);
+
+  // Strip every editor-only attribute, class, and injected UI control
+  clone.querySelectorAll('[contenteditable]').forEach(el => {
+    el.removeAttribute('contenteditable');
+    el.removeAttribute('data-cms');
+    el.removeAttribute('data-draggable');
+    el.classList.remove('editable','selected');
+  });
+  clone.querySelectorAll('.cms-move-handle, .cms-del-btn, .cms-avatar-upload, .cms-crop-btn, .cms-hero-upload, .cms-hero-crop, .cms-hero-remove, .cms-logo-upload, .cms-logo-revert, .cms-yt-btn').forEach(el => el.remove());
+  clone.querySelectorAll('.nav-emblem').forEach(el => { el.removeAttribute('data-has-logo'); el.removeAttribute('data-logo-orig-name'); el.removeAttribute('data-emblem-orig-text'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('.cms-new-textbox').forEach(el => el.classList.remove('cms-new-textbox'));
+  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); el.classList.remove('cms-img'); });
+  clone.querySelectorAll('svg[data-cms-svg]').forEach(el => el.removeAttribute('data-cms-svg'));
+  clone.querySelectorAll('[data-cms-avatar]').forEach(el => { el.removeAttribute('data-cms-avatar'); el.removeAttribute('data-avatar-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-tile]').forEach(el => { el.removeAttribute('data-cms-tile'); el.removeAttribute('data-idx'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-card]').forEach(el => el.removeAttribute('data-cms-card'));
+  clone.querySelectorAll('[data-cms-hero]').forEach(el => { el.removeAttribute('data-cms-hero'); el.removeAttribute('data-hero-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-research-card]').forEach(el => { el.removeAttribute('data-cms-research-card'); el.removeAttribute('data-research-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-replace-existing]').forEach(el => el.removeAttribute('data-replace-existing'));
+  clone.querySelectorAll('img[data-orig-name]').forEach(el => el.removeAttribute('data-orig-name'));
+  clone.querySelectorAll('.cms-hoverable').forEach(el => { el.classList.remove('selected','dragging'); });
+  clone.querySelectorAll('li.dragging').forEach(el => { el.classList.remove('dragging'); el.style.opacity=''; });
+  // Remove the editor's resize handle from the live saved output — visitors
+  // shouldn't be able to resize images/tiles on the public site.
+  clone.querySelectorAll('[style*="resize"]').forEach(el => {
+    el.style.removeProperty('resize');
+    if (el.style.overflow === 'auto' || el.style.overflow === 'hidden') el.style.removeProperty('overflow');
+  });
+
+  const ownStyles = styleCSS ? `\n  <style>\n${styleCSS}\n  </style>` : '';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE Group · University of Sydney</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">${extraCSSHTML || ''}${ownStyles}
+</head>
+<body>
+${clone.innerHTML}
+</body>
+</html>`;
+}
+
+async function previewPage() {
+  if (!serverOnline) {
+    toast('Start the server (START_EDITOR.bat) first — Preview needs it to load styling and images', 'err', 5000);
+    return;
+  }
+  const pg = document.getElementById('pg-'+cur);
+  const html = buildStandaloneHTML(pg, pageStyles[cur], extraCSSLinksHTML(cur));
+
+  try {
+    // Hand the fully-rendered HTML to the local server, which serves it
+    // back at a real URL (/preview) — this guarantees relative paths for
+    // css/style.css and images resolve exactly like any other saved page.
+    const res = await fetch(SERVER + '/preview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ html })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Unknown error');
+
+    const win = window.open(SERVER + '/preview?t=' + Date.now(), '_blank');
+    if (!win) {
+      toast('Pop-up blocked — allow pop-ups for this page to preview', 'err');
+      return;
+    }
+    toast('👁 Preview opened in a new tab (includes unsaved edits)', 'ok');
+  } catch (e) {
+    toast('Preview failed: ' + e.message, 'err');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SAVE — writes directly to disk via server
+═══════════════════════════════════════════════ */
+async function savePage() {
+  const btn = document.getElementById('btn-save');
+  const pg  = document.getElementById('pg-'+cur);
+  const clone = pg.cloneNode(true);
+
+  // If the server is online, upload any drag-and-dropped images (currently
+  // embedded as base64 data URLs) to images/<Tab>/ and swap in real file
+  // paths, so the saved HTML references actual image files, not base64 blobs.
+  if (serverOnline) {
+    const uploadFolder = UPLOAD_FOLDERS[cur] || 'uploads';
+    const dataImgs = [...clone.querySelectorAll('img[src^="data:"]')];
+    if (dataImgs.length) {
+      btn.className = 'bar-btn saving'; btn.textContent = '⏳ Uploading images…';
+      for (const img of dataImgs) {
+        const origName = img.getAttribute('data-orig-name') || (img.alt || 'image') + '.png';
+        const overwrite = img.getAttribute('data-replace-existing') === '1';
+        try {
+          const res = await fetch(SERVER + '/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: origName, dataUrl: img.getAttribute('src'), folder: uploadFolder, overwrite })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            img.setAttribute('src', data.path);
+            img.removeAttribute('data-orig-name');
+            img.removeAttribute('data-replace-existing');
+            // Also update the live (non-cloned) image so it doesn't re-upload next save
+            const liveMatch = pg.querySelector(`img[data-orig-name="${origName}"]`);
+            if (liveMatch) { liveMatch.setAttribute('src', data.path); liveMatch.removeAttribute('data-orig-name'); liveMatch.removeAttribute('data-replace-existing'); }
+          }
+        } catch (e) {
+          console.warn('Image upload failed for', origName, e);
+        }
+      }
+    }
+
+    // Also upload any avatar-sphere headshots or hero banner images (stored as
+    // a CSS background-image data URL rather than an <img> tag). Avatars always
+    // go to images/Headshots/; the hero banner goes to images/<Tab>/ like any
+    // other image on that page.
+    // NOTE: match on ANY style attribute containing a data: URL, not just ones
+    // with the literal substring "background-image" — when an avatar already
+    // has a photo (rendered with the CSS *shorthand* `background: url(...)
+    // center / cover`), setting el.style.backgroundImage on top makes Chrome
+    // re-serialize the whole declaration back into that same shorthand, so a
+    // selector looking only for "background-image" silently misses it, the
+    // upload never happens, and the raw base64 data gets baked into the saved
+    // HTML untouched instead.
+    const bgDataEls = [...clone.querySelectorAll('[style]')]
+      .filter(el => /url\(["']?data:image\//.test(el.getAttribute('style') || ''));
+    if (bgDataEls.length) {
+      btn.className = 'bar-btn saving'; btn.textContent = '⏳ Uploading images…';
+      for (const el of bgDataEls) {
+        const styleAttr = el.getAttribute('style') || '';
+        const match = styleAttr.match(/url\((["']?)(data:image\/[^)"']+)\1\)/);
+        if (!match) continue;
+        const dataUrl = match[2];
+        const isHero = el.hasAttribute('data-cms-hero');
+        const isLogo = el.classList.contains('nav-emblem');
+        const isResearchCard = el.classList.contains('research-card');
+        const folder = (isHero || isResearchCard) ? uploadFolder : (isLogo ? 'Branding' : 'Headshots');
+        const origNameAttr = isHero ? 'data-hero-orig-name' : (isLogo ? 'data-logo-orig-name' : (isResearchCard ? 'data-research-orig-name' : 'data-avatar-orig-name'));
+        const origName = el.getAttribute(origNameAttr) || (isHero ? 'hero.jpg' : (isLogo ? 'logo.png' : (isResearchCard ? 'research.jpg' : 'headshot.png')));
+        const overwrite = el.getAttribute('data-replace-existing') === '1';
+        try {
+          const res = await fetch(SERVER + '/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: origName, dataUrl, folder, overwrite })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            const newStyle = styleAttr.replace(match[0], `url('${data.path}')`);
+            el.setAttribute('style', newStyle);
+            el.removeAttribute(origNameAttr);
+            el.removeAttribute('data-replace-existing');
+            // Also update the live (non-cloned) element so it doesn't re-upload next save
+            const liveMatch = pg.querySelector(`[${origNameAttr}="${origName}"]`);
+            if (liveMatch) {
+              liveMatch.setAttribute('style', (liveMatch.getAttribute('style')||'').replace(match[0], `url('${data.path}')`));
+              liveMatch.removeAttribute(origNameAttr);
+              liveMatch.removeAttribute('data-replace-existing');
+            }
+          }
+        } catch (e) {
+          console.warn('Image upload failed for', origName, e);
+        }
+      }
+    }
+  }
+
+  // Snapshot Gallery/Photos tile data (photo file + caption, keyed by their
+  // data-idx into the data/*.js array) now, while image src's are already
+  // resolved to real server paths — the stripping pass just below removes
+  // data-idx (along with other editor-only attributes) from the clone, so
+  // this must happen first, not after.
+  // Caption text is read from TEXT NODES ONLY (not .textContent), because the
+  // caption span is itself an editable element with move/delete-handle glyphs
+  // (✥ ✕) appended as child elements — .textContent would pull those in too.
+  const readCaptionText = el => !el ? null : [...el.childNodes]
+    .filter(n => n.nodeType === Node.TEXT_NODE)
+    .map(n => n.textContent).join('').trim();
+
+  // Team grid (index.html "#teamGridHome .person-card" / people.html
+  // "#teamGridPeople .member-card") — both pages render it from data/team.js
+  // on load, so an edited name/role/avatar must be written back there too,
+  // same problem as Gallery/Photos/Publications above. The two pages use
+  // different class prefixes and index.html's cards don't visually encode
+  // the "lead" flag at all, so we only touch fields the current page's DOM
+  // actually represents, leaving the rest of each entry exactly as
+  // data/team.js already has it.
+  let teamSyncData = null;
+  if (cur === 'home' || cur === 'people') {
+    const prefix = cur === 'home' ? 'person' : 'member';
+    const gridId = cur === 'home' ? 'teamGridHome' : 'teamGridPeople';
+    teamSyncData = [...clone.querySelectorAll(`#${gridId} .${prefix}-card`)].map(card => {
+      const roleA = card.querySelector(`.${prefix}-role a`);
+      if (roleA) {
+        return {
+          open: true,
+          role: readCaptionText(card.querySelector(`.${prefix}-name`)) || '',
+          linkText: readCaptionText(roleA) || '',
+          link: roleA.getAttribute('href') || '',
+        };
+      }
+      const avatar = card.querySelector(`.${prefix}-avatar`);
+      const avatarStyle = avatar ? (avatar.getAttribute('style') || '') : '';
+      const urlMatch = avatarStyle.match(/url\((["']?)([^)"']+)\1\)/);
+      const hasRealPhoto = urlMatch && !urlMatch[2].startsWith('data:');
+      const stillPendingUpload = urlMatch && urlMatch[2].startsWith('data:');
+      const result = {
+        open: false,
+        name: readCaptionText(card.querySelector(`.${prefix}-name`)) || '',
+        role: readCaptionText(card.querySelector(`.${prefix}-role`)) || '',
+      };
+      if (hasRealPhoto) {
+        result.photoKnown = true;
+        result.photo = urlMatch[2].replace(/^images\/Headshots\//, '');
+      } else if (!stillPendingUpload) {
+        // No url() at all — rendering via a plain color/gradient instead.
+        result.photoKnown = true;
+        result.photo = '';
+        const bgMatch = avatarStyle.match(/background:\s*([^;]+);?/);
+        result.colorKnown = true;
+        result.color = bgMatch ? bgMatch[1].trim() : '';
+        result.initials = readCaptionText(avatar) || '';
+      }
+      // else: still a data: URL at snapshot time (upload didn't resolve in
+      // time, shouldn't normally happen) — leave photo/color/initials alone
+      // rather than risk overwriting good data with something ambiguous.
+
+      // Only people.html's cards encode "lead" visually (a left border) — on
+      // index.html we simply don't touch the existing lead value at all.
+      if (prefix === 'member') {
+        result.leadKnown = true;
+        result.lead = /border-left:\s*3px\s+solid/.test(card.getAttribute('style') || '');
+      }
+      return result;
+    });
+  }
+
+  // Research area cards (index.html only — a flat, always-in-order array,
+  // so simple positional correspondence with data/research.js is enough).
+  let researchSyncData = null;
+  if (cur === 'home') {
+    researchSyncData = [...clone.querySelectorAll('#researchGrid .research-card')].map(card => {
+      const styleAttr = card.getAttribute('style') || '';
+      const match = styleAttr.match(/url\((["']?)([^)"']+)\1\)/);
+      const image = match ? match[2].replace(/^images\/Home\//, '') : '';
+      return {
+        icon: readCaptionText(card.querySelector('.card-icon')) || '',
+        title: readCaptionText(card.querySelector('.card-title')) || '',
+        desc: readCaptionText(card.querySelector('.card-desc')) || '',
+        image,
+      };
+    });
+  }
+
+  let gallerySyncData = null, photosSyncData = null;
+  if (cur === 'gallery') {
+    gallerySyncData = [...clone.querySelectorAll('#mosaic .mtile')].map(tile => {
+      const img = tile.querySelector('img');
+      const cap = tile.querySelector('.mtile-cap');
+      // A YouTube-thumbnail hotlink (img.youtube.com) isn't a real uploaded
+      // file — only treat the src as a local file if it's actually one.
+      const rawSrc = img ? img.getAttribute('src') : '';
+      return {
+        file: rawSrc.startsWith('images/Gallery/') ? rawSrc.replace(/^images\/Gallery\//, '') : '',
+        caption: readCaptionText(cap),
+        youtube: tile.getAttribute('data-youtube') || '',
+      };
+    });
+  }
+  if (cur === 'photos') {
+    photosSyncData = [...clone.querySelectorAll('.masonry-item')].map(tile => {
+      const img = tile.querySelector('img');
+      const cap = tile.querySelector('.caption-text');
+      return {
+        idx: parseInt(tile.getAttribute('data-idx'), 10),
+        file: img ? img.getAttribute('src').replace(/^images\/Photos\//, '') : '',
+        caption: readCaptionText(cap),
+      };
+    });
+  }
+  // Publications thumbnails are matched back to their data/publications.js entry by
+  // a deterministic name (year + slugified title) rather than array position, since
+  // — unlike Gallery/Photos — the list can be filtered/sorted, and only publications
+  // that actually have a thumbnail get one; skip tiles that are still placeholders.
+  let pubsSyncData = null;
+  if (cur === 'pubs') {
+    pubsSyncData = [...clone.querySelectorAll('.pub-thumb')]
+      .map(thumb => {
+        const img = thumb.querySelector('img');
+        if (!img) return null;
+        return {
+          thumbName: thumb.getAttribute('data-thumb-name'),
+          file: img.getAttribute('src').replace(/^images\/Publications\//, ''),
+        };
+      })
+      .filter(Boolean);
+  }
+  // Same idea for Abstracts figures — matched to their data/abstracts.js
+  // entry by a deterministic name (year extracted from "journal" + slugified
+  // title) since only entries that actually have a figure image get one.
+  let abstractsSyncData = null;
+  if (cur === 'abstracts') {
+    abstractsSyncData = [...clone.querySelectorAll('.abstract-figure')]
+      .map(fig => {
+        const img = fig.querySelector('img');
+        if (!img) return null;
+        return {
+          figName: fig.getAttribute('data-fig-name'),
+          file: img.getAttribute('src').replace(/^images\/Abstracts\//, ''),
+        };
+      })
+      .filter(Boolean);
+  }
+
+  // Strip editor-only attributes and injected UI controls before saving
+  clone.querySelectorAll('[contenteditable]').forEach(el => {
+    el.removeAttribute('contenteditable');
+    el.removeAttribute('data-cms');
+    el.removeAttribute('data-draggable');
+    el.classList.remove('editable','selected');
+  });
+  clone.querySelectorAll('.cms-move-handle, .cms-del-btn, .cms-avatar-upload, .cms-crop-btn, .cms-hero-upload, .cms-hero-crop, .cms-hero-remove, .cms-logo-upload, .cms-logo-revert, .cms-yt-btn').forEach(el => el.remove());
+  clone.querySelectorAll('.nav-emblem').forEach(el => { el.removeAttribute('data-has-logo'); el.removeAttribute('data-logo-orig-name'); el.removeAttribute('data-emblem-orig-text'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('.cms-new-textbox').forEach(el => el.classList.remove('cms-new-textbox'));
+  clone.querySelectorAll('img[data-cms-img]').forEach(el => { el.removeAttribute('data-cms-img'); el.removeAttribute('data-orig-name'); el.classList.remove('cms-img'); });
+  clone.querySelectorAll('svg[data-cms-svg]').forEach(el => el.removeAttribute('data-cms-svg'));
+  clone.querySelectorAll('[data-cms-avatar]').forEach(el => { el.removeAttribute('data-cms-avatar'); el.removeAttribute('data-avatar-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-tile]').forEach(el => { el.removeAttribute('data-cms-tile'); el.removeAttribute('data-idx'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-card]').forEach(el => el.removeAttribute('data-cms-card'));
+  clone.querySelectorAll('[data-cms-hero]').forEach(el => { el.removeAttribute('data-cms-hero'); el.removeAttribute('data-hero-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-cms-research-card]').forEach(el => { el.removeAttribute('data-cms-research-card'); el.removeAttribute('data-research-orig-name'); el.classList.remove('avatar-drag-over'); });
+  clone.querySelectorAll('[data-replace-existing]').forEach(el => el.removeAttribute('data-replace-existing'));
+  clone.querySelectorAll('img[data-orig-name]').forEach(el => el.removeAttribute('data-orig-name'));
+  clone.querySelectorAll('.cms-hoverable').forEach(el => { el.classList.remove('selected','dragging'); });
+  clone.querySelectorAll('li.dragging').forEach(el => { el.classList.remove('dragging'); el.style.opacity=''; });
+  // Remove the editor's resize handle from the live saved output — visitors
+  // shouldn't be able to resize images/tiles on the public site.
+  clone.querySelectorAll('[style*="resize"]').forEach(el => {
+    el.style.removeProperty('resize');
+    if (el.style.overflow === 'auto' || el.style.overflow === 'hidden') el.style.removeProperty('overflow');
+  });
+
+  // Re-embed this page's own <style> block (hero/section/card layout rules)
+  // so the saved file keeps its formatting when reopened later.
+  const ownStyles = pageStyles[cur] ? `\n  <style>\n${pageStyles[cur]}\n  </style>` : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE Group · University of Sydney</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">${extraCSSLinksHTML(cur)}${ownStyles}
+</head>
+<body>
+${clone.innerHTML}
+</body>
+</html>`;
+
+  const filename = PAGE_FILES[cur];
+
+  if (serverOnline) {
+    btn.className = 'bar-btn saving'; btn.textContent='⏳ Saving…';
+    try {
+      const res = await fetch(SERVER+'/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename,content:html})});
+      const data = await res.json();
+      if (data.ok) {
+        btn.className='bar-btn saved'; btn.textContent='✓ Saved!';
+        document.getElementById('badge').classList.remove('on');
+        toast('✓ '+filename+' saved to disk','ok');
+        loaded[cur] = false; // mark for reload next visit
+
+        // Gallery tiles are rendered from data/gallery.js on every load, so a
+        // tile photo/caption saved here must be mirrored into that data file too.
+        if (gallerySyncData) {
+          btn.textContent = '🔄 Syncing gallery data…';
+          await syncGalleryData(gallerySyncData);
+        }
+        // Same problem, same fix, for Photos.
+        if (photosSyncData) {
+          btn.textContent = '🔄 Syncing photos data…';
+          await syncPhotosData(photosSyncData);
+        }
+        // ...and for Publications thumbnails.
+        if (pubsSyncData) {
+          btn.textContent = '🔄 Syncing publications data…';
+          await syncPublicationsData(pubsSyncData);
+        }
+        // ...and for Abstracts figures.
+        if (abstractsSyncData) {
+          btn.textContent = '🔄 Syncing abstracts data…';
+          await syncAbstractsData(abstractsSyncData);
+        }
+        // ...and for the Team grid (index.html and people.html both share data/team.js).
+        if (teamSyncData) {
+          btn.textContent = '🔄 Syncing team data…';
+          await syncTeamData(teamSyncData);
+        }
+        // ...and for the Research area cards (index.html only).
+        if (researchSyncData) {
+          btn.textContent = '🔄 Syncing research data…';
+          await syncResearchData(researchSyncData);
+        }
+
+        // Propagate header (logo/nav) and footer to every other page
+        btn.textContent = '🔄 Syncing header/footer…';
+        await syncHeaderFooter(clone, filename);
+        btn.textContent = '✓ Saved!';
+      } else throw new Error(data.error);
+    } catch(e) {
+      btn.className='bar-btn err'; btn.textContent='✗ Error';
+      toast('Save failed: '+e.message,'err');
+    }
+    setTimeout(()=>{btn.className='bar-btn';btn.id='btn-save';btn.textContent='💾 Save page';},3000);
+  } else {
+    // Clipboard fallback
+    try {
+      await navigator.clipboard.writeText(html);
+      btn.className='bar-btn saved'; btn.textContent='✓ Copied!';
+      document.getElementById('badge').classList.remove('on');
+      toast('Copied to clipboard — paste into '+filename,'ok');
+      setTimeout(()=>{btn.className='bar-btn';btn.id='btn-save';btn.textContent='💾 Save page';},3000);
+    } catch { toast('Start server for auto-save','err'); }
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   GALLERY DATA SYNC — the Gallery page renders its tiles from
+   data/gallery.js on every load (see gallery.html's own render()
+   script), not from the static HTML markup. So a tile photo/caption
+   saved in the editor must also be written back into that data file,
+   or it silently reverts to a placeholder the next time the page loads.
+═══════════════════════════════════════════════ */
+async function syncGalleryData(tileData) {
+  if (!tileData || !tileData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/gallery.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/gallery.js', e); return; }
+
+  let GALLERY;
+  try {
+    ({ GALLERY } = new Function(raw + '\nreturn {GALLERY};')());
+  } catch (e) { console.warn('Could not parse data/gallery.js', e); return; }
+
+  if (!Array.isArray(GALLERY) || GALLERY.length !== tileData.length) {
+    // Tile count no longer lines up 1:1 with the data file (added/removed
+    // some other way) — bail out rather than risk mismatching entries.
+    console.warn('Gallery tile count doesn\'t match data/gallery.js — skipping data sync');
+    return;
+  }
+
+  tileData.forEach((t, i) => {
+    GALLERY[i].file = t.file;
+    if (t.caption != null) GALLERY[i].caption = t.caption;
+    GALLERY[i].youtube = t.youtube || '';
+  });
+
+  const esc = s => String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  const entryLines = GALLERY.map(g =>
+    `  { file: "${esc(g.file)}", caption: "${esc(g.caption)}", link: "${esc(g.link)}", youtube: "${esc(g.youtube)}", category: "${esc(g.category)}", icon: "${esc(g.icon)}", size: "${esc(g.size)}" },`
+  ).join('\n');
+
+  const newRaw = raw.replace(/const GALLERY = \[[\s\S]*?\n\];/, `const GALLERY = [\n${entryLines}\n];`);
+  if (newRaw === raw) { console.warn('Could not locate GALLERY array in data/gallery.js — skipping data sync'); return; }
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/gallery.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Gallery photos saved, but data/gallery.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   PHOTOS DATA SYNC — same problem as Gallery: the Photos page
+   renders its masonry grid from data/photos.js on every load,
+   grouped and re-sorted by year, so a tile's DOM position isn't
+   its data-array index — each tile carries a data-idx attribute
+   for that. A tile's photo/caption saved in the editor must be
+   written back to the matching data/photos.js entry, or it
+   reverts to a placeholder next load.
+═══════════════════════════════════════════════ */
+async function syncPhotosData(tileData) {
+  if (!tileData || !tileData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/photos.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/photos.js', e); return; }
+
+  let PHOTOS;
+  try {
+    ({ PHOTOS } = new Function(raw + '\nreturn {PHOTOS};')());
+  } catch (e) { console.warn('Could not parse data/photos.js', e); return; }
+
+  if (!Array.isArray(PHOTOS) || tileData.length !== PHOTOS.length) {
+    // Most likely a category/year filter was active when saving, so the DOM
+    // doesn't hold every tile — bail out rather than risk a bad sync.
+    console.warn('Photos tile count doesn\'t match data/photos.js — skipping data sync');
+    return;
+  }
+
+  // Map each tile back to its original PHOTOS index via data-idx (tiles are
+  // grouped and re-sorted by year in the DOM, so simple DOM order won't do).
+  const byIdx = {};
+  let bad = false;
+  for (const t of tileData) {
+    if (Number.isNaN(t.idx) || byIdx[t.idx]) { bad = true; break; }
+    byIdx[t.idx] = t;
+  }
+  if (bad || !PHOTOS.every((_, i) => byIdx[i])) {
+    console.warn('Photos tile indices don\'t line up with data/photos.js — skipping data sync');
+    return;
+  }
+
+  const arrMatch = raw.match(/const PHOTOS = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate PHOTOS array in data/photos.js — skipping data sync'); return; }
+
+  // Patch each entry object in place (regex on {...} chunks, none of which
+  // nest braces) so per-year comment dividers and formatting are preserved —
+  // unlike Gallery's data file, this one is hand-organised by year.
+  const esc = s => String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  let idx = -1;
+  const newArrText = arrMatch[0].replace(/\{[^{}]*\}/g, chunk => {
+    idx++;
+    const t = byIdx[idx];
+    let updated = chunk.replace(/file:\s*"(?:[^"\\]|\\.)*"/, `file: "${esc(t.file)}"`);
+    if (t.caption != null) updated = updated.replace(/caption:\s*"(?:[^"\\]|\\.)*"/, `caption: "${esc(t.caption)}"`);
+    return updated;
+  });
+
+  const newRaw = raw.slice(0, arrMatch.index) + newArrText + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/photos.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Photos saved, but data/photos.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   PUBLICATIONS THUMBNAIL SYNC — same problem as Gallery/Photos,
+   but matched to its data/publications.js entry by a deterministic
+   name (year + slugified title, exactly mirroring publications.html's
+   own slugify()) instead of array position — the publications list is
+   commonly filtered/sorted, and only entries that actually have a
+   thumbnail need one, so a position-based match would be unreliable.
+═══════════════════════════════════════════════ */
+function pubSlugify(str) {
+  return String(str).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40);
+}
+
+async function syncPublicationsData(thumbData) {
+  if (!thumbData || !thumbData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/publications.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/publications.js', e); return; }
+
+  let PUBLICATIONS;
+  try {
+    ({ PUBLICATIONS } = new Function(raw + '\nreturn {PUBLICATIONS};')());
+  } catch (e) { console.warn('Could not parse data/publications.js', e); return; }
+  if (!Array.isArray(PUBLICATIONS)) return;
+
+  // thumbName -> new filename, from tiles that actually have an image set
+  const byName = {};
+  thumbData.forEach(t => { if (t.thumbName) byName[t.thumbName] = t.file; });
+
+  const arrMatch = raw.match(/const PUBLICATIONS = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate PUBLICATIONS array in data/publications.js — skipping data sync'); return; }
+
+  const esc = s => String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  let idx = -1;
+  const newArrText = arrMatch[0].replace(/\{[^{}]*\}/g, chunk => {
+    idx++;
+    const p = PUBLICATIONS[idx];
+    if (!p) return chunk;
+    const thumbName = `${p.year}-${pubSlugify(p.title)}.jpg`;
+    if (!(thumbName in byName)) return chunk; // this entry's tile wasn't touched — leave as-is
+    const newFile = byName[thumbName];
+    if (/thumbnail:\s*"(?:[^"\\]|\\.)*"/.test(chunk)) {
+      return chunk.replace(/thumbnail:\s*"(?:[^"\\]|\\.)*"/, `thumbnail: "${esc(newFile)}"`);
+    }
+    // no "thumbnail" field yet on this entry — add one, just before the closing brace
+    return chunk.replace(/\s*\}$/, `,\n    thumbnail: "${esc(newFile)}"\n  }`);
+  });
+
+  const newRaw = raw.slice(0, arrMatch.index) + newArrText + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/publications.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Thumbnail saved, but data/publications.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   ABSTRACTS FIGURE SYNC — same approach as Publications
+   thumbnails: matched to its data/abstracts.js entry by a
+   deterministic name (year extracted from "journal" + slugified
+   title, mirroring abstracts.html's own figName logic) rather
+   than array position, since only entries that actually have a
+   figure image get one.
+═══════════════════════════════════════════════ */
+function absFigName(a) {
+  const yearMatch = String(a.journal || '').match(/(\d{4})/);
+  const year = yearMatch ? yearMatch[1] : 'abstract';
+  return `${year}-${pubSlugify(a.title)}.jpg`;
+}
+
+async function syncAbstractsData(figData) {
+  if (!figData || !figData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/abstracts.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/abstracts.js', e); return; }
+
+  let ABSTRACTS;
+  try {
+    ({ ABSTRACTS } = new Function(raw + '\nreturn {ABSTRACTS};')());
+  } catch (e) { console.warn('Could not parse data/abstracts.js', e); return; }
+  if (!Array.isArray(ABSTRACTS)) return;
+
+  // figName -> new filename, from figures that actually have an image set
+  const byName = {};
+  figData.forEach(f => { if (f.figName) byName[f.figName] = f.file; });
+
+  const arrMatch = raw.match(/const ABSTRACTS = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate ABSTRACTS array in data/abstracts.js — skipping data sync'); return; }
+
+  const esc = s => String(s == null ? '' : s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  let idx = -1;
+  const newArrText = arrMatch[0].replace(/\{[^{}]*\}/g, chunk => {
+    idx++;
+    const a = ABSTRACTS[idx];
+    if (!a) return chunk;
+    const figName = absFigName(a);
+    if (!(figName in byName)) return chunk; // this entry's figure wasn't touched — leave as-is
+    const newFile = byName[figName];
+    if (/file:\s*"(?:[^"\\]|\\.)*"/.test(chunk)) {
+      return chunk.replace(/file:\s*"(?:[^"\\]|\\.)*"/, `file: "${esc(newFile)}"`);
+    }
+    // no "file" field yet on this entry (shouldn't normally happen) — add one
+    return chunk.replace(/\s*\}$/, `,\n    file: "${esc(newFile)}"\n  }`);
+  });
+
+  const newRaw = raw.slice(0, arrMatch.index) + newArrText + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/abstracts.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Figure saved, but data/abstracts.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   TEAM DATA SYNC — same problem as Gallery/Photos/Publications:
+   both index.html and people.html render "The Team" grid from
+   data/team.js on every load, so a name/role/avatar edited in
+   the editor must be written back there too, or it reverts on
+   the next load (including just switching tabs and back inside
+   the editor itself, since that re-runs the page's own script).
+
+   The two pages use different CSS class prefixes and only
+   people.html's cards visually encode the "lead" flag (a left
+   border) — index.html's don't show it at all — so each card's
+   snapshot only sets the fields that page's DOM actually
+   represents (marked with a "*Known" flag); anything else is
+   left exactly as data/team.js already has it, rather than
+   risking overwriting good data with a blank guess.
+═══════════════════════════════════════════════ */
+async function syncTeamData(cardData) {
+  if (!cardData || !cardData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/team.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/team.js', e); return; }
+
+  let TEAM;
+  try {
+    ({ TEAM } = new Function(raw + '\nreturn {TEAM};')());
+  } catch (e) { console.warn('Could not parse data/team.js', e); return; }
+
+  if (!Array.isArray(TEAM) || cardData.length < TEAM.length) {
+    // Fewer cards in the DOM than entries in the data file — the grid
+    // probably didn't fully render, or a member was removed some other
+    // way. Bail out rather than risk deleting/mismatching entries.
+    // (cardData.length > TEAM.length is fine — that's a new member added
+    // via "Add team member", handled as a new entry below.)
+    console.warn('Team card count doesn\'t match data/team.js — skipping data sync');
+    return;
+  }
+
+  cardData.forEach((c, i) => {
+    let m = TEAM[i];
+    if (!m) { m = {}; TEAM[i] = m; } // a new card beyond the existing entries
+    if (c.open) {
+      TEAM[i] = { open: true, role: c.role, linkText: c.linkText, link: c.link };
+      return;
+    }
+    m.name = c.name;
+    m.role = c.role;
+    delete m.open;
+    if (c.photoKnown) m.photo = c.photo;
+    if (c.colorKnown) m.color = c.color;
+    if (c.initials != null && c.photoKnown && !c.photo) m.initials = c.initials;
+    if (c.leadKnown) { if (c.lead) m.lead = true; else delete m.lead; }
+  });
+
+  const entryLines = TEAM.map(m => {
+    if (m.open) {
+      return `  { open: true, role: ${JSON.stringify(m.role || '')}, linkText: ${JSON.stringify(m.linkText || '')}, link: ${JSON.stringify(m.link || '')} },`;
+    }
+    const parts = [`name: ${JSON.stringify(m.name || '')}`, `role: ${JSON.stringify(m.role || '')}`];
+    if (m.lead) parts.push('lead: true');
+    parts.push(`photo: ${JSON.stringify(m.photo || '')}`);
+    parts.push(`initials: ${JSON.stringify(m.initials || '')}`);
+    parts.push(`color: ${JSON.stringify(m.color || '')}`);
+    return `  { ${parts.join(', ')} },`;
+  }).join('\n');
+
+  const arrMatch = raw.match(/const TEAM = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate TEAM array in data/team.js — skipping data sync'); return; }
+
+  const newRaw = raw.slice(0, arrMatch.index) + `const TEAM = [\n${entryLines}\n];` + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/team.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Team saved, but data/team.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   RESEARCH AREA CARDS SYNC — index.html renders these from
+   data/research.js on every load, so a card's icon/title/
+   description edited in the editor must be written back there
+   too, same problem as Gallery/Photos/Team above. It's a flat,
+   always-in-order array with no filtering, so simple positional
+   correspondence with data/research.js is enough (adding/
+   removing a card is done in the data file, not the editor).
+═══════════════════════════════════════════════ */
+async function syncResearchData(cardData) {
+  if (!cardData || !cardData.length) return;
+
+  let raw;
+  try {
+    raw = await (await fetch(SERVER + '/data/research.js?nocache=' + Date.now())).text();
+  } catch (e) { console.warn('Could not fetch data/research.js', e); return; }
+
+  let RESEARCH;
+  try {
+    ({ RESEARCH } = new Function(raw + '\nreturn {RESEARCH};')());
+  } catch (e) { console.warn('Could not parse data/research.js', e); return; }
+
+  if (!Array.isArray(RESEARCH) || RESEARCH.length !== cardData.length) {
+    console.warn('Research card count doesn\'t match data/research.js — skipping data sync');
+    return;
+  }
+
+  cardData.forEach((c, i) => {
+    RESEARCH[i].icon = c.icon;
+    RESEARCH[i].title = c.title;
+    RESEARCH[i].desc = c.desc;
+    RESEARCH[i].image = c.image || '';
+  });
+
+  const entryLines = RESEARCH.map(r =>
+    `  { icon: ${JSON.stringify(r.icon || '')}, title: ${JSON.stringify(r.title || '')}, desc: ${JSON.stringify(r.desc || '')}, image: ${JSON.stringify(r.image || '')} },`
+  ).join('\n');
+
+  const arrMatch = raw.match(/const RESEARCH = \[[\s\S]*?\n\];/);
+  if (!arrMatch) { console.warn('Could not locate RESEARCH array in data/research.js — skipping data sync'); return; }
+
+  const newRaw = raw.slice(0, arrMatch.index) + `const RESEARCH = [\n${entryLines}\n];` + raw.slice(arrMatch.index + arrMatch[0].length);
+  if (newRaw === raw) return; // nothing actually changed
+
+  try {
+    const res = await fetch(SERVER + '/save', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ filename: 'data/research.js', content: newRaw })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+  } catch (e) {
+    toast('Research cards saved, but data/research.js sync failed: ' + e.message, 'err', 5000);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+function toast(msg, type='', ms=3500) {
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.className='on'+(type?' '+type:'');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.className='',ms);
+}
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+window.addEventListener('load', async () => {
+  await checkServer();
+  await loadPage('home');
+  setTimeout(()=>toast('Hover any element for ✥ move / ✕ delete · Ctrl+Z to undo'),800);
+});
+</script>
+</body>
+</html>
