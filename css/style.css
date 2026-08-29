@@ -1,5 +1,5 @@
 /* ============================================
-   ICE Group — Interfacial Chemical Engineering
+   ICE Laboratory — Interfacial Chemical Engineering
    University of Sydney
    Shared Stylesheet
    ============================================ */
@@ -233,7 +233,7 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
      via generated content rather than truncating mid-word. */
   .nav-name { font-size: 0; }
   .nav-name::before {
-    content: "USYD";
+    content: "University of Sydney";
     font-size: 14px; font-weight: 500;
     color: var(--ice-bright); letter-spacing: 0.3px;
   }
