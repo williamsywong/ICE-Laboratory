@@ -279,6 +279,11 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   /* Profile header (people.html) */
   .pi-header { flex-direction: column !important; align-items: center !important; text-align: center; }
   .pi-badges, .social-icons { justify-content: center; }
+  /* Social icon row (Scholar/ResearchGate/Publons/LinkedIn/YouTube/ORCID)
+     was wrapping to two rows — shrink the icons and the gap between
+     them so all six comfortably fit on one line instead. */
+  .social-icons { flex-wrap: nowrap !important; gap: 0.4rem !important; }
+  .social-icon img { height: 15px !important; }
   .tab-nav { overflow-x: auto; flex-wrap: nowrap !important; padding: 0 1rem; }
 
   /* Publication list card & stat/filter rows */
