@@ -229,9 +229,13 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
      fixed height other pages rely on for their sticky "top: 64px"
      toolbars — only the dropdown panel below it is new. */
   nav { padding: 0 1rem; }
-  .nav-name {
-    max-width: 42vw; overflow: hidden; text-overflow: ellipsis;
-    white-space: nowrap; display: block;
+  /* Full lockup doesn't fit in portrait — swap the text for "USYD"
+     via generated content rather than truncating mid-word. */
+  .nav-name { font-size: 0; }
+  .nav-name::before {
+    content: "USYD";
+    font-size: 14px; font-weight: 500;
+    color: var(--ice-bright); letter-spacing: 0.3px;
   }
   .nav-toggle { display: flex; }
   .nav-links {
@@ -252,10 +256,20 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   .hero-title { font-size: 1.9rem !important; }
   .hero-desc { max-width: 100% !important; font-size: 13.5px !important; text-align: left !important; }
 
-  /* Item counts under the hero (news/publications/alumni stat strips) */
-  .stat-num, .pub-stat-num { font-size: 1.15rem !important; }
-  .stat-label, .pub-stat-label { font-size: 9.5px !important; letter-spacing: 1px !important; }
-  .stats-strip, .pub-stats { padding: 1.25rem !important; gap: 1.25rem !important; }
+  /* Item counts under the hero (news/publications/alumni stat strips) —
+     band height roughly halved, and number/label sizes unified so all
+     three pages' counters match exactly. */
+  .stat-num, .pub-stat-num { font-size: 0.95rem !important; line-height: 1.2 !important; }
+  .stat-label, .pub-stat-label { font-size: 8px !important; letter-spacing: 0.8px !important; }
+
+  /* Group photo and USYD logo on the homepage (index.html) are placed
+     with drag-and-drop pixel coordinates that only make sense on a wide
+     desktop layout — hide them on phones rather than have them float
+     awkwardly over other content. */
+  img[src*="20260817_Group_Logo"],
+  img[src*="USYD_2.png"] {
+    display: none !important;
+  }
 
   .research-grid, .people-grid, .news-grid,
   .form-row, .mosaic { grid-template-columns: 1fr !important; }
@@ -269,10 +283,28 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   /* Publication list card & stat/filter rows */
   .pub-card { flex-direction: column !important; gap: 0.75rem !important; }
   .stats-strip, .pub-stats {
-    flex-wrap: wrap !important; gap: 1.5rem !important; justify-content: center !important;
-    text-align: center;
+    flex-wrap: wrap !important; gap: 0.75rem 1.25rem !important; justify-content: center !important;
+    padding: 0.6rem 1rem !important; text-align: center;
   }
-  .controls-bar { padding: 0.85rem 1.25rem; }
+
+  /* Category/year filter rows (gallery, news, photos): keep to a single
+     scrollable line instead of wrapping, with a consistent, compact
+     type size across all three pages. */
+  .controls-bar {
+    padding: 0.6rem 1.25rem;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .controls-bar::-webkit-scrollbar { display: none; }
+  .controls-bar label,
+  .controls-bar .filter-btn,
+  .controls-bar .sort-select,
+  .controls-bar .sep { flex-shrink: 0; }
+  .controls-bar .controls-spacer { display: none; }
+  .controls-bar label { font-size: 10px !important; }
+  .filter-btn { font-size: 11px !important; padding: 0.28rem 0.7rem !important; }
+  .sort-select { font-size: 11px !important; }
 
   /* Justified text reads poorly in a narrow column */
   .abstract-title, .abstract-text, .about-text p,

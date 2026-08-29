@@ -94,6 +94,9 @@
       <span class="nav-name" style="position: relative;">ICE Laboratory · University of Sydney</span>
     </a>
   </div>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="const n=this.closest('nav'); n.classList.toggle('nav-open'); this.setAttribute('aria-expanded', n.classList.contains('nav-open'));">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li data-page="research"><a href="index.html#research">Research</a></li>
     <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
