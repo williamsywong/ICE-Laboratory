@@ -279,7 +279,10 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   /* Profile header (people.html) */
   .pi-header { flex-direction: column !important; align-items: center !important; text-align: center; }
   .pi-badges, .social-icons { justify-content: center; }
-  .pi-name { font-size: 1.4rem !important; }
+  .pi-name {
+    font-size: clamp(0.95rem, 5.5vw, 1.15rem) !important;
+    letter-spacing: -0.2px;
+  }
   /* Social icon row (Scholar/ResearchGate/Publons/LinkedIn/YouTube/ORCID)
      was wrapping to two rows — shrink the icons and the gap between
      them so all six comfortably fit on one line instead. */
