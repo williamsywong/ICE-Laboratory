@@ -6,8 +6,18 @@
   <title>ICE Group · University of Sydney</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
+
+
+
+
 
     .page-hero {
       background: var(--ice-deep);
@@ -139,9 +149,11 @@
   
   
   
+  
   </style>
 </head>
 <body>
+
 
 
 
@@ -159,15 +171,15 @@
     </a>
   </div>
   <ul class="nav-links">
-    <li data-page="research"><a href="index.html#research">Research</a></li>
-    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
-    <li data-page="publications"><a href="publications.html">Publications</a></li>
-    <li data-page="people"><a href="people.html">People</a></li>
-    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news"><a href="news.html" class="active">News</a></li>
-    <li data-page="photos"><a href="photos.html">Photos</a></li>
-    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
+    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
+    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
+    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news" class="" style="position: relative;"><a href="news.html" class="active">News</a></li>
+    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
+    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -195,7 +207,7 @@
 
 <div class="news-wrap">
   <div class="news-grid" id="newsGrid">
-        <div class="news-card featured" data-cms-resize-tracked="1" style="position: relative;">
+        <div class="news-card featured" data-news-key="2026-08-25-phd-positions-open" data-cms-resize-tracked="1" style="position: relative;">
           <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
           <div class="news-card-body">
             <div class="news-card-meta">
@@ -203,11 +215,11 @@
               <span class="news-date-str" style="position: relative;">25 Aug 2026</span>
             </div>
             <h3 class="news-card-title" style="position: relative;">PhD positions open</h3>
-            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">link</a>.</p>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br><b> 2 Fully-funded positions available. </b><br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">Doctor of Philosophy (Engineering)</a></p>
             <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
           </div>
         </div>
-        <div class="news-card" data-cms-resize-tracked="1" style="position: relative;">
+        <div class="news-card" data-news-key="2026-08-01-the-interfacial-chemical-engineering-ice" data-cms-resize-tracked="1" style="position: relative;">
           <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
           <div class="news-card-body">
             <div class="news-card-meta">
@@ -239,6 +251,16 @@
   function tagStyle(tag) {
     const c = NEWS_TAG_COLORS[tag] || { bg: '#f0f0f0', color: '#555' };
     return `background:${c.bg};color:${c.color}`;
+  }
+
+  // Deterministic key for a news item (date + slugified title) — must
+  // exactly match newsKeyFor() in editor.html, since that's how a card
+  // edited in the Site Editor gets matched back to this entry when saving.
+  function slugify(str) {
+    return String(str).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40);
+  }
+  function newsKeyFor(item) {
+    return `${item.date}-${slugify(item.title)}`;
   }
 
   // Full years elapsed since 1 Feb 2027 (when the lab's "years running" count
@@ -312,7 +334,7 @@
         ? `<a class="news-card-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`
         : '';
       return `
-        <div class="news-card ${featured}">
+        <div class="news-card ${featured}" data-news-key="${newsKeyFor(item)}">
           ${imgEl}
           <div class="news-card-body">
             <div class="news-card-meta">
@@ -350,6 +372,7 @@
   renderStats();
   renderGrid();
 </script>
+
 
 
 

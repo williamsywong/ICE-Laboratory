@@ -30,7 +30,7 @@ const NEWS = [
     date: "2026-08-25",
     tag: "Recruitment",
     title: "PhD positions open",
-    body: "We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br> 2 Fully-funded positions available. <br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: Doctor of Philosophy (Engineering)",
+    body: "We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br><b> 2 Fully-funded positions available. </b><br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href=\"https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html\" target=\"_blank\" rel=\"noopener\">Doctor of Philosophy (Engineering)</a>",
     link: "mailto:william.swong@sydney.edu.au",
     linkText: "Express interest",
     image: ""
@@ -40,7 +40,7 @@ const NEWS = [
     date: "2026-08-01",
     tag: "Milestone",
     title: "The Interfacial Chemical Engineering (ICE) Laboratory is officially established at the University of Sydney",
-    body: "William S. Y. Wong joins the School of Chemical & Biomolecular Engineering as Lecturer and Group Leader.",
+    body: "William S. Y. Wong joins the School of Chemical &amp; Biomolecular Engineering as Lecturer and Group Leader.",
     link: "",
     linkText: "",
     image: ""
