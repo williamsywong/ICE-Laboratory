@@ -1,5 +1,5 @@
 /* ============================================
-   ICE Laboratory — Interfacial Chemical Engineering
+   ICE Group — Interfacial Chemical Engineering
    University of Sydney
    Shared Stylesheet
    ============================================ */
@@ -229,8 +229,9 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
      fixed height other pages rely on for their sticky "top: 64px"
      toolbars — only the dropdown panel below it is new. */
   nav { padding: 0 1rem; }
-  /* Full lockup doesn't fit in portrait — swap the text for "USYD"
-     via generated content rather than truncating mid-word. */
+  /* The logo emblem carries the "ICE" branding on its own — drop the
+     "ICE Laboratory ·" prefix on mobile and keep just the institution
+     name, via generated content rather than truncating mid-word. */
   .nav-name { font-size: 0; }
   .nav-name::before {
     content: "University of Sydney";
@@ -297,10 +298,11 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
     -ms-overflow-style: none; scrollbar-width: none;
   }
   .controls-bar::-webkit-scrollbar { display: none; }
-  .controls-bar label,
-  .controls-bar .filter-btn,
-  .controls-bar .sort-select,
-  .controls-bar .sep { flex-shrink: 0; }
+  /* Every direct child (labels, the "sep" divider, and — on photos.html
+     — the #categoryFilters / #yearFilters wrapper divs) must refuse to
+     shrink, or the wrappers compress and their buttons start
+     overlapping each other instead of the row simply scrolling. */
+  .controls-bar > * { flex-shrink: 0; }
   .controls-bar .controls-spacer { display: none; }
   .controls-bar label { font-size: 10px !important; }
   .filter-btn { font-size: 11px !important; padding: 0.28rem 0.7rem !important; }
