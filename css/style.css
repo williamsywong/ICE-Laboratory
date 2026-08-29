@@ -187,7 +187,37 @@ html, body { overflow-x: hidden; }
   .masonry { columns: 2 !important; }
   .industry-grid, .members-grid, .collab-grid, .timeline-grid { gap: 0.85rem !important; }
   footer { padding: 1.5rem; }
+
+  /* Grid/flex items default to a min-width based on their largest
+     un-shrinkable child (here, the editor's fixed-pixel text elements).
+     That "blowout" is what was squeezing the hero: the row above still
+     tries to fit a ~630px-wide child even though we capped that child's
+     own max-width. Letting the item itself shrink below its content
+     size is what actually makes the column narrow to fit the phone. */
+  .hero-grid > *, .contact-inner > *, .about-grid > *, .pi-header > * {
+    min-width: 0;
+  }
 }
+
+/* ---- Hamburger menu button (built with CSS only; hidden on desktop) ---- */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 34px; height: 34px;
+  background: none; border: none; cursor: pointer; padding: 0;
+  flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block; width: 20px; height: 2px;
+  background: rgba(255,255,255,0.85); border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+nav.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---- PHONE (≤640px) ---- */
 @media (max-width: 640px) {
@@ -195,21 +225,37 @@ html, body { overflow-x: hidden; }
   .section-title { font-size: 1.5rem !important; }
   .section-lead { max-width: 100% !important; }
 
-  /* Nav stays the same fixed height other pages rely on for their
-     sticky "top: 64px" toolbars — the link list scrolls horizontally
-     instead of wrapping or overflowing the screen. */
+  /* Nav collapses into a hamburger menu. Nav itself stays the same
+     fixed height other pages rely on for their sticky "top: 64px"
+     toolbars — only the dropdown panel below it is new. */
   nav { padding: 0 1rem; }
-  .nav-name { display: none; }
-  .nav-links {
-    gap: 1.1rem; flex-wrap: nowrap; overflow-x: auto; max-width: 60vw;
-    -ms-overflow-style: none; scrollbar-width: none;
+  .nav-name {
+    max-width: 42vw; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; display: block;
   }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-links li { flex-shrink: 0; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute; top: 64px; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    max-width: none; max-height: 75vh; overflow-y: auto;
+    background: rgba(10,22,40,0.98); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(91,184,232,0.15);
+  }
+  nav.nav-open .nav-links { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 13px; }
 
   .hero, .page-hero { padding: 4.5rem 1.25rem 3rem; }
-  .hero-title { font-size: 2.1rem !important; }
-  .hero-desc { max-width: 100% !important; text-align: left !important; }
+  .hero-eyebrow { font-size: 10px !important; letter-spacing: 1.5px !important; }
+  .hero-subtitle { font-size: 11px !important; letter-spacing: 1px !important; padding-bottom: 1.25rem !important; }
+  .hero-title { font-size: 1.9rem !important; }
+  .hero-desc { max-width: 100% !important; font-size: 13.5px !important; text-align: left !important; }
+
+  /* Item counts under the hero (news/publications/alumni stat strips) */
+  .stat-num, .pub-stat-num { font-size: 1.15rem !important; }
+  .stat-label, .pub-stat-label { font-size: 9.5px !important; letter-spacing: 1px !important; }
+  .stats-strip, .pub-stats { padding: 1.25rem !important; gap: 1.25rem !important; }
 
   .research-grid, .people-grid, .news-grid,
   .form-row, .mosaic { grid-template-columns: 1fr !important; }
