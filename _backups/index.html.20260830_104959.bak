@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICE Group · University of Sydney</title>
+  <title>ICE Laboratory · University of Sydney</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
-
-
-
 
 
     /* ---- HERO ---- */
@@ -150,15 +150,10 @@
     .form-submit:hover { background: var(--ice-bright); }
   
 
-    
-  
-  
-  </style>
+    </style>
+<link rel="icon" type ="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
-
-
-
 
 
 
@@ -275,7 +270,7 @@
       <h3 class="card-title" style="position: relative;">Sustainable Processing</h3>
       <p class="card-desc" style="position: relative;">Developing energy-passive and sustainable interfacial technologies for water treatment, pollutant removal, and resource-efficient processing.</p>
     </div></div>
-<span class="cms-hoverable" style="position: absolute; left: 770px; top: 86px; display: inline-block; z-index: 5;"></span><span class="cms-hoverable" style="position: absolute; left: 735px; top: 73px; display: inline-block; z-index: 5;"><img src="images/Home/20260817_Group_Logo-removebg_1_1.png" alt="20260817_Group_Logo-removebg_1.png" class="" style="width: 316px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></span></section>
+<span class="cms-hoverable" style="position: absolute; left: 770px; top: 86px; display: inline-block; z-index: 5;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 774px; top: 99px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -48px; top: -30px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><img src="images/Home/20260817_Group_Logo-removebg_2.png" alt="20260817_Group_Logo-removebg.png" class="" style="width: 326px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span></section>
 
 <!-- PEOPLE -->
 <div class="full-width-band">
@@ -306,7 +301,7 @@
       </div></div>
   <p style="margin-top: 1.5rem; font-size: 13px; color: var(--text-muted); position: relative; width: 1007px; height: 66px;" class="">Recruitment takes place on a rolling basis and is open to self-funded positions.&nbsp;<br><br>Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">link</a>.<br></p>
 
-<span class="cms-hoverable" style="position: absolute; left: 265px; top: 919px; display: inline-block; z-index: 5;"><img src="images/Home/USYD_1.png" alt="USYD.png" class="" style="width: 251px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></span></section></div>
+<span class="cms-hoverable" style="position: absolute; left: 279px; top: 921px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 0px; top: 6px;"><img src="images/Home/USYD_2.png" alt="USYD.png" style="width: 233px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span></section></div>
 
 <!-- CONTACT -->
 <div class="contact-band" id="contact" style="position: relative;">
@@ -317,7 +312,7 @@
       <p class="section-lead" style="position: relative;">We welcome enquiries from prospective students, collaborators, and industry partners.</p>
       <div class="contact-detail">
         <div class="contact-icon">📍</div>
-        <div><span class="contact-text-label" style="position: relative;">Address</span><span class="contact-text-val" style="position: relative;"><div style="text-align: right;">School of Chemical &amp; Biomolecular Engineering</div>The University of Sydney, NSW 2006</span></div>
+        <div><span class="contact-text-label" style="position: relative;">Address</span><span class="contact-text-val" style="position: relative;">School of Chemical &amp; Biomolecular Engineering<br>The University of Sydney, NSW 2006</span></div>
       </div>
       <div class="contact-detail">
         <div class="contact-icon">✉️</div>
@@ -406,10 +401,7 @@
 
 
 
-<span class="cms-hoverable" style="position: relative; display: inline-block; left: -7px; top: 85px;"></span>
-
-
-
+<span class="cms-hoverable" style="position: absolute; left: 1118px; top: 766px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 0px; top: 1px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -7px; top: 85px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
 
 
 
