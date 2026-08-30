@@ -266,9 +266,13 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   /* Group photo and USYD logo on the homepage (index.html) are placed
      with drag-and-drop pixel coordinates that only make sense on a wide
      desktop layout — hide them on phones rather than have them float
-     awkwardly over other content. */
-  img[src*="20260817_Group_Logo"],
-  img[src*="USYD_2.png"] {
+     awkwardly over other content.
+     Matched on the stable part of the filename only (not the full name
+     with its numeric suffix) — the editor appends a new _1/_2/etc. every
+     time the image is re-uploaded, so pinning to one exact suffix breaks
+     the very next time that image gets replaced. */
+  img[src*="Group_Logo"],
+  img[src*="/Home/USYD"] {
     display: none !important;
   }
 
@@ -325,4 +329,27 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
     flex-direction: column !important; gap: 0.6rem;
     text-align: center; padding: 1.5rem;
   }
+}
+
+/* ============================================
+   CONTENT-CORRECTNESS FIXES (not viewport-specific —
+   these are genuinely wrong at any screen size, so they
+   apply everywhere rather than only inside a media query)
+   ============================================ */
+
+/* The homepage address ended up with an inline text-align:right on just
+   its first line (likely an accidental editor click), so it read as
+   indented relative to the second line beneath it. Address text should
+   always be left-aligned; !important is needed to beat that inline style. */
+.contact-text-val, .contact-text-val div { text-align: left !important; }
+
+/* Long unbroken strings (URLs, emails) don't wrap by default — CSS only
+   breaks at word boundaries unless told otherwise — so they silently
+   overflow their container and get clipped instead of wrapping onto a
+   second line. Affects the People page's info rows (website, email, etc.)
+   and the homepage contact block equally. */
+.info-val, .info-val a,
+.contact-text-val, .contact-text-val a {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
