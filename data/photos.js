@@ -22,7 +22,7 @@ const PHOTOS = [
   
   
   {
-    file: "Australia_Coin.jpg?v=Australia_Coin.jpg",
+    file: "Australia_Coin.jpg",
     caption: "Interfacial Chemical Engineering (ICE) Laboratory Established, University of Sydney, 2026",
     year: 2026,
     category: "event",

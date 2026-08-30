@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICE Laboratory · University of Sydney</title>
+  <title>ICE Group · University of Sydney</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <style>
+
 
     /* ---- PAGE HEADER ---- */
     .page-hero {
@@ -190,12 +190,12 @@
   
   
   
+  
   </style>
-
-<link rel="icon" type ="image/png" href="images/Branding/favicon.png">
-
+<link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
+
 
 
 
@@ -211,15 +211,15 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li data-page="research"><a href="index.html#research">Research</a></li>
-    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
-    <li data-page="publications"><a href="publications.html" class="active">Publications</a></li>
-    <li data-page="people"><a href="people.html">People</a></li>
-    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news"><a href="news.html">News</a></li>
-    <li data-page="photos"><a href="photos.html">Photos</a></li>
-    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
+    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications" class="" style="position: relative;"><a href="publications.html" class="active">Publications</a></li>
+    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
+    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news" class="" style="position: relative;"><a href="news.html">News</a></li>
+    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
+    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -233,7 +233,7 @@
 </div>
 
 <!-- STATS -->
-<div class="pub-stats" id="pubStats"><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">40</span><span class="pub-stat-label" style="position: relative;">Total publications</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">36</span><span class="pub-stat-label" style="position: relative;">Research articles</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">3</span><span class="pub-stat-label" style="position: relative;">Reviews</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">12</span><span class="pub-stat-label" style="position: relative;">Years of PI experience</span></div></div>
+<div class="pub-stats" id="pubStats"><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">40</span><span class="pub-stat-label" style="position: relative;">Total publications</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">36</span><span class="pub-stat-label" style="position: relative;">Research articles</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">3</span><span class="pub-stat-label" style="position: relative;">Reviews</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">12</span><span class="pub-stat-label" style="position: relative;">Years of PI's experience</span></div></div>
 
 <!-- FILTER CONTROLS -->
 <div class="controls-bar">
@@ -609,7 +609,7 @@
           <div class="year-label">2019 <span class="year-count" style="position: relative;">1 publication</span></div>
           
           <div class="pub-card highlighted">
-            <div class="pub-thumb" data-thumb-name="2019-surface-chemistry-enhancements-for-the-t.jpg" style="position: relative;"><img src="images/Publications/2019-surface-chemistry-enhancements-for-the-t.jpg-cropped.png-cropped.png" alt="Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids" loading="lazy"></div>
+            <div class="pub-thumb" data-thumb-name="2019-surface-chemistry-enhancements-for-the-t.jpg" style="position: relative;"><img src="images/Publications/2019-surface-chemistry-enhancements-for-the-t.jpg-cropped.png-cropped.png-cropped.png-cropped.png" alt="Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids" loading="lazy"></div>
             <div class="pub-type-badge">
               <span class="type-pill type-article" style="position: relative;">Article</span>
             </div>
@@ -946,11 +946,12 @@
 
 
 
-<span class="cms-hoverable" style="position: absolute; left: 766px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -5px; top: 91px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -3px; top: -89px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: 0px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 850px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 87px; top: 0px;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -6px; top: 3px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 933px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -82px; top: 0px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -6px; top: 91px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: -89px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 1018px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 3px; top: 0px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 7px; top: 94px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -5px; top: -95px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -6px; top: 4px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 1101px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 4px; top: 0px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 6px; top: 93px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -3px; top: -95px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -4px; top: 5px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-hoverable" style="position: absolute; left: 1185px; top: 361px; display: inline-block; z-index: 5;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 5px; top: 0px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: 4px; top: 93px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -1px; top: -94px;"><span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: 4px;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
+<span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: 0px;"></span><span class="cms-hoverable" style="position: relative; display: inline-block; left: -6px; top: 3px;"></span><span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: -89px;"></span><span class="cms-hoverable" style="position: relative; display: inline-block; left: -6px; top: 4px;"></span><span class="cms-hoverable" style="position: relative; display: inline-block; left: -4px; top: 5px;"></span><span class="cms-hoverable" style="position: relative; display: inline-block; left: -2px; top: 4px;"></span>
 
 
 
-<span class="cms-hoverable" style="position: absolute; left: 843px; top: 363px; display: inline-block; z-index: 5;"><span class="cms-resize-handle" title="Drag to resize (aspect ratio is kept)"></span></span>
+<span class="cms-hoverable" style="position: absolute; left: 843px; top: 363px; display: inline-block; z-index: 5;"></span>
+
 
 
 </body>

@@ -17,23 +17,13 @@
 // ============================================================
 
 const PHOTOS = [
-  
 
 // ── 2026 ──────────────────────────────────────────────────
   
-
-  {
-    file: "People-WW.jpg_v_People-WW.jpg?v=People-WW.jpg_v_People-WW.jpg?v=People-WW.jpg_v_People-WW.jpg%3Fv%3DPeople-WW.jpg_v_People-WW.jpg",
-    caption: "Interfacial Chemical Engineering Laboratory and Okinawa Institute of Science and Technology Collaborators at Okinawa Colloids, Okinawa, 2026",
-    year: 2028,
-    category: "conference",
-    wide: true,
-    tall: false
-  },
   
   {
-    file: "placeholder-group-wide.jpg_v_placeholder-group-wide.jpg?v=placeholder-group-wide.jpg_v_placeholder-group-wide.jpg?v=placeholder-group-wide.jpg_v_placeholder-group-wide.jpg%3Fv%3Dplaceholder-group-wide.jpg_v_placeholder-group-wide.jpg",
-    caption: "Interfacial Chemical Engineering Laboratory Established, University of Sydney, 2026",
+    file: "Australia_Coin.jpg?v=Australia_Coin.jpg",
+    caption: "Interfacial Chemical Engineering (ICE) Laboratory Established, University of Sydney, 2026",
     year: 2026,
     category: "event",
     wide: true,
