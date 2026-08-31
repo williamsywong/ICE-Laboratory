@@ -183,7 +183,7 @@
 </div>
 
 <!-- STATS (computed from data/alumni.js) -->
-<div class="stats-strip" id="statsStrip"><div class="stat-item"><span class="stat-num" style="position: relative;">0</span><span class="stat-label" style="position: relative;">Postdocs supervised</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">PhD students</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">UG / Masters students</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">Institutions</span></div></div>
+<div class="stats-strip" id="statsStrip"><div class="stat-item"><span class="stat-num" style="position: relative;">0</span><span class="stat-label" style="position: relative;">Postdocs supervised</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">PhD students</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">UG / Masters students</span></div><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">Home Institutions</span><span class="stat-label" style="position: relative;">Collaborator Institutions</span></div></div>
 
 <!-- ALUMNI -->
 <div class="alumni-section">
@@ -351,12 +351,13 @@
 
   // Stats strip — computed live from the data so it never goes stale
   const countByLevel = lvl => ALUMNI.filter(p => p.level === lvl).length;
-  const institutionCount = new Set(ALUMNI.map(p => p.institution).filter(Boolean)).size;
+  const CinstitutionCount = new Set(COLLABORATOR_NETWORK.map(p => p.institution).filter(Boolean)).size;
   const stats = [
     { num: countByLevel('Postdoc'), label: 'Postdocs supervised' },
     { num: countByLevel('PhD'), label: 'PhD students' },
     { num: countByLevel('Masters') + countByLevel('Bachelor'), label: 'UG / Masters students' },
-    { num: institutionCount, label: 'Institutions' },
+    { num: 6, label: 'Home Institutions' },
+    { num: CinstitutionCount, label: 'Collab. Institutions' },
   ];
   document.getElementById('statsStrip').innerHTML = stats.filter(s => s.num > 0).map(s =>
     `<div class="stat-item"><span class="stat-num">${s.num}</span><span class="stat-label">${s.label}</span></div>`

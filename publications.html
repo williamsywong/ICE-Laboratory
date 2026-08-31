@@ -9,6 +9,8 @@
   <style>
 
 
+
+
     /* ---- PAGE HEADER ---- */
     .page-hero {
       background: var(--ice-deep);
@@ -78,10 +80,10 @@
     .pub-stats {
       background: var(--ice-mid);
       padding: 1.5rem 3rem;
-      display: flex; gap: 3rem; justify-content: flex-start;
+      display: flex; justify-content: center; gap: 4rem;
       align-items: center;
     }
-    .pub-stat { text-align: left; }
+    .pub-stat { text-align: center; }
     .pub-stat-num {
       font-family: 'Playfair Display', serif;
       font-size: 1.6rem; font-weight: 600;
@@ -191,10 +193,14 @@
   
   
   
+  
+  
   </style>
 <link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
+
+
 
 
 
@@ -233,7 +239,7 @@
 </div>
 
 <!-- STATS -->
-<div class="pub-stats" id="pubStats"><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">40</span><span class="pub-stat-label" style="position: relative;">Total publications</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">36</span><span class="pub-stat-label" style="position: relative;">Research articles</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">3</span><span class="pub-stat-label" style="position: relative;">Reviews</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">12</span><span class="pub-stat-label" style="position: relative;">Years of PI's experience</span></div></div>
+<div class="pub-stats" id="pubStats"><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">41</span><span class="pub-stat-label" style="position: relative;">Publications</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">37</span><span class="pub-stat-label" style="position: relative;">Articles</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">3</span><span class="pub-stat-label" style="position: relative;">Reviews</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">14</span><span class="pub-stat-label" style="position: relative;">Years of PI's experience</span></div><div class="pub-stat"><span class="pub-stat-num" style="position: relative;">1</span><span class="pub-stat-label" style="position: relative;">Group Years</span></div></div>
 
 <!-- FILTER CONTROLS -->
 <div class="controls-bar">
@@ -253,6 +259,22 @@
 
 <!-- PUBLICATION LIST -->
 <div class="pub-section" id="pubList">
+        <div class="year-group">
+          <div class="year-label">2028 <span class="year-count" style="position: relative;">1 publication</span></div>
+          
+          <div class="pub-card highlighted">
+            <div class="pub-thumb" data-thumb-name="2028-rolling-and-impacting-caustic-drops-on-s.jpg" style="position: relative;"><img src="images/Publications/2026-rolling-and-impacting-caustic-drops-on-s.jpg-cropped.png" alt="Rolling and Impacting Caustic Drops on Super Liquid Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation" loading="lazy"></div>
+            <div class="pub-type-badge">
+              <span class="type-pill type-article" style="position: relative;">Article</span>
+            </div>
+            <div class="pub-body">
+              <p class="pub-title" style="position: relative;">Rolling and Impacting Caustic Drops on Super Liquid Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation<span class="highlight-star" style="position: relative;">★</span></p>
+              <p class="pub-authors" style="position: relative;">Koochak, P., Liu, K., and Wong, W. S. Y.*</p>
+              <p class="pub-journal" style="position: relative;"><em class="" style="position: relative;">Advanced Functional Materials</em> <span class="" style="position: relative;">· <b>36</b>, e27264 </span></p>
+              <a class="pub-doi" href="https://doi.org/10.1002/adfm.202527264" target="_blank" rel="noopener" style="position: relative;">doi:10.1002/adfm.202527264</a>
+            </div>
+          </div>
+        </div>
         <div class="year-group">
           <div class="year-label">2026 <span class="year-count" style="position: relative;">1 publication</span></div>
           
@@ -846,11 +868,11 @@
     const piYears    = yearsSince(typeof PI_START_DATE !== 'undefined' ? PI_START_DATE : null, pubs);
     const groupYears = yearsSince(typeof GROUP_START_DATE !== 'undefined' ? GROUP_START_DATE : null, pubs);
     const stats = [
-      { num: total,    label: 'Total publications' },
-      { num: articles, label: 'Research articles' },
+      { num: total,    label: 'Publications' },
+      { num: articles, label: 'Articles' },
       { num: reviews,  label: 'Reviews' },
       { num: piYears,    label: "Years of PI's experience" },
-      { num: groupYears, label: 'Years as ICE Laboratory' },
+      { num: groupYears, label: 'Group Years' },
     ].filter(s => s.num > 0);
     document.getElementById('pubStats').innerHTML = stats.map(s =>
       `<div class="pub-stat"><span class="pub-stat-num">${s.num}</span><span class="pub-stat-label">${s.label}</span></div>`
@@ -951,6 +973,8 @@
 
 
 <span class="cms-hoverable" style="position: absolute; left: 843px; top: 363px; display: inline-block; z-index: 5;"></span>
+
+
 
 
 
