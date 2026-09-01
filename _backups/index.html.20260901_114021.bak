@@ -17,7 +17,6 @@
 
 
 
-
     /* ---- HERO ---- */
     .hero {
       background: var(--ice-deep);
@@ -171,12 +170,10 @@
   
   
   
-  
   </style>
 <link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
-
 
 
 
@@ -280,34 +277,28 @@
       <span class="card-icon" style="position: relative;">🧪</span>
       <h3 class="card-title" style="position: relative;">Surface Chemistry</h3>
       <p class="card-desc" style="position: relative;">Engineering interfacial chemistry, wettability, and surface charge through liquid- and vapor-phase functionalization.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Surface%20Chemistry" style="position: relative;">View related abstracts</a>
     </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2016_Re-entrant_Nanoparticles.jpg&quot;); position: relative;">
       <span class="card-icon" style="position: relative;">🧩</span>
       <h3 class="card-title" style="position: relative;">Surface Engineering</h3>
       <p class="card-desc" style="position: relative;">Designing hierarchical surfaces across nano-, micro-, and macro-scales using self-assembly, particle technologies, lithography, and 3D printing.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Surface%20Engineering" style="position: relative;">View related abstracts</a>
     </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2020_Langmuir.png-cropped.png&quot;); position: relative;">
       <span class="card-icon" style="position: relative;">🔬</span>
       <h3 class="card-title" style="position: relative;">Surface Characterization</h3>
       <p class="card-desc" style="position: relative;">Probing surface structure, chemistry, and interfacial dynamics using advanced microscopy, spectroscopy, and quantitative imaging.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Surface%20Characterization" style="position: relative;">View related abstracts</a>
     </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/Debubbling-crop.gif&quot;); position: relative;">
       <span class="card-icon" style="position: relative;">🫧</span>
       <h3 class="card-title" style="position: relative;">Multiphase Flow &amp; Transport</h3>
       <p class="card-desc" style="position: relative;">Understanding gas–liquid and gas–solid interactions, bubble dynamics, and transport phenomena in multiphase systems and reactors.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Multiphase%20Flow%20%26%20Transport" style="position: relative;">View related abstracts</a>
     </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2022_Effervescence.jpg-cropped.png&quot;); position: relative;">
       <span class="card-icon" style="position: relative;">⚡</span>
       <h3 class="card-title" style="position: relative;">Electrochemical Interfaces</h3>
       <p class="card-desc" style="position: relative;">Engineering electrode–electrolyte interfaces and solid-liquid-gas interactions to improve the efficiency and stability of electrochemical systems.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Electrochemical%20Interfaces" style="position: relative;">View related abstracts</a>
     </div><div class="research-card research-card-photo" style="background-image: linear-gradient(rgba(10, 22, 40, 0.45), rgba(10, 22, 40, 0.75)), url(&quot;images/Home/2023_Fluoro-Free.jpg-cropped.png&quot;); position: relative;">
       <span class="card-icon" style="position: relative;">🌍</span>
       <h3 class="card-title" style="position: relative;">Sustainable Processing</h3>
       <p class="card-desc" style="position: relative;">Developing energy-passive and sustainable interfacial technologies for water treatment, pollutant removal, and resource-efficient processing.</p>
-      <a class="card-abstracts-link" href="abstracts.html?area=Sustainable%20Processing" style="position: relative;">View related abstracts</a>
     </div></div>
-<span class="cms-hoverable" style="position: absolute; left: 770px; top: 86px; display: inline-block; z-index: 5;"></span><span class="cms-hoverable" style="position: absolute; left: 735px; top: 73px; display: inline-block; z-index: 5;"><a href="https://williamsywong.github.io/ICE-Laboratory/gallery.html" target="_blank" rel="noopener"><img src="images/Home/20260817_Group_Logo-removebg_1_1.png" alt="20260817_Group_Logo-removebg_1.png" class="" style="width: 316px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></a></span></section>
+<span class="cms-hoverable" style="position: absolute; left: 770px; top: 86px; display: inline-block; z-index: 5;"></span><span class="cms-hoverable" style="position: absolute; left: 735px; top: 73px; display: inline-block; z-index: 5;"><img src="images/Home/20260817_Group_Logo-removebg_1_1.png" alt="20260817_Group_Logo-removebg_1.png" class="" style="width: 316px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></span></section>
 
 <!-- PEOPLE -->
 <div class="full-width-band">
@@ -338,7 +329,7 @@
       </div></div>
   <p style="margin-top: 1.5rem; font-size: 13px; color: var(--text-muted); position: relative; width: 1007px; height: 66px;" class="">Recruitment takes place on a rolling basis and is open to self-funded positions.&nbsp;<br><br>Details regarding eligibility, application procedures and English-language requirements can be found in this <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">link</a>.<br></p>
 
-<span class="cms-hoverable" style="position: absolute; left: 265px; top: 919px; display: inline-block; z-index: 5;"><a href="https://www.sydney.edu.au/" target="_blank" rel="noopener"><img src="images/Home/USYD_1.png" alt="USYD.png" class="" style="width: 251px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></a></span></section></div>
+<span class="cms-hoverable" style="position: absolute; left: 265px; top: 919px; display: inline-block; z-index: 5;"><img src="images/Home/USYD_1.png" alt="USYD.png" class="" style="width: 251px; max-width: 90vw; height: auto; border-radius: 6px; display: block; cursor: pointer;"></span></section></div>
 
 <!-- CONTACT -->
 <div class="contact-band" id="contact" style="position: relative;">
@@ -445,7 +436,6 @@
 
 
 <span class="cms-hoverable" style="position: relative; display: inline-block; left: -7px; top: 85px;"></span>
-
 
 
 

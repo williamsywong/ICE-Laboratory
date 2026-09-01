@@ -16,7 +16,6 @@
 
 
 
-
     .page-hero {
       background: var(--ice-deep);
       padding: 5rem 3rem 4rem;
@@ -143,12 +142,10 @@
   
   
   
-  
   </style>
 <link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
-
 
 
 
@@ -218,7 +215,7 @@
               <span class="news-date-str" style="position: relative;">25 Aug 2026</span>
             </div>
             <h3 class="news-card-title" style="position: relative;">PhD positions open</h3>
-            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br><b> 2 Fully-funded positions available. </b><br> <br> If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">Doctor of Philosophy (Engineering)</a>.</p>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br><b> 2 Fully-funded positions available. </b><br> <br> If you are interested in joining the group, please send us a brief introduction outlining your research interests (max 1 page) together with your CVs (max 2 pages) and latest academic transcript. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener">Doctor of Philosophy (Engineering)</a>.</p>
             <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
           </div>
         </div>
@@ -375,7 +372,6 @@
   renderStats();
   renderGrid();
 </script>
-
 
 
 

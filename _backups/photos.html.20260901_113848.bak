@@ -9,7 +9,6 @@
   <style>
 
 
-
     .page-hero {
       background: var(--ice-deep);
       padding: 5rem 3rem 4rem;
@@ -166,12 +165,10 @@
 
   
   
-  
   </style>
 <link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
-
 
 
 
@@ -198,15 +195,15 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
-    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
-    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
-    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
-    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news" class="" style="position: relative;"><a href="news.html">News</a></li>
-    <li data-page="photos" class="" style="position: relative;"><a href="photos.html" class="active">Photos</a></li>
-    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
+    <li data-page="research"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications"><a href="publications.html">Publications</a></li>
+    <li data-page="people"><a href="people.html">People</a></li>
+    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news"><a href="news.html">News</a></li>
+    <li data-page="photos"><a href="photos.html" class="active">Photos</a></li>
+    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -250,7 +247,7 @@
       </div>
       <div class="masonry">
       <div class="masonry-item wide" style="position: relative;">
-        <img src="images/Photos/Australia_Coin.jpg?v=Australia_Coin.jpg" alt="Interfacial Chemical Engineering (ICE) Laboratory Established, University of Sydney, 2026" loading="lazy" style="">
+        <img src="images/Photos/Australia_Coin.jpg?v=Australia_Coin.jpg?v=Australia_Coin.jpg%3Fv%3DAustralia_Coin.jpg" alt="Interfacial Chemical Engineering (ICE) Laboratory Established, University of Sydney, 2026" loading="lazy" style="">
         <div class="caption-overlay">
           <span class="caption-cat" style="position: relative;">🎉 Events</span>
           <span class="caption-text" style="position: relative;">Interfacial Chemical Engineering (ICE) Laboratory Established, University of Sydney, 2026</span>
@@ -449,7 +446,6 @@ yf.querySelectorAll('.filter-btn').forEach(btn => {
 
   render();
 </script>
-
 
 
 

@@ -299,7 +299,7 @@
     <div class="pi-header">
       <div class="pi-photo-col">
         <div class="pi-avatar" style="position: relative; background-image: url('images/Headshots/People-WW.jpg-cropped.png-cropped.png'); background-size: cover; background-position: center center;"></div>
-        <a class="pi-cv-link" href="assets/cv/20260801_CVs.pdf" target="_blank" rel="noopener" title="Download CV (PDF)" style="position: relative;">📄 Download CV</a>
+        <a class="pi-cv-link" href="assets/cv/CV.pdf" target="_blank" rel="noopener" title="Download CV (PDF)" style="position: relative;">📄 Download CV</a>
       </div>
       <div class="pi-meta">
         <h2 class="pi-name" style="position: relative;">William S. Y. Wong</h2>

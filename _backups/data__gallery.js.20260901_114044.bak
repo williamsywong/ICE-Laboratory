@@ -31,6 +31,7 @@
 // ============================================================
 
 const GALLERY = [
+
   { file: "2025_Racing_Silicone_Drops.gif", caption: "Racing Water Drops on Silicone Surfaces", link: "https://doi.org/10.1021/acsnano.5c04250", youtube: "", category: "phenomena", icon: "💧", size: "small" },
   { file: "2024_Drop_Spring.gif", caption: "Polarity-induced Reactive Wetting", link: "https://doi.org/10.1021/acs.langmuir.4c01085", youtube: "", category: "phenomena", icon: "🧪", size: "small" },
   { file: "2024_Bubble_Rupture_Imaged_Through.gif", caption: "Bubble Rupture Imaging Through Surface", link: "https://doi.org/10.1002/advs.202403366", youtube: "", category: "phenomena", icon: "🫧", size: "small" },
