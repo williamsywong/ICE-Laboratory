@@ -409,3 +409,25 @@ nav.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(
   overflow-wrap: break-word;
   word-break: break-word;
 }
+
+/* ============================================
+   NEWS: pill-style document link inside a news item's body, e.g.
+   <a class="pi-cv-link" href="assets/...pdf">📄 Download ...</a>
+   (data/news.js). Lives here rather than only in news.html so it styles
+   correctly even if an older news.html is deployed. Scoped to news cards
+   so it can't affect people.html, which has its own .pi-cv-link look for
+   its dark banner. Tuned for the light news-card background.
+   ============================================ */
+.news-card-body-text .pi-cv-link,
+.news-card-body-text .document-link {
+  display: inline-block; margin-top: 0.4rem;
+  font-size: 11px; font-weight: 500; color: var(--ice-blue);
+  text-decoration: none; text-align: center; white-space: nowrap;
+  border: 1px solid rgba(45,111,168,0.4); border-radius: 20px;
+  padding: 4px 12px; background: rgba(45,111,168,0.06);
+  transition: background 0.15s, border-color 0.15s;
+}
+.news-card-body-text .pi-cv-link:hover,
+.news-card-body-text .document-link:hover {
+  background: rgba(45,111,168,0.14); border-color: var(--ice-blue);
+}

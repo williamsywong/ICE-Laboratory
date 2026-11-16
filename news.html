@@ -11,6 +11,45 @@
 
 
 
+    .news-card-body-text .document-link {
+      display: block; width: fit-content;
+      margin: 0.6rem auto;          /* auto left/right = centered */
+      font-size: 11px; font-weight: 500; color: var(--ice-bright);
+      text-decoration: none; text-align: center; white-space: nowrap;
+      border: 1px solid rgba(91,184,232,0.4); border-radius: 20px;
+      padding: 4px 12px; background: rgba(91,184,232,0.08);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .news-card-body-text .document-link:hover {
+      background: rgba(91,184,232,0.18); border-color: var(--ice-bright);
+    }
+    .pi-meta { position: relative; z-index: 1; }
+    .pi-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 600; color: white;
+      margin-bottom: 0.3rem;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -144,10 +183,48 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   </style>
 <link rel="icon" type="image/png" href="images/Branding/favicon.png">
 </head>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -174,15 +251,15 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li data-page="research"><a href="index.html#research">Research</a></li>
-    <li data-page="abstracts"><a href="abstracts.html">Abstracts</a></li>
-    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
-    <li data-page="publications"><a href="publications.html">Publications</a></li>
-    <li data-page="people"><a href="people.html">People</a></li>
-    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
-    <li data-page="news"><a href="news.html" class="active">News</a></li>
-    <li data-page="photos"><a href="photos.html">Photos</a></li>
-    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
+    <li data-page="research" class="" style="position: relative;"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts" class="" style="position: relative;"><a href="abstracts.html">Abstracts</a></li>
+    <li data-page="gallery" class="" style="position: relative;"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications" class="" style="position: relative;"><a href="publications.html">Publications</a></li>
+    <li data-page="people" class="" style="position: relative;"><a href="people.html">People</a></li>
+    <li data-page="alumni" class="" style="position: relative;"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news" class="" style="position: relative;"><a href="news.html" class="active">News</a></li>
+    <li data-page="photos" class="" style="position: relative;"><a href="photos.html">Photos</a></li>
+    <li data-page="join" class="" style="position: relative;"><a href="index.html#contact">Join Us</a></li>
   </ul>
 </nav>
 
@@ -194,7 +271,7 @@
   </div>
 </div>
 
-<div class="stats-strip" id="newsStats"><div class="stat-item"><span class="stat-num" style="position: relative;">2</span><span class="stat-label" style="position: relative;">Total items</span></div></div>
+<div class="stats-strip" id="newsStats"><div class="stat-item"><span class="stat-num" style="position: relative;">4</span><span class="stat-label" style="position: relative;">Total items</span></div></div>
 
 <div class="controls-bar">
   <label>Filter:</label>
@@ -210,15 +287,39 @@
 
 <div class="news-wrap">
   <div class="news-grid" id="newsGrid">
-        <div class="news-card featured" data-news-key="2026-08-25-phd-positions-open" style="position: relative;">
+        <div class="news-card featured" data-news-key="2026-11-11-phd-scholarship-funded-positions-open" style="position: relative;">
           <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
           <div class="news-card-body">
             <div class="news-card-meta">
               <span class="news-tag-pill" style="background: rgb(240, 235, 250); color: rgb(107, 63, 160); position: relative;">Recruitment</span>
-              <span class="news-date-str" style="position: relative;">25 Aug 2026</span>
+              <span class="news-date-str" style="position: relative;">11 Nov 2026</span>
             </div>
-            <h3 class="news-card-title" style="position: relative;">PhD positions open</h3>
-            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, materials science, chemistry, and applied physics. <br> <br><b> 2 Fully-funded positions available. </b><br> <br> If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment and discuss suitable funding routes. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">Doctor of Philosophy (Engineering)</a>.</p>
+            <h3 class="news-card-title" style="position: relative;">PhD scholarship-funded positions open</h3>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with backgrounds in chemical engineering, mechanical engineering, materials science, applied chemistry, and applied physics. <u>Support for independent thinkers and researchers is available!</u><br> <br><b> University of Sydney and Australian Government RTP-funded Ph.D Positions are available all year-round.</b><br> <br>Positions are funded at a tax-free USYD stipend rate: $44,293 p.a. (2027), including relocation and thesis allowance.<br><br> Domestic and International students with exceptional academic profiles are highly encouraged to explore the <b><u><a href="https://www.sydney.edu.au/scholarships/australian-government-research-training-program.html" target="_blank" rel="noopener" class="" style="position: relative;">Research Training Program (RTP)</a></u></b>&nbsp;to promote their research independence during their PhD candidature. <br> <br><b>Domestic</b> RTP application deadlines: <u>19 March 2027</u> (Outcome: 18 May 2027), <u>11 October 2027</u> (Outcome: 20 December 2027). <br> <br><b>International</b> RTP application deadlines: <u>26 February 2027</u> (Outcome: 18 May 2027), <u>16 November 2027</u> (Outcome: 20 December 2027). <br> <br>If you are interested in joining the group, please send us a brief introduction outlining your <b>(1) research interests (max 1 page)</b> together with your <b>(2) CVs (max 2 pages)</b> and <b>(3) latest academic transcript</b>. This allows us to assess potential research alignment and funding opportunities. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <b><u><a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">Doctor of Philosophy (Engineering)</a></u></b>.</p>
+            <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
+          </div>
+        </div>
+        <div class="news-card" data-news-key="2026-11-10-phd-position-1-manipulating-interfacial-" style="position: relative;">
+          <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-tag-pill" style="background: rgb(240, 235, 250); color: rgb(107, 63, 160); position: relative;">Recruitment</span>
+              <span class="news-date-str" style="position: relative;">10 Nov 2026</span>
+            </div>
+            <h3 class="news-card-title" style="position: relative;">PhD Position 1: Manipulating Interfacial Phenomena via Rational Surface Engineering Principles</h3>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with experimental backgrounds in chemical engineering, materials science/engineering, and applied chemistry. <br><br>Fully-funded position available, at standard USYD tax-free stipend rate: $44,293 p.a. (2027).<br><br><b>Position Description:&nbsp;</b><br><br>Surface engineering fundamentally governs wetting, adhesion, transport phenomena, and the performance of engineering materials. This project aims to develop environmentally responsible strategies for fabricating functional hydrophobic surfaces while reducing dependence on persistent, fluorinated chemistries. The project explores fluoro-replacements and benign chemistries for next-generation functional interfaces. The successful candidate will investigate thin-film fabrication through chemical vapor deposition and investigate the relationship between surface topographical/chemical design and phenomenologically unique physical properties.&nbsp;<br> <br> If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">Doctor of Philosophy (Engineering)</a>. <br><a class="document-link" href="assets/recruitment/PhD_1_Interfacial_Phenomenological_Engineering.pdf" target="_blank" rel="noopener" title="Download Position Description (PDF)" download="" style="position: relative;">📄 Download Position Description</a></p>
+            <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
+          </div>
+        </div>
+        <div class="news-card" data-news-key="2026-11-10-phd-position-2-interfacial-electrochemic" style="position: relative;">
+          <div class="news-card-img-placeholder" style="background:linear-gradient(135deg,var(--ice-blue),var(--ice-bright))"></div>
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              <span class="news-tag-pill" style="background: rgb(240, 235, 250); color: rgb(107, 63, 160); position: relative;">Recruitment</span>
+              <span class="news-date-str" style="position: relative;">10 Nov 2026</span>
+            </div>
+            <h3 class="news-card-title" style="position: relative;">PhD Position 2: Interfacial Electrochemical Engineering via Electrochemically-Durable Surfaces</h3>
+            <p class="news-card-body-text" style="position: relative;">We are recruiting motivated PhD students with experimental backgrounds in chemical engineering, mechanical engineering, and applied physics. <br><br>Fully-funded position available, at standard USYD tax-free stipend rate: $44,293 p.a. (2027).<br><br><b>Position Description:&nbsp;</b><br><br>Electrochemical technologies are rapidly emerging as key platforms for sustainable chemical manufacturing, energy conversion, and carbon utilisation. However, gas evolution, transport limitations, and complex interfacial phenomena continue to limit reactor efficiency and scalability. This project aims to develop interfacial materials capable of manipulating gas-liquid interactions within electrochemical systems. The successful candidate will fabricate advanced functional surfaces, integrate them into electrochemical reactors, and investigate how interfacial engineering influences gas transport, reaction kinetics, reactor stability, and overall process performance.<div>&nbsp; <br>If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href="https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html" target="_blank" rel="noopener" class="" style="position: relative;">Doctor of Philosophy (Engineering)</a>. <br><a class="document-link" href="assets/recruitment/PhD_2_Interfacial_Electrochemical_Engineering.pdf" target="_blank" rel="noopener" title="Download Position Description (PDF)" download="" style="position: relative;">📄 Download Position Description</a></div></p>
             <a class="news-card-link" href="mailto:william.swong@sydney.edu.au" target="_blank" rel="noopener" style="position: relative;">Express interest</a>
           </div>
         </div>
@@ -318,6 +419,45 @@
     ).join('');
   }
 
+  // Sanitise a news body before it is rendered into the card's <p>:
+  //  1. Drop editor leftovers (contenteditable / data-cms / class="editable" /
+  //     position:relative) that older saves baked into the data. On the live
+  //     page a contenteditable link does not navigate when clicked.
+  //  2. Make "Download Position Description" pills (a.document-link) real
+  //     downloads.
+  //  3. Flatten <div>/<p> to <br> line breaks: the HTML parser closes a <p> at
+  //     the first <div>/<p>, spilling the rest of the text out of the styled box.
+  function flattenNewsBody(html) {
+    html = String(html == null ? '' : html);
+    const t = document.createElement('div');
+    t.innerHTML = html;
+    t.querySelectorAll('[contenteditable], [data-cms], [data-draggable], .editable, .selected').forEach(el => {
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('data-cms');
+      el.removeAttribute('data-draggable');
+      el.classList.remove('editable', 'selected');
+      if (!el.getAttribute('class')) el.removeAttribute('class');
+      if (el.style && el.style.position === 'relative') el.style.removeProperty('position');
+      if (el.hasAttribute('style') && !el.getAttribute('style').trim()) el.removeAttribute('style');
+    });
+    t.querySelectorAll('a.document-link').forEach(a => {
+      if (!a.hasAttribute('download')) a.setAttribute('download', '');
+    });
+    [...t.querySelectorAll('div, p')].reverse().forEach(el => {
+      const isP = el.tagName === 'P';
+      const onlyBr = el.childNodes.length === 1 && el.firstChild.nodeName === 'BR';
+      const blank = !el.textContent.trim() && !el.querySelector('a, img');
+      const frag = document.createDocumentFragment();
+      if (el.previousSibling) {
+        frag.appendChild(document.createElement('br'));
+        if (isP) frag.appendChild(document.createElement('br'));
+      }
+      if (!onlyBr && !blank) while (el.firstChild) frag.appendChild(el.firstChild);
+      el.replaceWith(frag);
+    });
+    return t.innerHTML.replace(/(\s*<br\s*\/?>)+\s*$/i, '').trim();
+  }
+
   function renderGrid() {
     let items = [...NEWS].sort((a, b) => b.date.localeCompare(a.date));
     if (activeTag !== 'all') items = items.filter(n => n.tag === activeTag);
@@ -345,7 +485,7 @@
               <span class="news-date-str">${formatDate(item.date)}</span>
             </div>
             <h3 class="news-card-title">${item.title}</h3>
-            <p class="news-card-body-text">${item.body}</p>
+            <p class="news-card-body-text">${flattenNewsBody(item.body)}</p>
             ${linkEl}
           </div>
         </div>`;
@@ -375,6 +515,25 @@
   renderStats();
   renderGrid();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
