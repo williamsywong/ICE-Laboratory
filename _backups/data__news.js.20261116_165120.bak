@@ -1,0 +1,83 @@
+// ============================================================
+//  ICE Group — News Data
+//  Add new items at the TOP of the array (newest first).
+//
+//  Fields:
+//    date:     "YYYY-MM-DD"
+//    tag:      "Publication" | "Award" | "Grant" | "Recruitment"
+//              | "Event" | "Media" | "Milestone" | "Welcome"
+//    title:    Headline text
+//    body:     Short description (1–2 sentences)
+//    link:     Optional URL string, or "" for none
+//    linkText: Label for the link button, or ""
+//    image:    Optional filename in images/News/, or "" for none
+//              e.g. "2025-acsnano.jpg"
+//
+//  NEWS_START_DATE — start date ("YYYY-MM-DD") for the "Years" counter
+//  shown on the News page stats strip. That counter is NOT based on
+//  today's real calendar date — it's based on the most recent date
+//  among the NEWS entries below, so the whole site stays deterministic
+//  and you can preview a "future" state of the site just by adding a
+//  further-dated entry here. The counter hides itself while it would
+//  show 0 (i.e. before this start date has been reached).
+// ============================================================
+
+const NEWS_START_DATE = "2026-08-01";
+
+const NEWS = [
+
+
+  {
+    date: "2026-11-11",
+    tag: "Recruitment",
+    title: "PhD scholarship-funded positions open",
+    body: "We are recruiting motivated PhD students with backgrounds in chemical engineering, mechanical engineering, materials science, applied chemistry, and applied physics. <u>Support for independent thinkers and researchers is available!</u><br> <br><b> University of Sydney and Australian Government RTP-funded Ph.D Positions are available all year-round.</b><br> <br>Positions are funded at a tax-free USYD stipend rate: $44,293 p.a. (2027), including relocation and thesis allowance.<br><br> Domestic and International students with exceptional academic profiles are highly encouraged to explore the <b><u><a href=\"https://www.sydney.edu.au/scholarships/australian-government-research-training-program.html\" target=\"_blank\" rel=\"noopener\" data-cms=\"1\" contenteditable=\"true\" class=\"editable\" data-draggable=\"1\" style=\"position: relative;\">Research Training Program (RTP)</a></u></b>&nbsp;to promote their research independence during their PhD candidature. <br> <br><b>Domestic</b> RTP application deadlines: <u>19 March 2027</u> (Outcome: 18 May 2027), <u>11 October 2027</u> (Outcome: 20 December 2027). <br> <br><b>International</b> RTP application deadlines: <u>26 February 2027</u> (Outcome: 18 May 2027), <u>16 November 2027</u> (Outcome: 20 December 2027). <br> <br>If you are interested in joining the group, please send us a brief introduction outlining your <b>(1) research interests (max 1 page)</b> together with your <b>(2) CVs (max 2 pages)</b> and <b>(3) latest academic transcript</b>. This allows us to assess potential research alignment and funding opportunities. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <b><u><a href=\"https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html\" target=\"_blank\" rel=\"noopener\" data-cms=\"1\" contenteditable=\"true\" class=\"editable\" data-draggable=\"1\" style=\"position: relative;\">Doctor of Philosophy (Engineering)</a></u></b>.",
+    link: "mailto:william.swong@sydney.edu.au",
+    linkText: "Express interest",
+    image: ""
+  },
+
+
+  {
+    date: "2026-11-10",
+    tag: "Recruitment",
+    title: "PhD Position 1: Manipulating Interfacial Phenomena through Rational Surface Engineering",
+    body: "We are recruiting motivated PhD students with experimental backgrounds in chemical engineering, materials science/engineering, and applied chemistry. <br><br>Fully-funded position available, at standard USYD tax-free stipend rate: $44,293 p.a. (2027).<br><br><b>Position Description:&nbsp;</b><br><br>Surface engineering fundamentally governs wetting, adhesion, transport phenomena, and the performance of engineered materials. This project aims to develop environmentally responsible strategies for fabricating functional hydrophobic surfaces while reducing reliance on persistent, fluorinated chemistries. The project explores fluorine-free alternatives and environmentally benign chemistries for next-generation functional interfaces.<br><br>The successful candidate will investigate thin-film fabrication using nanomaterial deposition and/or chemical vapor deposition (CVD), and establish relationships between surface topography, chemistry, and emergent physical properties.<div><br> If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href=\"https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html\" target=\"_blank\" rel=\"noopener\" data-cms=\"1\" contenteditable=\"true\" class=\"editable\" data-draggable=\"1\" style=\"position: relative;\">Doctor of Philosophy (Engineering)</a>. <br><a class=\"document-link editable\" href=\"assets/recruitment/PhD_1_Interfacial_Phenomenological_Engineering.pdf\" target=\"_blank\" rel=\"noopener\" title=\"Download Position Description (PDF)\" download=\"\" data-cms=\"1\" contenteditable=\"true\" data-draggable=\"1\" style=\"position: relative;\">📄 Download Position Description</a></div>",
+    link: "mailto:william.swong@sydney.edu.au",
+    linkText: "Express interest",
+    image: ""
+  },
+
+  {
+    date: "2026-11-10",
+    tag: "Recruitment",
+    title: "PhD Position 2: Interfacial Electrochemical Engineering via Electrochemically-Durable Surfaces",
+    body: "We are recruiting motivated PhD students with experimental backgrounds in chemical engineering, mechanical engineering, and applied physics. <br><br>Fully-funded position available, at standard USYD tax-free stipend rate: $44,293 p.a. (2027).<br><br><b>Position Description:&nbsp;</b><br><br>Electrochemical technologies are rapidly emerging as key platforms for sustainable energy storage, chemical manufacturing, energy conversion, and carbon capture. However, gas evolution, transport limitations, and complex interfacial phenomena continue to limit reactor efficiency and scalability. This project aims to develop engineered interfaces that manipulate gas–liquid–solid interactions within electrochemical systems.<br><br><br>The successful candidate will fabricate advanced functional surfaces, integrate them into electrochemical reactors, and investigate how interfacial engineering influences gas transport, reaction kinetics, reactor stability, and overall process performance.<div><br>If you are interested in joining the group, please send us a brief introduction outlining your<b> (1) research interests</b> (<b><u>max 1 page</u></b>) together with your <b>(2)&nbsp;CVs </b>(<b><u>max 2 pages</u></b>) and <b>(3)&nbsp;latest academic transcript</b>. This allows us to assess potential research alignment. Formal admission to the PhD program is handled through the University of Sydney. Details regarding eligibility, application procedures and English-language requirements can be found in this link: <a href=\"https://www.sydney.edu.au/courses/courses/pr/doctor-of-philosophy-engineering.html\" target=\"_blank\" rel=\"noopener\" data-cms=\"1\" contenteditable=\"true\" class=\"editable\" data-draggable=\"1\" style=\"position: relative;\">Doctor of Philosophy (Engineering)</a>. <br><a class=\"document-link editable\" href=\"assets/recruitment/PhD_2_Interfacial_Electrochemical_Engineering.pdf\" target=\"_blank\" rel=\"noopener\" title=\"Download Position Description (PDF)\" download=\"\" data-cms=\"1\" contenteditable=\"true\" data-draggable=\"1\" style=\"position: relative;\">📄 Download Position Description</a></div>",
+    link: "mailto:william.swong@sydney.edu.au",
+    linkText: "Express interest",
+    image: ""
+  },
+
+  {
+    date: "2026-08-01",
+    tag: "Milestone",
+    title: "The Interfacial Chemical Engineering (ICE) Laboratory is established at the University of Sydney",
+    body: "William S. Y. Wong joins the School of Chemical &amp; Biomolecular Engineering as Lecturer and Group Leader.",
+    link: "",
+    linkText: "",
+    image: ""
+  },
+
+  ];
+
+// Tag colour map — add new tags here if needed
+const NEWS_TAG_COLORS = {
+  "Publication":  { bg: "#e6f1fb", color: "#185fa5" },
+  "Award":        { bg: "#fdf3dc", color: "#92580a" },
+  "Grant":        { bg: "#e1f5ee", color: "#0f6e56" },
+  "Recruitment":  { bg: "#f0ebfa", color: "#6b3fa0" },
+  "Event":        { bg: "#fde8f0", color: "#a0285a" },
+  "Media":        { bg: "#e8f4fd", color: "#1565a0" },
+  "Milestone":    { bg: "#e6faf3", color: "#0a6640" },
+  "Welcome":      { bg: "#fff3e0", color: "#8a4500" },
+};

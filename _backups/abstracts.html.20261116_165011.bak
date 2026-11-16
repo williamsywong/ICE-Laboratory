@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICE Group · University of Sydney</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+
+
+    .page-hero { background: var(--ice-deep); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+    .page-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 55% 70% at 85% 40%, rgba(91,184,232,0.07) 0%, transparent 70%); }
+    .page-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 400; color: white; margin-bottom: 0.75rem; }
+    .page-hero p { color: rgba(255,255,255,0.5); font-size: 15px; max-width: 500px; }
+
+    .abstracts-wrap { max-width: 1000px; margin: 0 auto; padding: 4rem 3rem; }
+    .abstract-card {
+      background: white; border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; margin-bottom: 2rem; display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+    .abstract-figure {
+      background: linear-gradient(135deg, var(--ice-mid), var(--ice-blue));
+      display: flex; align-items: center; justify-content: center;
+      min-height: 220px; padding: 1.5rem;
+    }
+    .abstract-figure img { width: 100%; border-radius: 8px; display: block; }
+    .abstract-figure .ph-icon { font-size: 2.5rem; opacity: 0.5; color: white; }
+    .abstract-body { padding: 1.75rem 2rem; }
+    .abstract-journal { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ice-blue); margin-bottom: 0.5rem; }
+    .abstract-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--ice-deep); margin-bottom: 0.5rem; line-height: 1.4; text-align: justify;}
+    .abstract-authors { font-size: 12.5px; color: var(--text-muted); margin-bottom: 0.85rem; }
+    .abstract-text { font-size: 13px; color: var(--text-body); line-height: 1.75; margin-bottom: 1rem; text-align: justify;}
+    .abstract-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: var(--ice-blue); text-decoration: none; }
+    .abstract-link::after { content: '↗'; font-size: 11px; }
+
+    /* Briefly highlights the abstract(s) linked from a homepage research
+       card, so it's obvious which one(s) were being pointed to. */
+    .abstract-card.abstract-highlight {
+      animation: abstractHighlightPulse 2s ease-in-out;
+    }
+    @keyframes abstractHighlightPulse {
+      0%, 100% { box-shadow: none; }
+      20%, 60% { box-shadow: 0 0 0 3px var(--ice-bright); }
+    }
+
+    @media (max-width: 700px) {
+      .abstract-card { grid-template-columns: 1fr; }
+    }
+  
+  
+  
+  
+  
+  
+  </style>
+<link rel="icon" type="image/png" href="images/Branding/favicon.png">
+</head>
+<body>
+
+
+
+
+
+
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-emblem" style="position: relative; background-image: url('images/Branding/ICE_Logo.png'); background-size: contain; background-position: center center; background-repeat: no-repeat;"></div>
+    <a href="index.html" style="text-decoration:none">
+      <span class="nav-name" style="position: relative;">ICE Laboratory · University of Sydney</span>
+    </a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="const n=this.closest('nav'); n.classList.toggle('nav-open'); this.setAttribute('aria-expanded', n.classList.contains('nav-open'));">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li data-page="research"><a href="index.html#research">Research</a></li>
+    <li data-page="abstracts"><a href="abstracts.html" class="active">Abstracts</a></li>
+    <li data-page="gallery"><a href="gallery.html">Gallery</a></li>
+    <li data-page="publications"><a href="publications.html">Publications</a></li>
+    <li data-page="people"><a href="people.html">People</a></li>
+    <li data-page="alumni"><a href="alumni.html">Alumni</a></li>
+    <li data-page="news"><a href="news.html">News</a></li>
+    <li data-page="photos"><a href="photos.html">Photos</a></li>
+    <li data-page="join"><a href="index.html#contact">Join Us</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero" style="position: relative; background-image: linear-gradient(rgba(10, 22, 40, 0.55), rgba(10, 22, 40, 0.75)), url('images/Abstracts/Bouncing_Foam_Jets.gif'); background-size: cover, cover; background-position: center center, center center; background-repeat: no-repeat, no-repeat;">
+  <div class="page-hero-inner">
+    <span class="section-tag" style="color: var(--ice-bright); position: relative;">Research highlights</span>
+    <h1 class="" style="position: relative;">Abstracts</h1>
+    <p class="" style="position: relative;">Graphical abstracts of latest research work.</p>
+  </div>
+</div>
+
+<div class="abstracts-wrap" id="abstractsWrap">
+      <div class="abstract-card" data-research-area="Surface Characterization">
+        <div class="abstract-figure" data-fig-name="2026-rolling-and-impacting-caustic-drops-on-s.jpg" style="position: relative;"><img src="images/Abstracts/2026_Caustic.jpg" alt="Rolling and Impacting Caustic Drops on Super Liquid-Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Advanced Functional Materials · 2026</p>
+          <h3 class="abstract-title" style="position: relative;">Rolling and Impacting Caustic Drops on Super Liquid-Repellent Surfaces: In Situ Force and Energy Monitoring of Surface Degradation</h3>
+          <p class="abstract-authors" style="position: relative;">Koochak, P., Liu, K., and Wong, W. S. Y.*</p>
+          <p class="abstract-text" style="position: relative;">Super liquid-repellent surfaces can degrade under prolonged exposure to corrosive liquids, yet conventional durability tests provide only coarse and discontinuous measurements. Here, two continuous drop-based techniques quantify degradation through rolling and impacting caustic drops, resolving retention forces and energy dissipation at ≈0.1 µN and ≈1 µJ, respectively. Applied to three superhydrophobic surfaces, the methods reveal degradation-rate differences of up to an order of magnitude despite similar wetting properties, providing a precise approach for evaluating chemically durable liquid-repellent materials.</p>
+          <a class="abstract-link" href="https://doi.org/10.1002/adfm.202527264" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Electrochemical Interfaces">
+        <div class="abstract-figure" data-fig-name="2025-self-accelerating-drops-on-silicone-base.jpg" style="position: relative;"><img src="images/Abstracts/2025_Accelerating.jpg" alt="Self-Accelerating Drops on Silicone-Based Super Liquid Repellent Surfaces" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">ACS Nano · 2025</p>
+          <h3 class="abstract-title" style="position: relative;">Self-Accelerating Drops on Silicone-Based Super Liquid Repellent Surfaces</h3>
+          <p class="abstract-authors" style="position: relative;">Koochak, P., Lin, M., Afzalifar, A., Hashemi, A., Arunachalam, S., Shoaib, A., Turkki, V., Ala-Nissila, T., Daniel, D., Vuckovac, M., and Wong, W. S. Y.*</p>
+          <p class="abstract-text" style="position: relative;">Drop mobility on super liquid-repellent surfaces depends not only on surface structure but also on chemistry and electrostatic charging. Comparing perfluoroalkyl- and silicone-based surfaces, we show that rolling drops are governed primarily by adhesion and electrostatic effects rather than friction, with silicone surfaces rapidly reaching charge saturation, whereas perfluoroalkyl surfaces continue to accumulate charge. Combined experiments and quantum-mechanical calculations reveal how surface chemistry controls charge retention and, consequently, sequential drop mobility, providing design principles for sustainable antistatic liquid-repellent surfaces.</p>
+          <a class="abstract-link" href="https://doi.org/10.1021/acsnano.5c04250" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Multiphase Flow &amp; Transport">
+        <div class="abstract-figure" data-fig-name="2024-designing-plastrons-for-underwater-bubbl.jpg" style="position: relative;"><img src="images/Abstracts/2024_Plastrons.jpg" alt="Designing Plastrons for Underwater Bubble Capture: From Model Microstructures to Stochastic Nanostructures" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Advanced Science · 2024</p>
+          <h3 class="abstract-title" style="position: relative;">Designing Plastrons for Underwater Bubble Capture: From Model Microstructures to Stochastic Nanostructures</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.*, Naga, A., Neef, T., Karunakaran, B., Poulikakos, D., and Ras, R. H. A.</p>
+          <p class="abstract-text" style="position: relative;">Super liquid-repellent surfaces can capture underwater bubbles through plastron-induced coalescence, offering a passive route to bubble management. We investigate how surface feature size and gas fraction control the two stages of capture: rupture and subsequent bubble absorption. Smaller features accelerate rupture, while higher gas fractions enhance absorption, with rupture preferentially initiated near solid-feature edges. These findings establish design principles for rapidly capturing bubbles on structured surfaces for applications including electrolysis and flotation.</p>
+          <a class="abstract-link" href="https://doi.org/10.1002/advs.202403366" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Sustainable Processing">
+        <div class="abstract-figure" data-fig-name="2023-design-of-fluoro-free-surfaces-super-rep.jpg" style="position: relative;"><img src="images/Abstracts/2023_Fluoro-Free.jpg" alt="Design of Fluoro-Free Surfaces Super-Repellent to Low-Surface-Tension Liquids" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Advanced Materials · 2023</p>
+          <h3 class="abstract-title" style="position: relative;">Design of Fluoro-Free Surfaces Super-Repellent to Low-Surface-Tension Liquids</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.*, Kiseleva, M. S., Zhou, S., Junaid, M., Pitkänen, L., and Ras, R. H. A.*</p>
+          <p class="abstract-text" style="position: relative;">Super-repellency toward low-surface-tension liquids commonly relies on persistent perfluoroalkyl chemistries. Here, stochastic nanoparticle surfaces functionalized with silicone and hydrocarbon groups are developed and benchmarked against perfluoroalkyl surfaces. Dimethyl-silicone and hydrocarbon chemistries achieve super-liquid-repellency down to surface tensions of approximately 32–33 and 40–41 mN/m, respectively. The results demonstrate that perfluoroalkyls are not essential for achieving super liquid-repellency and provide phase-diagram-based guidelines for designing more sustainable liquid-repellent surfaces.</p>
+          <a class="abstract-link" href="https://doi.org/10.1002/adma.202300306" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Surface Engineering">
+        <div class="abstract-figure" data-fig-name="2022-effervescence-inspired-self-healing-plas.jpg" style="position: relative;"><img src="images/Abstracts/2022_Effervescence.jpg" alt="Effervescence-Inspired Self-Healing Plastrons for Long-Term Immersion Stability" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Advanced Functional Materials · 2022</p>
+          <h3 class="abstract-title" style="position: relative;">Effervescence-Inspired Self-Healing Plastrons for Long-Term Immersion Stability</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.* and Vollmer, D.*</p>
+          <p class="abstract-text" style="position: relative;">Superhydrophobic and superamphiphobic surfaces lose their protective air layer during prolonged immersion as gas dissolves into the surrounding liquid. We introduce a passive self-healing strategy in which an underlying effervescent layer generates gas when localized wetting occurs after partial Cassie-state collapse. A moisture-protective, water-soluble polymer enables controlled activation during immersion, allowing the surface to recover its plastron without external energy or intervention. This provides a scalable approach to maintaining liquid repellency under prolonged immersion.</p>
+          <a class="abstract-link" href="https://doi.org/10.1002/adfm.202107831" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Multiphase Flow &amp; Transport">
+        <div class="abstract-figure" data-fig-name="2021-super-liquid-repellent-surfaces-for-anti.jpg" style="position: relative;"><img src="images/Abstracts/2021_Foam.jpg" alt="Super liquid repellent surfaces for anti-foaming and froth management" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Nature Communications · 2021</p>
+          <h3 class="abstract-title" style="position: relative;">Super liquid repellent surfaces for anti-foaming and froth management</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.*, Naga, A., Hauer, L., et al., Butt, H-J., and Vollmer, D.*</p>
+          <p class="abstract-text" style="position: relative;">Uncontrolled foaming causes losses and operational problems across many industries, while conventional defoamers require chemical additives or mechanical energy. We demonstrate that chemically and morphologically modified surfaces can instead promote passive defoaming and active anti-foaming, with superamphiphobic surfaces showing the most potential in scalability. Experiments with beer and aqueous soap foams reveal that amphiphobic nanostructures destabilize contacting bubbles and facilitate gas escape through Cassie-state air gaps, providing a low-energy strategy for foam and froth management.</p>
+          <a class="abstract-link" href="https://doi.org/10.1038/s41467-021-25556-w" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Multiphase Flow &amp; Transport">
+        <div class="abstract-figure" data-fig-name="2020-capillary-balancing-designing-frost-resi.jpg" style="position: relative;"><img src="images/Abstracts/2020_Capillary.jpg" alt="Capillary Balancing: Designing Frost-Resistant Lubricant-Infused Surfaces" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Nano Letters · 2020</p>
+          <h3 class="abstract-title" style="position: relative;">Capillary Balancing: Designing Frost-Resistant Lubricant-Infused Surfaces</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.*, Hegner, K. I., Donadei, V., Hauer, L., Naga, A., and Vollmer, D.*</p>
+          <p class="abstract-text" style="position: relative;">Frost-induced capillary forces can deplete lubricants from lubricant-infused surfaces, compromising their anti-icing performance. We introduce the concept of capillary balancing, in which densely packed nanoparticles create nanointerstitial spaces that generate sufficient capillary pressure to stabilize the lubricant against frost-induced drainage. Confocal imaging confirms lubricant stability during condensation, frosting, and ice-shearing tests even at -100°C, while the optimized surfaces maintain low ice adhesion over 50 icing cycles. The work establishes a structural design principle for durable frost-resistant surfaces.</p>
+          <a class="abstract-link" href="https://doi.org/10.1021/acs.nanolett.0c02956" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Surface Chemistry">
+        <div class="abstract-figure" data-fig-name="2019-surface-chemistry-enhancements-for-the-t.jpg" style="position: relative;"><img src="images/Abstracts/2019_Enhancement.jpg" alt="Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Nano Letters · 2019</p>
+          <h3 class="abstract-title" style="position: relative;">Surface Chemistry Enhancements for the Tunable Super-Liquid Repellency of Low-Surface-Tension Liquids</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y.*</p>
+          <p class="abstract-text" style="position: relative;">Extreme liquid repellency is commonly attributed to re-entrant surface geometries, particularly for low-surface-tension liquids. Here, we demonstrate an alternative route based on controlled surface-chemistry enhancement without explicitly designed re-entrant structures. By tuning the density of fluoroalkyl groups on nanoparticle surfaces, super-repellent states with contact angles above 150° and sliding angles below 10° are achieved for liquids with surface tensions as low as approximately 23.8 mN/m. These results show that surface-chemistry enhancement provides a facile means of tuning the limits of super-liquid repellency.</p>
+          <a class="abstract-link" href="https://doi.org/10.1021/acs.nanolett.8b04972" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Surface Chemistry">
+        <div class="abstract-figure" data-fig-name="2018-dynamically-gas-phase-switchable-super-d.jpg" style="position: relative;"><img src="images/Abstracts/2018_RAF.jpg" alt="Dynamically Gas-Phase Switchable Super(de)Wetting States by Reversible Amphiphilic Functionalization: A Powerful Approach for Smart Fluid Gating Membranes" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Advanced Functional Materials · 2018</p>
+          <h3 class="abstract-title" style="position: relative;">Dynamically Gas-Phase Switchable Super(de)Wetting States by Reversible Amphiphilic Functionalization: A Powerful Approach for Smart Fluid Gating Membranes</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y., Gengenbach, T., Nguyen, H. T., Gao, X., Craig, V. S. J., and Tricoli, A.</p>
+          <p class="abstract-text" style="position: relative;">Artificial fluid-gating membranes typically require complex stimuli-responsive mechanisms to switch between wetting states. We introduce a room-temperature gas-phase approach that reversibly transforms porous surfaces between superhydrophobic and superhydrophilic states through the adsorption of bipolar amphiphiles. Applied to nanofibrous membranes, this temporary superhydrophilic state enables pressure-less liquid permeation and can be reversed by changes in the ambient environment. The approach provides a simple route toward valve-less flow control, fluid-erasable microfluidics, and other adaptive fluidic systems.</p>
+          <a class="abstract-link" href="https://doi.org/10.1002/adfm.201704423" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Surface Engineering">
+        <div class="abstract-figure" data-fig-name="2017-omnidirectional-self-assembly-of-transpa.jpg" style="position: relative;"><img src="images/Abstracts/2017_Omnidirectional.jpg" alt="Omnidirectional Self-Assembly of Transparent Superoleophobic Nanotextures" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">ACS Nano · 2017</p>
+          <h3 class="abstract-title" style="position: relative;">Omnidirectional Self-Assembly of Transparent Superoleophobic Nanotextures</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y., Gengenbach, T., Nguyen, H. T., Gao, X., Craig, V. S. J., and Tricoli, A.</p>
+          <p class="abstract-text" style="position: relative;">Fabricating transparent surfaces that repel water, oils, and other low-surface-tension liquids remains challenging, particularly on complex and curved substrate geometries. We demonstrate an omnidirectional self-assembly process that rapidly forms flexible nanoparticle textures with up to 99.97% optical transparency while providing superhydrophobic and superoleophobic behavior. The resulting multi-re-entrant morphology forms spontaneously from nanoparticle aerosols, and we present a mathematical model describing the self-assembly process. This approach enables the development of functional liquid-repellent coatings on substrates with diverse and complex geometries.</p>
+          <a class="abstract-link" href="https://doi.org/10.1021/acsnano.6b06715" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div>
+      <div class="abstract-card" data-research-area="Multiphase Flow &amp; Transport">
+        <div class="abstract-figure" data-fig-name="2016-mimosa-origami-a-nanostructure-enabled-d.jpg" style="position: relative;"><img src="images/Abstracts/2016_Mimosa.jpg" alt="Mimosa Origami: a Nanostructure-enabled Directional Self-Organization Regime of Materials" loading="lazy"></div>
+        <div class="abstract-body"><select class="cms-research-area-select" title="Which homepage research card this abstract links from"><option value="">— No linked research area —</option><option value="Surface Chemistry">Surface Chemistry</option><option value="Surface Engineering">Surface Engineering</option><option value="Surface Characterization">Surface Characterization</option><option value="Multiphase Flow &amp; Transport">Multiphase Flow &amp; Transport</option><option value="Electrochemical Interfaces">Electrochemical Interfaces</option><option value="Sustainable Processing">Sustainable Processing</option></select>
+          <p class="abstract-journal" style="position: relative;">Science Advances · 2016</p>
+          <h3 class="abstract-title" style="position: relative;">Mimosa Origami: a Nanostructure-enabled Directional Self-Organization Regime of Materials</h3>
+          <p class="abstract-authors" style="position: relative;">Wong, W. S. Y., Li, M., Nisbet, D. R., Craig, V. S. J., Wang, Z., and Tricoli, A.</p>
+          <p class="abstract-text" style="position: relative;">Living systems can rapidly transform local stimuli into directional structural motion, but reproducing such self-organization in inorganic materials remains challenging. We develop a Janus bilayer that converts localized water stimuli into rapid, directional folding through the propagation of a programmed mechanical response. The resulting structures can self-organize over several centimeters, while simultaneously transporting water at velocities up to 8 cm/s and flow rates of 4.7 µL/s. This stimulus-driven organization enables flexible three-dimensional channels for applications in microfluidics, biosensing, and water purification.</p>
+          <a class="abstract-link" href="https://doi.org/10.1126/sciadv.1600417" target="_blank" rel="noopener" style="position: relative;">Read full paper</a>
+        </div>
+      </div></div>
+
+<footer>
+  <span class="footer-left" style="position: relative; width: 562px; height: 12px;">© 2026 ICE Laboratory · Interfacial Chemical Engineering for Next-Generation Processes</span>
+  <span class="footer-visitors" data-cms-skip="1"><img src="https://api.visitorbadge.io/api/visitors?path=ice-group-usyd-website&amp;label=Visitors&amp;countColor=%235bb8e8&amp;style=flat-square&amp;labelColor=%230a1628" alt="Visitor count"></span>
+  <span class="footer-usyd" style="position: relative;">The University of Sydney</span>
+</footer>
+
+<script src="data/abstracts.js"></script>
+<script>
+  // Entry data now lives in data/abstracts.js (ABSTRACTS array) —
+  // edit that file to add, remove, or reorder entries. Figure images can
+  // also be added/replaced directly in the Site Editor (hover an abstract's
+  // icon and click 📷) — Save writes the result back into this entry's
+  // "file" field automatically.
+
+  // Deterministic figure filename for an abstract entry (year extracted
+  // from "journal" + slugified title) — must exactly match absFigName() in
+  // editor.html, since that's how a figure uploaded in the editor gets
+  // matched back to this entry when saving.
+  function slugify(str) {
+    return String(str).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 40);
+  }
+  function figNameFor(a) {
+    const yearMatch = String(a.journal || '').match(/(\d{4})/);
+    const year = yearMatch ? yearMatch[1] : 'abstract';
+    return `${year}-${slugify(a.title)}.jpg`;
+  }
+
+  function abstractHTML(a) {
+    const fig = a.file
+      ? `<img src="images/Abstracts/${a.file}" alt="${a.title}" loading="lazy">`
+      : `<span class="ph-icon">${a.icon || '📄'}</span>`;
+    return `
+      <div class="abstract-card" data-research-area="${a.researchArea || ''}">
+        <div class="abstract-figure" data-fig-name="${figNameFor(a)}">${fig}</div>
+        <div class="abstract-body">
+          <p class="abstract-journal">${a.journal}</p>
+          <h3 class="abstract-title">${a.title}</h3>
+          <p class="abstract-authors">${a.authors}</p>
+          <p class="abstract-text">${a.text}</p>
+          ${a.link ? `<a class="abstract-link" href="${a.link}" target="_blank" rel="noopener">Read full paper</a>` : ''}
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('abstractsWrap').innerHTML = ABSTRACTS.map(abstractHTML).join('');
+
+  // Arriving from a homepage research card (e.g. "abstracts.html?area=Surface%20Chemistry")
+  // scrolls to and briefly highlights every abstract tagged with that research
+  // area, rather than filtering the page down — the rest of the list stays
+  // visible so a visitor can keep browsing.
+  (function highlightFromResearchArea() {
+    const area = new URLSearchParams(location.search).get('area');
+    if (!area) return;
+    const matches = [...document.querySelectorAll('.abstract-card')]
+      .filter(card => card.getAttribute('data-research-area') === area);
+    if (!matches.length) return;
+    matches.forEach(card => card.classList.add('abstract-highlight'));
+    matches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => matches.forEach(card => card.classList.remove('abstract-highlight')), 4000);
+  })();
+</script>
+
+
+
+
+
+
+</body>
+</html>
